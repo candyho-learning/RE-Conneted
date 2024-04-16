@@ -11,9 +11,7 @@ import { getStreamUserToken } from "../utils/utils";
 import { useEffect, useState } from "react";
 import VideoView from "../components/VideoView";
 
-const userCredential = JSON.parse(
-  localStorage.getItem("userCredential") || "guest"
-);
+const userCredential = JSON.parse(localStorage.getItem("userCredential") || "");
 
 const API_KEY: string = import.meta.env.VITE_STREAM_API_KEY;
 const userId: string = userCredential?.uid;

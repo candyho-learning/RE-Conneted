@@ -1,13 +1,19 @@
+import { UserType } from "../interface/interfaces";
 import { getCollection } from "../utils/utils";
 
-const allUsers = await getCollection("users");
-console.log(allUsers);
+let allUsers: undefined | Array<UserType>;
+
+async function loadUsers() {
+  allUsers = await getCollection("users");
+  console.log(allUsers);
+}
+loadUsers();
 
 export default function Community() {
   return (
     <div>
       <h1>Community Page placeholder</h1>
-      {allUsers.map((user) => (
+      {allUsers?.map((user) => (
         <div key={user.userId}>
           <h3>
             {user.firstName} has {user?.futureSessions?.length || "no"} future
