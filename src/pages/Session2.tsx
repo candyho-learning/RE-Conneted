@@ -55,7 +55,7 @@ export default function Session2() {
   return (
     <div
       style={{
-        backgroundImage: `url(${imageUrl})`,
+        backgroundImage: call ? `url(${imageUrl})` : "none",
         width: "100%",
         height: "100vh",
         backgroundSize: "cover",
