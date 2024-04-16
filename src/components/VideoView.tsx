@@ -17,8 +17,8 @@ export default function VideoView() {
   }
   return (
     <div style={{ width: "800px" }}>
-      Call "{call?.id}" has {participantCount} participants
-      <div style={{ width: "40%" }}>
+      Call "{call?.id}" has {participantCount} participants...
+      <div style={{ width: "50%", height: "450px" }}>
         <PaginatedGridLayout />
       </div>
       <CallControls />
@@ -27,7 +27,7 @@ export default function VideoView() {
           call?.endCall();
         }}
       >
-        Leave Call
+        End Call
       </button>
     </div>
   );
