@@ -8,9 +8,11 @@ export default function Login({ context }: LoginProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    login(email, password);
+    await login(email, password);
+    setEmail("");
+    setPassword("");
   }
   return (
     <div>
