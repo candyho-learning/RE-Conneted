@@ -1,15 +1,17 @@
+import { useEffect, useState } from "react";
 import { UserType } from "../interface/interfaces";
 import { getCollection } from "../utils/utils";
 
-let allUsers: undefined | Array<UserType>;
-
-async function loadUsers() {
-  allUsers = await getCollection("users");
-  console.log(allUsers);
-}
-loadUsers();
-
 export default function Community() {
+  const [allUsers, setAllUsers] = useState<undefined | Array<UserType>>();
+  useEffect(() => {
+    async function loadUsers() {
+      const data = await getCollection("users");
+      console.log(allUsers);
+      setAllUsers(data);
+    }
+    loadUsers();
+  }, []);
   return (
     <div>
       <h1>Community Page placeholder</h1>
