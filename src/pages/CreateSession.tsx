@@ -4,9 +4,10 @@ import TimeBlockInput from "../components/TimeBlockInput";
 import { TimeBlock } from "../interface/interfaces";
 import { AuthContext } from "../context/authContext";
 import { addFutureSession, createNewSession } from "../utils/utils";
+import Login from "./Login";
 
 export default function CreateSesssion() {
-  const { userId } = useContext(AuthContext);
+  const { userId, isLoggedIn } = useContext(AuthContext);
   const [sessionName, setSessionName] = useState<string>("");
   const [sessionStartTime, setSessionStartTime] = useState("");
   let nextId = useRef(1);
@@ -77,6 +78,8 @@ export default function CreateSesssion() {
       return;
     }
   }
+  if (!isLoggedIn) return <Login context="force" />;
+
   return (
     <div>
       <h1>Create a New Session</h1>
