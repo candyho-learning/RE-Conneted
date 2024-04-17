@@ -13,6 +13,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -82,4 +86,14 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+.session-wrapper {
+  display: flex;
+  padding: 20px;
+}
+
+.chat-window {
+  width: 300px;
+  height: 85%;
 }
