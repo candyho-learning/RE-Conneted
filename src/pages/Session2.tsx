@@ -24,6 +24,7 @@ import {
 } from "stream-chat-react";
 
 import "stream-chat-react/dist/css/v2/index.css";
+import FocusTimer from "../components/FocusTimer";
 
 //@ts-ignore
 const userCredential = JSON.parse(localStorage.getItem("userCredential"));
@@ -69,11 +70,11 @@ export default function Session2() {
     }
   }, []);
 
-  useEffect(() => {
-    if (client && call) {
-      call.join({ create: true });
-    }
-  }, [call]);
+  // useEffect(() => {
+  //   if (client && call) {
+  //     call.join({ create: true });
+  //   }
+  // }, [call]);
   if (!isLoggedIn) return <Login context="force" />;
 
   return (
@@ -96,7 +97,8 @@ export default function Session2() {
           </StreamTheme>
         </StreamVideo>
       )}
-      <div className="chat-window">
+      <FocusTimer />
+      {/* <div className="chat-window">
         <Chat client={chatClient} theme="str-chat__theme-light">
           <Channel channel={chatChannel}>
             <Window>
@@ -107,7 +109,7 @@ export default function Session2() {
             <Thread />
           </Channel>
         </Chat>
-      </div>
+      </div> */}
     </div>
   );
 }
