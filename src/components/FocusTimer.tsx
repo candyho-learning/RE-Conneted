@@ -9,11 +9,16 @@ export default function FocusTimer() {
     { type: "deep-work", duration: 0.2 },
     { type: "rest", duration: 0.1 },
   ];
+  const timerTotalTime = timeBlocks.reduce((acc, cur) => {
+    return acc + cur.duration;
+  }, 0);
   const [currentTimeBlockIndex, setCurrentTimeBlockIndex] = useState(0);
-  const [blockMin, setBlockMin] = useState<number>(
-    timeBlocks[currentTimeBlockIndex].duration
+  //   const [blockMin, setBlockMin] = useState<number>(
+  //     timeBlocks[currentTimeBlockIndex].duration
+  //   );
+  const [secondsLeft, setSecondsLeft] = useState(
+    timeBlocks[currentTimeBlockIndex].duration * 60
   );
-  const [secondsLeft, setSecondsLeft] = useState(blockMin * 60);
   const [displayTime, setDisplayTime] = useState(() =>
     toTimerDisplay(secondsLeft)
   );
@@ -43,24 +48,14 @@ export default function FocusTimer() {
       console.log("timer interval clean up!");
       clearInterval(timer);
     };
-  }, [isTimerActive, blockMin]);
+  }, [isTimerActive, currentTimeBlockIndex]);
 
-  //chain2 - index -> blockMin
   useEffect(() => {
     console.log("changing block min", currentTimeBlockIndex);
-    setBlockMin(timeBlocks[currentTimeBlockIndex].duration);
+    // setBlockMin(timeBlocks[currentTimeBlockIndex].duration);
+    setSecondsLeft(timeBlocks[currentTimeBlockIndex].duration * 60);
   }, [currentTimeBlockIndex]);
 
-  //chain 3? blockMin -> secondsLeft
-
-  useEffect(() => {
-    console.log("changing secondsLeft");
-    setSecondsLeft(blockMin * 60);
-  }, [blockMin]);
-
-  //2- when secondsLeft changes, also update the display
-  //chain 1 - when secondsLeft hits 0 -> index
-  //chain4 ? secondsLeft -> displayTime
   useEffect(() => {
     if (secondsLeft === 0) {
       if (currentTimeBlockIndex < timeBlocks.length - 1) {
@@ -87,6 +82,20 @@ export default function FocusTimer() {
 
   return (
     <div className="timer">
+      <div className="progress-bar">
+        {timeBlocks.map((block) => (
+          <div
+            key={block.id}
+            style={{
+              width: `${(block.duration / timerTotalTime) * 100}%`,
+              backgroundColor: "white",
+              border: "1px solid red",
+            }}
+          >
+            <div className="solid-progress" style={{ width: "30%" }}></div>
+          </div>
+        ))}
+      </div>
       <h4>Current Time Block: {timeBlocks[currentTimeBlockIndex].type}</h4>
       <h1>
         {displayTime[0]}:{displayTime[1]}
