@@ -101,7 +101,7 @@ button:focus-visible {
 
 .timer {
   margin: 20px;
-  width: 300px;
+  width: 500px;
   height: 300px;
   border: 1px solid black;
 }
@@ -113,5 +113,5 @@ button:focus-visible {
 
 .solid-progress {
   height: 100%;
-  background-color: #f1f1f1;
+  background-color: skyblue;
 }

@@ -1,13 +1,18 @@
 import { useEffect, useState } from "react";
-import { TimeBlock } from "../interface/interfaces";
-export default function FocusTimer() {
+import { SessionDataType } from "../interface/interfaces";
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "../firebase";
+
+export default function FocusTimer(sessionData: SessionDataType) {
   //this will need to be passed as a prop
   //for testing, I'm using floats
-  const timeBlocks: Array<TimeBlock> = [
-    { type: "ice-breaking", duration: 0.1 },
-    { type: "deep-work", duration: 0.2 },
-    { type: "rest", duration: 0.1 },
-  ];
+  //   const timeBlocks: Array<TimeBlock> = [
+  //     { type: "ice-breaking", duration: 0.1 },
+  //     { type: "deep-work", duration: 0.2 },
+  //     { type: "rest", duration: 0.1 },
+  //   ];
+
+  const timeBlocks = sessionData.timeBlocks;
   const timerTotalTime = timeBlocks.reduce((acc, cur) => {
     return acc + cur.duration;
   }, 0);
@@ -91,6 +96,17 @@ export default function FocusTimer() {
     setTimerStartState("started");
     setIsTimerActive((s) => !s);
   }
+
+  useEffect(() => {
+    const sessionRef = doc(db, "sessions", sessionData.sessionId);
+    async function updateSession() {
+      await updateDoc(sessionRef, {
+        timerState: isTimerActive,
+      });
+    }
+
+    updateSession();
+  }, [isTimerActive]);
 
   return (
     <div className="timer">

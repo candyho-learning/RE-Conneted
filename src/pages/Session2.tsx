@@ -22,10 +22,14 @@ import {
   Thread,
   Window,
 } from "stream-chat-react";
+import { onSnapshot, doc } from "firebase/firestore";
+
+import { db } from "../firebase";
 
 import "stream-chat-react/dist/css/v2/index.css";
 import FocusTimer from "../components/FocusTimer";
-
+import { getSessionData } from "../utils/utils";
+import { SessionDataType } from "../interface/interfaces";
 //@ts-ignore
 const userCredential = JSON.parse(localStorage.getItem("userCredential"));
 
@@ -52,29 +56,44 @@ export default function Session2() {
   const callId = searchParams.get("id");
   const callType = searchParams.get("type") || "default";
   const [call, setCall] = useState<Call>();
+  const [sessionData, setSessionData] = useState<SessionDataType>();
   //@ts-ignore
   const [chatChannel, setChatChannel] = useState<Channel>();
   const imageUrl =
     "https://images.unsplash.com/photo-1631679706909-1844bbd07221?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MTMyNzk5Mzl8&ixlib=rb-4.0.3&q=85";
 
   useEffect(() => {
-    if (callId) {
-      const newCall = client.call(callType, callId);
-      setCall(newCall);
-      const chatChannel = chatClient.channel("messaging", callId, {
-        // add as many custom fields as you'd like
-        image: "https://www.drupal.org/files/project-images/react.png",
-        name: "Session Chat",
-      });
-      setChatChannel(chatChannel);
+    if (!callId) return;
+    const unsub = onSnapshot(doc(db, "sessions", callId), (doc) => {
+      console.log("change in session data!");
+      console.log("Current data: ", doc.data());
+      console.log(typeof doc.data());
+      setSessionData(doc.data() as SessionDataType);
+    });
+    async function init() {
+      if (callId) {
+        const newCall = client.call(callType, callId);
+        setCall(newCall);
+        const chatChannel = chatClient.channel("messaging", callId, {
+          // add as many custom fields as you'd like
+          image: "https://www.drupal.org/files/project-images/react.png",
+          name: "Session Chat",
+        });
+        setChatChannel(chatChannel);
+        const sesh = await getSessionData(callId);
+        console.log(sesh);
+        setSessionData(sesh as SessionDataType);
+      }
     }
-  }, []);
+    init();
+    return () => unsub();
+  }, [callId]);
 
-  // useEffect(() => {
-  //   if (client && call) {
-  //     call.join({ create: true });
-  //   }
-  // }, [call]);
+  useEffect(() => {
+    if (client && call) {
+      call.join({ create: true });
+    }
+  }, [call]);
   if (!isLoggedIn) return <Login context="force" />;
 
   return (
@@ -97,8 +116,8 @@ export default function Session2() {
           </StreamTheme>
         </StreamVideo>
       )}
-      <FocusTimer />
-      {/* <div className="chat-window">
+      {sessionData && <FocusTimer {...sessionData} />}
+      <div className="chat-window">
         <Chat client={chatClient} theme="str-chat__theme-light">
           <Channel channel={chatChannel}>
             <Window>
@@ -109,7 +128,7 @@ export default function Session2() {
             <Thread />
           </Channel>
         </Chat>
-      </div> */}
+      </div>
     </div>
   );
 }

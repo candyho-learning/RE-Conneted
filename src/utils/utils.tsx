@@ -7,6 +7,7 @@ import {
   arrayUnion,
   collection,
   getDocs,
+  getDoc,
 } from "firebase/firestore";
 
 import {
@@ -66,5 +67,22 @@ export async function getStreamUserToken(userId: string): Promise<string> {
   } catch (err) {
     console.error(err);
     throw new Error("Unable to retrieve token");
+  }
+}
+
+export async function getSessionData(sessionId: string) {
+  const docRef = doc(db, "sessions", sessionId);
+  try {
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      console.log("Document data:", docSnap.data());
+      return docSnap.data();
+    } else {
+      throw new Error(
+        "Cannot get session data because document does not exist."
+      );
+    }
+  } catch (err) {
+    console.error(err);
   }
 }
