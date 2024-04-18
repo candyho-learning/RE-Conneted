@@ -50,5 +50,5 @@ export interface FutureSessionDataType {
 }
 
 export interface VideoViewProps {
-  isHost: boolean;
+  isHost: boolean | undefined;
 }

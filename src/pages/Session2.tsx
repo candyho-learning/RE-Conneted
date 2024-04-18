@@ -57,7 +57,7 @@ export default function Session2() {
   const callType = searchParams.get("type") || "default";
   const [call, setCall] = useState<Call>();
   const [sessionData, setSessionData] = useState<SessionDataType>();
-  const [isHost, setIsHost] = useState();
+  const [isHost, setIsHost] = useState<boolean>();
   //@ts-ignore
   const [chatChannel, setChatChannel] = useState<Channel>();
   const imageUrl =
