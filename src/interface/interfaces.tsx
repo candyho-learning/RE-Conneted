@@ -22,7 +22,7 @@ export interface AuthContextType {
 }
 
 export interface TimeBlock {
-  id?: number;
+  id: number;
   type: string;
   duration: number;
 }

@@ -8,7 +8,6 @@ import {
 import { VideoViewProps } from "../interface/interfaces";
 
 export default function VideoView({ isHost }: VideoViewProps) {
-  console.log("I am host", isHost);
   const call = useCall();
   const { useCallCallingState, useParticipantCount } = useCallStateHooks();
   const callingState = useCallCallingState();

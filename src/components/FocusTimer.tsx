@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { SessionDataType, TimeBlock } from "../interface/interfaces";
+import { SessionDataType } from "../interface/interfaces";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { AuthContext } from "../context/authContext";
@@ -8,13 +8,13 @@ export default function FocusTimer(sessionData: SessionDataType) {
   const { userId } = useContext(AuthContext);
   //this will need to be passed as a prop
   //for testing, I'm using floats
-  const timeBlocks: Array<TimeBlock> = [
-    { type: "ice-breaking", duration: 0.1 },
-    { type: "deep-work", duration: 0.2 },
-    { type: "rest", duration: 0.1 },
-  ];
+  //   const timeBlocks: Array<TimeBlock> = [
+  //     { type: "ice-breaking", duration: 0.1 },
+  //     { type: "deep-work", duration: 0.2 },
+  //     { type: "rest", duration: 0.1 },
+  //   ];
 
-  //   const timeBlocks = sessionData.timeBlocks;
+  const timeBlocks = sessionData.timeBlocks;
   const timerTotalTime = timeBlocks.reduce((acc, cur) => {
     return acc + cur.duration;
   }, 0);
