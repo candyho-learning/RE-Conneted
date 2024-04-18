@@ -39,6 +39,7 @@ export interface SessionDataType {
   startTime: Date;
   timeBlocks: Array<TimeBlock>;
   host: string;
+  timerState?: boolean;
 }
 
 export interface FutureSessionDataType {

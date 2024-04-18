@@ -1,18 +1,20 @@
-import { useEffect, useState } from "react";
-import { SessionDataType } from "../interface/interfaces";
+import { useContext, useEffect, useState } from "react";
+import { SessionDataType, TimeBlock } from "../interface/interfaces";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
+import { AuthContext } from "../context/authContext";
 
 export default function FocusTimer(sessionData: SessionDataType) {
+  const { userId } = useContext(AuthContext);
   //this will need to be passed as a prop
   //for testing, I'm using floats
-  //   const timeBlocks: Array<TimeBlock> = [
-  //     { type: "ice-breaking", duration: 0.1 },
-  //     { type: "deep-work", duration: 0.2 },
-  //     { type: "rest", duration: 0.1 },
-  //   ];
+  const timeBlocks: Array<TimeBlock> = [
+    { type: "ice-breaking", duration: 0.1 },
+    { type: "deep-work", duration: 0.2 },
+    { type: "rest", duration: 0.1 },
+  ];
 
-  const timeBlocks = sessionData.timeBlocks;
+  //   const timeBlocks = sessionData.timeBlocks;
   const timerTotalTime = timeBlocks.reduce((acc, cur) => {
     return acc + cur.duration;
   }, 0);
@@ -38,6 +40,10 @@ export default function FocusTimer(sessionData: SessionDataType) {
     const second = (secs % 60).toString().padStart(2, "0");
     return [minute, second];
   }
+
+  useEffect(() => {
+    setIsTimerActive(sessionData.timerState);
+  }, [sessionData]);
 
   //1 - if timer is not paused, take 1 sec off seconds left every second
   useEffect(() => {
@@ -70,6 +76,7 @@ export default function FocusTimer(sessionData: SessionDataType) {
         setCurrentTimeBlockIndex((prevIndex) => prevIndex + 1);
       } else {
         console.log("timer ended, removing timer");
+        console.log("timer end time", Date.now());
         setTimerStartState("ended");
         clearInterval(timerId);
       }
@@ -137,7 +144,9 @@ export default function FocusTimer(sessionData: SessionDataType) {
       {currentTimeBlockIndex < timeBlocks.length - 1 && (
         <h4>Next:{timeBlocks[currentTimeBlockIndex + 1].type}</h4>
       )}
-      <button onClick={toggleTimerState}>Start/Pause</button>
+      {userId === sessionData.host && (
+        <button onClick={toggleTimerState}>Start/Pause</button>
+      )}
     </div>
   );
 }
