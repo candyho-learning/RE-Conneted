@@ -17,8 +17,9 @@ export default function FocusTimer() {
   const [displayTime, setDisplayTime] = useState(() =>
     toTimerDisplay(secondsLeft)
   );
-  const [isTimerActive, setIsTimerActive] = useState(true);
+  const [isTimerActive, setIsTimerActive] = useState(false);
   const [timerId, setTimerId] = useState<NodeJS.Timeout>();
+  const [timerStartState, setTimerStartState] = useState("not started");
 
   function toTimerDisplay(secs: number) {
     const minute = Math.floor(secs / 60);
@@ -32,7 +33,8 @@ export default function FocusTimer() {
 
     const timer = setInterval(() => {
       console.log("1s passed", isTimerActive);
-      setSecondsLeft((prevSecondsLeft) => Math.max(0, prevSecondsLeft - 1));
+      isTimerActive &&
+        setSecondsLeft((prevSecondsLeft) => Math.max(0, prevSecondsLeft - 1));
     }, 1000);
 
     setTimerId(timer);
@@ -67,6 +69,7 @@ export default function FocusTimer() {
         setCurrentTimeBlockIndex((prevIndex) => prevIndex + 1);
       } else {
         console.log("timer ended, removing timer");
+        setTimerStartState("ended");
         clearInterval(timerId);
       }
     }
@@ -74,7 +77,11 @@ export default function FocusTimer() {
   }, [secondsLeft]);
 
   function toggleTimerState() {
+    if (timerStartState === "ended") {
+      return;
+    }
     console.log("resetting timer state");
+    setTimerStartState("started");
     setIsTimerActive((s) => !s);
   }
 
@@ -87,7 +94,7 @@ export default function FocusTimer() {
       {currentTimeBlockIndex < timeBlocks.length - 1 && (
         <h4>Next:{timeBlocks[currentTimeBlockIndex + 1].type}</h4>
       )}
-      <button onClick={toggleTimerState}>Pause/Go</button>
+      <button onClick={toggleTimerState}>Start/Pause</button>
     </div>
   );
 }
