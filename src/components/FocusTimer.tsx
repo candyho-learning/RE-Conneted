@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { TimeBlock } from "../interface/interfaces";
-
 export default function FocusTimer() {
   //this will need to be passed as a prop
   //for testing, I'm using floats
@@ -25,6 +24,9 @@ export default function FocusTimer() {
   const [isTimerActive, setIsTimerActive] = useState(false);
   const [timerId, setTimerId] = useState<NodeJS.Timeout>();
   const [timerStartState, setTimerStartState] = useState("not started");
+  const [progress, setProgress] = useState<Array<number>>(
+    Array(timeBlocks.length).fill(0)
+  );
 
   function toTimerDisplay(secs: number) {
     const minute = Math.floor(secs / 60);
@@ -52,7 +54,6 @@ export default function FocusTimer() {
 
   useEffect(() => {
     console.log("changing block min", currentTimeBlockIndex);
-    // setBlockMin(timeBlocks[currentTimeBlockIndex].duration);
     setSecondsLeft(timeBlocks[currentTimeBlockIndex].duration * 60);
   }, [currentTimeBlockIndex]);
 
@@ -69,6 +70,17 @@ export default function FocusTimer() {
       }
     }
     setDisplayTime(toTimerDisplay(secondsLeft));
+    setProgress(
+      progress.map((item, i) => {
+        if (i === currentTimeBlockIndex) {
+          const totalBlockTime =
+            timeBlocks[currentTimeBlockIndex].duration * 60;
+          return (totalBlockTime - secondsLeft) / totalBlockTime;
+        } else {
+          return item;
+        }
+      })
+    );
   }, [secondsLeft]);
 
   function toggleTimerState() {
@@ -83,16 +95,22 @@ export default function FocusTimer() {
   return (
     <div className="timer">
       <div className="progress-bar">
-        {timeBlocks.map((block) => (
+        {timeBlocks.map((block, i) => (
           <div
             key={block.id}
             style={{
               width: `${(block.duration / timerTotalTime) * 100}%`,
               backgroundColor: "white",
-              border: "1px solid red",
+              border: "1px solid darkgrey",
             }}
           >
-            <div className="solid-progress" style={{ width: "30%" }}></div>
+            <div
+              className="solid-progress"
+              style={{
+                width: `${progress[i] * 100}%`,
+                transition: "width .3s ease-in-out",
+              }}
+            ></div>
           </div>
         ))}
       </div>
