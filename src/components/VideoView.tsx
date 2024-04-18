@@ -5,8 +5,10 @@ import {
   PaginatedGridLayout,
   CallControls,
 } from "@stream-io/video-react-sdk";
+import { VideoViewProps } from "../interface/interfaces";
 
-export default function VideoView() {
+export default function VideoView({ isHost }: VideoViewProps) {
+  console.log("I am host", isHost);
   const call = useCall();
   const { useCallCallingState, useParticipantCount } = useCallStateHooks();
   const callingState = useCallCallingState();
@@ -22,13 +24,15 @@ export default function VideoView() {
         <PaginatedGridLayout />
       </div>
       <CallControls />
-      <button
-        onClick={() => {
-          call?.endCall();
-        }}
-      >
-        End Call
-      </button>
+      {isHost && (
+        <button
+          onClick={() => {
+            call?.endCall();
+          }}
+        >
+          End Call
+        </button>
+      )}
     </div>
   );
 }

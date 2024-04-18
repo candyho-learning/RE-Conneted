@@ -62,6 +62,7 @@ export default function CreateSesssion() {
         startTime: formattedSessionStartTime,
         timeBlocks,
         host: userId,
+        isTimerActive: false,
       };
 
       const futureSessionData = {

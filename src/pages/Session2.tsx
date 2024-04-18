@@ -57,6 +57,7 @@ export default function Session2() {
   const callType = searchParams.get("type") || "default";
   const [call, setCall] = useState<Call>();
   const [sessionData, setSessionData] = useState<SessionDataType>();
+  const [isHost, setIsHost] = useState();
   //@ts-ignore
   const [chatChannel, setChatChannel] = useState<Channel>();
   const imageUrl =
@@ -90,6 +91,10 @@ export default function Session2() {
   }, [callId]);
 
   useEffect(() => {
+    sessionData && setIsHost(sessionData.host === userId);
+  }, [sessionData]);
+
+  useEffect(() => {
     if (client && call) {
       call.join({ create: true });
     }
@@ -111,7 +116,7 @@ export default function Session2() {
         <StreamVideo client={client}>
           <StreamTheme>
             <StreamCall call={call}>
-              <VideoView />
+              <VideoView isHost={isHost} />
             </StreamCall>
           </StreamTheme>
         </StreamVideo>

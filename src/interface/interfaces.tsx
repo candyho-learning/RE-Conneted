@@ -39,7 +39,7 @@ export interface SessionDataType {
   startTime: Date;
   timeBlocks: Array<TimeBlock>;
   host: string;
-  timerState?: boolean;
+  isTimerActive: boolean;
 }
 
 export interface FutureSessionDataType {
@@ -47,4 +47,8 @@ export interface FutureSessionDataType {
   role: string;
   userId: string;
   startTime: Date;
+}
+
+export interface VideoViewProps {
+  isHost: boolean;
 }

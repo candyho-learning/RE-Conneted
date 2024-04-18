@@ -28,7 +28,7 @@ export default function FocusTimer(sessionData: SessionDataType) {
   const [displayTime, setDisplayTime] = useState(() =>
     toTimerDisplay(secondsLeft)
   );
-  const [isTimerActive, setIsTimerActive] = useState(false);
+  const [isTimerActive, setIsTimerActive] = useState<boolean>(false);
   const [timerId, setTimerId] = useState<NodeJS.Timeout>();
   const [timerStartState, setTimerStartState] = useState("not started");
   const [progress, setProgress] = useState<Array<number>>(
@@ -42,7 +42,7 @@ export default function FocusTimer(sessionData: SessionDataType) {
   }
 
   useEffect(() => {
-    setIsTimerActive(sessionData.timerState);
+    setIsTimerActive(sessionData.isTimerActive);
   }, [sessionData]);
 
   //1 - if timer is not paused, take 1 sec off seconds left every second
@@ -108,7 +108,7 @@ export default function FocusTimer(sessionData: SessionDataType) {
     const sessionRef = doc(db, "sessions", sessionData.sessionId);
     async function updateSession() {
       await updateDoc(sessionRef, {
-        timerState: isTimerActive,
+        isTimerActive,
       });
     }
 
