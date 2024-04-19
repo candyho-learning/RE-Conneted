@@ -40,6 +40,7 @@ export interface SessionDataType {
   timeBlocks: Array<TimeBlock>;
   host: string;
   isTimerActive: boolean;
+  backgroundImageUrl: string;
 }
 
 export interface FutureSessionDataType {

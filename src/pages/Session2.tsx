@@ -60,8 +60,6 @@ export default function Session2() {
   const [isHost, setIsHost] = useState<boolean>();
   //@ts-ignore
   const [chatChannel, setChatChannel] = useState<Channel>();
-  const imageUrl =
-    "https://images.unsplash.com/photo-1631679706909-1844bbd07221?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MTMyNzk5Mzl8&ixlib=rb-4.0.3&q=85";
 
   useEffect(() => {
     if (!callId) return;
@@ -104,7 +102,9 @@ export default function Session2() {
   return (
     <div
       style={{
-        backgroundImage: call ? `url(${imageUrl})` : "none",
+        backgroundImage: call
+          ? `url(${sessionData?.backgroundImageUrl})`
+          : "none",
         width: "100%",
         height: "100vh",
         backgroundSize: "cover",
