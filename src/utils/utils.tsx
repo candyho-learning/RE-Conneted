@@ -86,3 +86,19 @@ export async function getSessionData(sessionId: string) {
     console.error(err);
   }
 }
+
+export async function searchUnsplash(searchTerm: string) {
+  const UNSPLASH_API_KEY = import.meta.env.VITE_UNSPLASH_API_KEY;
+  const URL = `https://api.unsplash.com/search/photos?query=${searchTerm}&client_id=${UNSPLASH_API_KEY}&orientation=landscape&per_page=9`;
+  console.log("searching on unsplash");
+  try {
+    const response = await fetch(URL);
+    if (!response.ok) {
+      throw new Error("cannot get search results from Unsplash");
+    }
+    const result = await response.json();
+    return result;
+  } catch (err) {
+    console.error(err);
+  }
+}

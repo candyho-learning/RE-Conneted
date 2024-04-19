@@ -5,6 +5,7 @@ import { TimeBlock } from "../interface/interfaces";
 import { AuthContext } from "../context/authContext";
 import { addFutureSession, createNewSession } from "../utils/utils";
 import Login from "./Login";
+import BackgroundPicker from "../components/BackgroundPicker";
 
 export default function CreateSesssion() {
   const { userId, isLoggedIn } = useContext(AuthContext);
@@ -82,7 +83,7 @@ export default function CreateSesssion() {
   if (!isLoggedIn) return <Login context="force" />;
 
   return (
-    <div>
+    <div style={{ width: "55%" }}>
       <h1>Create a New Session</h1>
 
       <form onSubmit={handleSubmit}>
@@ -115,6 +116,7 @@ export default function CreateSesssion() {
             <p className="warning">Start time must be in the future.</p>
           )}
         </div>
+        <BackgroundPicker />
         <div>
           <h4>Session Timer Setting</h4>
           {timeBlocks.map((timeBlock) => (

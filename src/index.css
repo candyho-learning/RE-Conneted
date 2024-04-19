@@ -115,3 +115,24 @@ button:focus-visible {
   height: 100%;
   background-color: skyblue;
 }
+
+.background-picker {
+  border: 1px solid black;
+  height: 300px;
+  overflow: scroll;
+  padding: 20px;
+}
+
+.search-results {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.image-frame {
+  width: 200px;
+  height: 150px;
+  background-color: pink;
+  border: 1px solid grey;
+  margin: 5px;
+  border-radius: 10px;
+}

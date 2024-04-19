@@ -52,3 +52,14 @@ export interface FutureSessionDataType {
 export interface VideoViewProps {
   isHost: boolean | undefined;
 }
+
+export interface UnsplashResponse {
+  id: string;
+  urls: {
+    thumb: string;
+    full: string;
+  };
+  user: {
+    username: string;
+  };
+}
