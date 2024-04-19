@@ -1,8 +1,14 @@
 import { useEffect, useState } from "react";
 import { searchUnsplash } from "../utils/utils";
-import { UnsplashResponse } from "../interface/interfaces";
+import {
+  BackgroundPickerProps,
+  UnsplashResponse,
+} from "../interface/interfaces";
 
-export default function BackgroundPicker() {
+export default function BackgroundPicker({
+  setBackgroundImage,
+  backgroundImage,
+}: BackgroundPickerProps) {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState<Array<UnsplashResponse>>(
     []
@@ -44,10 +50,22 @@ export default function BackgroundPicker() {
       <div className="search-results">
         {searchResults &&
           searchResults.map((item) => (
-            <div>
-              <div className="image-frame">
+            <div
+              key={item.id}
+              onClick={() => {
+                setBackgroundImage(item.urls.full);
+              }}
+            >
+              <div
+                className="image-frame"
+                style={{
+                  border:
+                    backgroundImage === item.urls.full
+                      ? "2px solid red"
+                      : "1px solid grey",
+                }}
+              >
                 <img
-                  key={item.id}
                   src={item.urls.thumb}
                   style={{
                     objectFit: "cover",

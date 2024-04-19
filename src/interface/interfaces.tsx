@@ -63,3 +63,8 @@ export interface UnsplashResponse {
     username: string;
   };
 }
+
+export interface BackgroundPickerProps {
+  setBackgroundImage: Function;
+  backgroundImage: string;
+}

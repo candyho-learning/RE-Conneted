@@ -7,10 +7,14 @@ import { addFutureSession, createNewSession } from "../utils/utils";
 import Login from "./Login";
 import BackgroundPicker from "../components/BackgroundPicker";
 
+const defaultBackground =
+  "https://images.unsplash.com/photo-1631679706909-1844bbd07221?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MTMyNzk5Mzl8&ixlib=rb-4.0.3&q=85";
+
 export default function CreateSesssion() {
   const { userId, isLoggedIn } = useContext(AuthContext);
   const [sessionName, setSessionName] = useState<string>("");
   const [sessionStartTime, setSessionStartTime] = useState("");
+  const [backgroundImage, setBackgroundImage] = useState(defaultBackground);
   let nextId = useRef(1);
   const [timeBlocks, setTimeBlocks] = useState<Array<TimeBlock>>([
     {
@@ -34,6 +38,7 @@ export default function CreateSesssion() {
   function resetForm() {
     setSessionName("");
     setSessionStartTime("");
+    setBackgroundImage(defaultBackground);
     setTimeBlocks([
       {
         type: "deep-work",
@@ -64,6 +69,7 @@ export default function CreateSesssion() {
         timeBlocks,
         host: userId,
         isTimerActive: false,
+        backgroundImageUrl: backgroundImage,
       };
 
       const futureSessionData = {
@@ -116,7 +122,10 @@ export default function CreateSesssion() {
             <p className="warning">Start time must be in the future.</p>
           )}
         </div>
-        <BackgroundPicker />
+        <BackgroundPicker
+          setBackgroundImage={setBackgroundImage}
+          backgroundImage={backgroundImage}
+        />
         <div>
           <h4>Session Timer Setting</h4>
           {timeBlocks.map((timeBlock) => (
