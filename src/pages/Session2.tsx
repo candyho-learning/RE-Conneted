@@ -52,7 +52,7 @@ const chatClient = new StreamChat(API_KEY);
 chatClient.connectUser(user, () => getStreamUserToken(userId));
 
 export default function Session2() {
-  const { isLoggedIn } = useContext(AuthContext);
+  const { isLoggedIn, user } = useContext(AuthContext);
   const [searchParams] = useSearchParams();
   const callId = searchParams.get("id");
   const callType = searchParams.get("type") || "default";
@@ -123,9 +123,26 @@ export default function Session2() {
         </StreamVideo>
       )}
       {sessionData && <FocusTimer {...sessionData} />}
-      {sessionData && (
-        <GoalTracker sessionId={sessionData.sessionId} userId={userId} />
+      {sessionData && user && (
+        <GoalTracker
+          sessionId={sessionData.sessionId}
+          userId={userId}
+          userName={user?.firstName}
+        />
       )}
+      <div className="goals-display">
+        {sessionData &&
+          sessionData.participantsActivity?.map((item) => (
+            <>
+              <h4>{item.userName}</h4>
+              {item.goals?.map((task) => (
+                <p>
+                  {task.task} {task.isDone ? "🎉" : ""}
+                </p>
+              ))}
+            </>
+          ))}
+      </div>
       <div className="chat-window">
         <Chat client={chatClient} theme="str-chat__theme-light">
           <Channel channel={chatChannel}>

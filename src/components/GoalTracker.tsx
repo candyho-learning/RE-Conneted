@@ -15,7 +15,11 @@ import { GoalTrackerProps, GoalsType } from "../interface/interfaces";
 //   },
 // ];
 
-export default function GoalTracker({ sessionId, userId }: GoalTrackerProps) {
+export default function GoalTracker({
+  sessionId,
+  userId,
+  userName,
+}: GoalTrackerProps) {
   const [allGoals, setAllGoals] = useState<Array<GoalsType>>([]);
   const [newTask, setNewTask] = useState("");
   let nextId = useRef(3);
@@ -28,7 +32,7 @@ export default function GoalTracker({ sessionId, userId }: GoalTrackerProps) {
 
   useEffect(() => {
     //send to firebase
-    updateUserSessionGoal(sessionId, userId, allGoals);
+    updateUserSessionGoal(sessionId, userId, allGoals, userName);
   }, [allGoals]);
 
   function changeGoalStatus(goalId: number) {

@@ -41,6 +41,7 @@ export interface SessionDataType {
   host: string;
   isTimerActive: boolean;
   backgroundImageUrl: string;
+  participantsActivity?: Array<UserActivityType>;
 }
 
 export interface FutureSessionDataType {
@@ -73,6 +74,7 @@ export interface BackgroundPickerProps {
 export interface GoalTrackerProps {
   sessionId: string;
   userId: string;
+  userName: string;
 }
 
 export interface GoalsType {
@@ -82,6 +84,7 @@ export interface GoalsType {
 }
 
 export interface UserActivityType {
+  userName: string;
   userId: string;
   goals?: Array<GoalsType>;
 }

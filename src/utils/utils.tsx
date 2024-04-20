@@ -108,7 +108,8 @@ export async function searchUnsplash(searchTerm: string) {
 export async function updateUserSessionGoal(
   sessionId: string,
   userId: string,
-  goalArr: Array<GoalsType>
+  goalArr: Array<GoalsType>,
+  userName: string
 ) {
   const docRef = doc(db, "sessions", sessionId);
   try {
@@ -129,6 +130,7 @@ export async function updateUserSessionGoal(
 
       if (index === -1) {
         newUserActivity = {
+          userName,
           userId,
           goals: goalArr,
         };
