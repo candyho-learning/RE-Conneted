@@ -12,7 +12,9 @@ import {
 
 import {
   FutureSessionDataType,
+  GoalsType,
   SessionDataType,
+  UserActivityType,
   UserType,
 } from "../interface/interfaces";
 
@@ -98,6 +100,67 @@ export async function searchUnsplash(searchTerm: string) {
     }
     const result = await response.json();
     return result;
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+export async function updateUserSessionGoal(
+  sessionId: string,
+  userId: string,
+  goalArr: Array<GoalsType>
+) {
+  const docRef = doc(db, "sessions", sessionId);
+  try {
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      console.log("Document data:", docSnap.data());
+      //find field: participantsActivity
+      const participantsActivityCopy =
+        docSnap.data()?.participantsActivity || [];
+
+      //find object with userId -> exist vs doesn't exist
+      let newUserActivity: UserActivityType;
+      let newParticipantsActivityCopy;
+      const index = participantsActivityCopy.findIndex(
+        (item: UserActivityType) => item.userId === userId
+      );
+      //replace goals with goalArr
+
+      if (index === -1) {
+        newUserActivity = {
+          userId,
+          goals: goalArr,
+        };
+        newParticipantsActivityCopy = [
+          ...participantsActivityCopy,
+          newUserActivity,
+        ];
+      } else {
+        newUserActivity = {
+          ...participantsActivityCopy[index],
+          goals: goalArr,
+        };
+        newParticipantsActivityCopy = participantsActivityCopy.map(
+          (item: UserActivityType) => {
+            if (item.userId === userId) {
+              return newUserActivity;
+            } else {
+              return item;
+            }
+          }
+        );
+      }
+
+      //update with new data
+      await updateDoc(docRef, {
+        participantsActivity: newParticipantsActivityCopy,
+      });
+
+      console.log("user goals updated on firebase!!");
+    } else {
+      throw new Error("Session data for this sessionId doesn't exist.");
+    }
   } catch (err) {
     console.error(err);
   }

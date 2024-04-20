@@ -17,7 +17,7 @@ export default function VideoView({ isHost }: VideoViewProps) {
     return <div>You are not in the call.</div>;
   }
   return (
-    <div style={{ width: "800px" }}>
+    <div style={{ width: "600px" }}>
       Call "{call?.id}" has {participantCount} participants...
       <div style={{ width: "50%", height: "450px" }}>
         <PaginatedGridLayout />

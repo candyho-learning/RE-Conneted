@@ -69,3 +69,19 @@ export interface BackgroundPickerProps {
   setBackgroundImage: Function;
   backgroundImage: string;
 }
+
+export interface GoalTrackerProps {
+  sessionId: string;
+  userId: string;
+}
+
+export interface GoalsType {
+  task: string;
+  id: number;
+  isDone: boolean;
+}
+
+export interface UserActivityType {
+  userId: string;
+  goals?: Array<GoalsType>;
+}

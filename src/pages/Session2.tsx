@@ -30,6 +30,7 @@ import "stream-chat-react/dist/css/v2/index.css";
 import FocusTimer from "../components/FocusTimer";
 import { getSessionData } from "../utils/utils";
 import { SessionDataType } from "../interface/interfaces";
+import GoalTracker from "../components/GoalTracker";
 //@ts-ignore
 const userCredential = JSON.parse(localStorage.getItem("userCredential"));
 
@@ -76,7 +77,7 @@ export default function Session2() {
         const chatChannel = chatClient.channel("messaging", callId, {
           // add as many custom fields as you'd like
           image: "https://www.drupal.org/files/project-images/react.png",
-          name: "Session Chat",
+          name: sessionData?.sessionName,
         });
         setChatChannel(chatChannel);
         const sesh = await getSessionData(callId);
@@ -105,7 +106,7 @@ export default function Session2() {
         backgroundImage: call
           ? `url(${sessionData?.backgroundImageUrl})`
           : "none",
-        width: "100%",
+        width: "100vw",
         height: "100vh",
         backgroundSize: "cover",
         position: "relative",
@@ -122,6 +123,9 @@ export default function Session2() {
         </StreamVideo>
       )}
       {sessionData && <FocusTimer {...sessionData} />}
+      {sessionData && (
+        <GoalTracker sessionId={sessionData.sessionId} userId={userId} />
+      )}
       <div className="chat-window">
         <Chat client={chatClient} theme="str-chat__theme-light">
           <Channel channel={chatChannel}>

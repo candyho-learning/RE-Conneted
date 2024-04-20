@@ -136,3 +136,9 @@ button:focus-visible {
   margin: 5px;
   border-radius: 10px;
 }
+
+.goal-tracker {
+  border: 1px solid grey;
+  height: 300px;
+  width: 300px;
+}
