@@ -127,6 +127,8 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
           email: email,
           userId: uid,
           accountCreatedTimestamp: serverTimestamp(),
+          quote: "",
+          location: "",
         });
       }
     } catch (err) {

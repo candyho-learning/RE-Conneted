@@ -18,6 +18,8 @@ import {
   UserType,
 } from "../interface/interfaces";
 
+//TODO check error handling for each function
+
 export async function createNewSession(sessionData: SessionDataType) {
   const { sessionId } = sessionData;
   try {
@@ -180,5 +182,22 @@ export async function getUserData(userId: string) {
     }
   } catch (err) {
     console.error(err);
+  }
+}
+
+export async function updateUserData(
+  userId: string,
+  fieldName: string,
+  data: any
+) {
+  const docRef = doc(db, "users", userId);
+  try {
+    await updateDoc(docRef, {
+      [fieldName]: data,
+    });
+    return { success: true };
+  } catch (err) {
+    console.error(err);
+    return { success: false };
   }
 }

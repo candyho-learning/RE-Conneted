@@ -5,6 +5,8 @@ export interface UserType {
   userId: string;
   accountCreatedTimestamp: any;
   futureSessions?: Array<FutureSessionDataType>;
+  quote: string;
+  location: string;
 }
 export interface AuthContextType {
   isLoggedIn: boolean;
@@ -90,5 +92,7 @@ export interface UserActivityType {
 }
 
 export interface EditableTextProps {
-  placeholder: string;
+  fieldName: string;
+  databaseContent: string;
+  userId: string;
 }

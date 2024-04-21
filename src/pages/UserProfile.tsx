@@ -25,7 +25,7 @@ export default function UserProfile() {
     }
   }, [userId]);
 
-  if (!userData) {
+  if (!userData || !userId) {
     return <h1>This user does not exist!</h1>;
   }
   return (
@@ -38,9 +38,17 @@ export default function UserProfile() {
         <h3>
           {userData.firstName} {userData.lastName}
         </h3>
-        <EditableText placeholder="your quote here..." />
+        <EditableText
+          fieldName="quote"
+          databaseContent={userData.quote}
+          userId={userId}
+        />
         <h4>📍</h4>
-        <EditableText placeholder="your city?" />
+        <EditableText
+          fieldName="location"
+          databaseContent={userData.location}
+          userId={userId}
+        />
       </div>
       <div className="left">
         <div className="stats">
