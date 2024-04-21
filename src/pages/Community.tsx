@@ -38,6 +38,9 @@ export default function Community() {
                 <br />
               </>
             ))}
+          <a href={`/connect/${user.userId}`}>
+            <button> Link to {user.firstName}'s profile</button>
+          </a>
         </div>
       ))}
     </div>

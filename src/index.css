@@ -142,3 +142,47 @@ button:focus-visible {
   height: 300px;
   width: 300px;
 }
+
+.user-profile-wrapper {
+  display: flex;
+  background: pink;
+  justify-content: space-between;
+  height: 100vh;
+}
+
+.profile-card {
+  width: 35%;
+  border: 1px solid grey;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  align-items: center;
+}
+
+.left {
+  width: 60%;
+}
+
+.stats {
+  height: 30%;
+  border: 1px solid grey;
+  border-radius: 10px;
+}
+
+.future-sessions {
+  display: flex;
+}
+
+.session-card {
+  border: 1px solid grey;
+  border-radius: 10px;
+  margin: 0 5px;
+}
+
+.profile-pic {
+  width: 200px;
+  height: 200px;
+  border-radius: 100%;
+  object-fit: cover;
+}

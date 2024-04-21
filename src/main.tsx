@@ -12,6 +12,7 @@ import Dashboard from "./pages/Dashboard.tsx";
 import CreateSesssion from "./pages/CreateSession.tsx";
 import Community from "./pages/Community.tsx";
 import Session2 from "./pages/Session2.tsx";
+import UserProfile from "./pages/UserProfile.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -26,6 +27,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             <Route path="/create-session" element={<CreateSesssion />} />
             <Route path="/community" element={<Community />} />
             <Route path="/coworking-session" element={<Session2 />} />
+            <Route path="/connect/:userId" element={<UserProfile />} />
           </Route>
         </Routes>
       </BrowserRouter>

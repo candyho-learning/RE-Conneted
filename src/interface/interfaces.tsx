@@ -3,7 +3,7 @@ export interface UserType {
   lastName: string;
   email: string;
   userId: string;
-  accountCreatedTimestamp: null | Date;
+  accountCreatedTimestamp: any;
   futureSessions?: Array<FutureSessionDataType>;
 }
 export interface AuthContextType {
@@ -36,7 +36,7 @@ export interface TimeBlockProps {
 export interface SessionDataType {
   sessionId: string;
   sessionName: string;
-  startTime: Date;
+  startTime: any;
   timeBlocks: Array<TimeBlock>;
   host: string;
   isTimerActive: boolean;
@@ -48,7 +48,7 @@ export interface FutureSessionDataType {
   sessionId: string;
   role: string;
   userId: string;
-  startTime: Date;
+  startTime: any;
 }
 
 export interface VideoViewProps {
@@ -87,4 +87,8 @@ export interface UserActivityType {
   userName: string;
   userId: string;
   goals?: Array<GoalsType>;
+}
+
+export interface EditableTextProps {
+  placeholder: string;
 }

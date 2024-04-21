@@ -167,3 +167,18 @@ export async function updateUserSessionGoal(
     console.error(err);
   }
 }
+
+export async function getUserData(userId: string) {
+  const docRef = doc(db, "users", userId);
+  try {
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      console.log("Document data:", docSnap.data());
+      return docSnap.data();
+    } else {
+      throw new Error("Cannot get user data because document does not exist.");
+    }
+  } catch (err) {
+    console.error(err);
+  }
+}
