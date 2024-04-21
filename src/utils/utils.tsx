@@ -198,6 +198,6 @@ export async function updateUserData(
     return { success: true };
   } catch (err) {
     console.error(err);
-    return { success: false };
+    return { success: false, error: err };
   }
 }
