@@ -74,12 +74,12 @@ export default function CreateSesssion() {
 
       const futureSessionData = {
         sessionId: sessionData.sessionId,
+        sessionName,
         role: "host",
-        userId,
         startTime: formattedSessionStartTime,
       };
       await createNewSession(sessionData);
-      await addFutureSession(futureSessionData);
+      await addFutureSession(userId, futureSessionData);
       resetForm();
     } else {
       console.log("nope");

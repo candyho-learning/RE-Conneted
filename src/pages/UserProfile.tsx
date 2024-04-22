@@ -72,11 +72,10 @@ export default function UserProfile() {
             ?.filter((session) => session.role === "host")
             .map((session) => (
               <div className="session-card">
-                <p>{session.sessionId}</p>
-                <p>
-                  Session starts at:{" "}
-                  {session.startTime.toDate().toLocaleString()}
-                </p>
+                <strong>
+                  <p>{session.sessionName}</p>
+                </strong>
+                <p>{session.startTime.toDate().toLocaleString()}</p>
                 <button>Join</button>
               </div>
             ))}

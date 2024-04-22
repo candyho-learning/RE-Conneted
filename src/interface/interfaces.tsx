@@ -49,8 +49,8 @@ export interface SessionDataType {
 export interface FutureSessionDataType {
   sessionId: string;
   role: string;
-  userId: string;
   startTime: any;
+  sessionName: string;
 }
 
 export interface VideoViewProps {

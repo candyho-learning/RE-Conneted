@@ -34,9 +34,9 @@ export async function createNewSession(sessionData: SessionDataType) {
 }
 
 export async function addFutureSession(
+  userId: string,
   futureSessionData: FutureSessionDataType
 ) {
-  const { userId } = futureSessionData;
   const userRef = doc(db, "users", userId);
   await updateDoc(userRef, {
     futureSessions: arrayUnion(futureSessionData),
