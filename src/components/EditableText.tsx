@@ -6,7 +6,7 @@ export default function EditableText({
   fieldName,
   databaseContent,
   userIdParam,
-  isProfileOwner,
+  isProfileOwner = true,
 }: EditableTextProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [textValue, setTextValue] = useState(

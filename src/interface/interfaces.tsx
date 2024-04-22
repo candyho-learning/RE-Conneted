@@ -7,6 +7,7 @@ export interface UserType {
   futureSessions?: Array<FutureSessionDataType>;
   quote: string;
   location: string;
+  tags?: Array<string>;
 }
 export interface AuthContextType {
   isLoggedIn: boolean;
@@ -95,5 +96,10 @@ export interface EditableTextProps {
   fieldName: string;
   databaseContent: string;
   userIdParam: string;
-  isProfileOwner: boolean;
+  isProfileOwner?: boolean;
+}
+
+export interface TagSelectorProps {
+  setTags: React.Dispatch<React.SetStateAction<string[]>>; // Function to update the tags
+  tags: Array<string>;
 }

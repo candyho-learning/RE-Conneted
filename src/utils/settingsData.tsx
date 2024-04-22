@@ -1,0 +1,37 @@
+export const TAGS = [
+  "🛍️ Marketing",
+  "💼 Freelancer",
+  "💻 Software",
+  "📈 Sales",
+  "🎓 Student",
+  "🐾 Pet Parents",
+  "🍔 Foodie",
+  "🎵 Music",
+  "🏅 Sports",
+  "🌈 LGBTQ+",
+  "🎨 Art",
+  "🏥 Healthcare",
+  "🏦 Finance",
+  "📚 Education",
+  "🌿 Environment",
+  "🔧 Engineering",
+  "🎬 Entertainment",
+  "🌐 Technology",
+  "🏋️‍♀️ Fitness",
+  "🚀 Entrepreneur",
+  "📸 Photography",
+  "🌍 Travel",
+  "📘 Book Lover",
+  "🎮 Gaming",
+  "🌟 Astrology",
+];
+
+export const SETTINGS_FIELDS = [
+  { fieldName: "firstName", displayName: "First Name" },
+  { fieldName: "lastName", displayName: "Last Name" },
+  // { fieldName: "tags", displayName: "Tags" },
+  { fieldName: "quote", displayName: "Quote" },
+  { fieldName: "location", displayName: "Location" },
+  // { fieldName: "socialLinks", displayName: "Social Links" },
+]; //TODO Click to edit fields, on save send data back to database
+//TODO How to approach tags?
