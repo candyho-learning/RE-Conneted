@@ -1,8 +1,14 @@
 import { TagSelectorProps } from "../interface/interfaces";
 import { TAGS } from "../utils/settingsData";
 import { useState } from "react";
+import { updateUserData } from "../utils/utils";
 
-export default function TagSelector({ setTags, tags }: TagSelectorProps) {
+export default function TagSelector({
+  setTags,
+  tags,
+  userId,
+}: TagSelectorProps) {
+  console.log(userId);
   const [isEditing, setIsEditing] = useState(false);
   function toggleSelectedTags(tagName: string) {
     console.log(tagName);
@@ -13,6 +19,17 @@ export default function TagSelector({ setTags, tags }: TagSelectorProps) {
       //tag not yet selected -> add to list
       if (tags.length >= 5) return;
       setTags((prevList) => [...prevList, tagName]);
+    }
+  }
+
+  async function confirmTagSelection() {
+    setIsEditing(false);
+    console.log(userId);
+    const result = await updateUserData(userId, "tags", tags);
+    if (result.success) {
+      alert(`Updated your tags successfully!`);
+    } else {
+      console.error("Failed to update user data", result.error);
     }
   }
   return (
@@ -57,13 +74,7 @@ export default function TagSelector({ setTags, tags }: TagSelectorProps) {
               </div>
             ))}
           </div>
-          <button
-            onClick={() => {
-              setIsEditing(false);
-            }}
-          >
-            Confirm Tags
-          </button>
+          <button onClick={confirmTagSelection}>Confirm Tags</button>
         </>
       )}
     </>

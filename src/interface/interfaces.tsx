@@ -102,4 +102,5 @@ export interface EditableTextProps {
 export interface TagSelectorProps {
   setTags: React.Dispatch<React.SetStateAction<string[]>>; // Function to update the tags
   tags: Array<string>;
+  userId: string;
 }

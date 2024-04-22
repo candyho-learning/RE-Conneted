@@ -19,11 +19,8 @@ export default function Settings() {
     const unsub = onSnapshot(doc(db, "users", userId), (doc) => {
       console.log("change in user settings!");
       setUserData(doc.data() as UserType);
+      setTags(doc.data()?.tags);
     });
-    // (async () => {
-    //   const data = await getUserData(userId);
-    //   setUserData(data as UserType);
-    // })();
 
     return () => unsub();
   }, [userId]);
@@ -46,7 +43,7 @@ export default function Settings() {
           />
         </>
       ))}
-      <TagSelector setTags={setTags} tags={tags} />
+      <TagSelector setTags={setTags} tags={tags} userId={userId} />
     </div>
   );
 }
