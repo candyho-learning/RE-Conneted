@@ -49,6 +49,8 @@ export default function UserProfile() {
           databaseContent={userData.location}
           userId={userId}
         />
+        <br />
+        <a>Go to profile settings</a>
       </div>
       <div className="left">
         <div className="stats">
