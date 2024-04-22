@@ -29,9 +29,10 @@ export const TAGS = [
 export const SETTINGS_FIELDS = [
   { fieldName: "firstName", displayName: "First Name" },
   { fieldName: "lastName", displayName: "Last Name" },
-  // { fieldName: "tags", displayName: "Tags" },
   { fieldName: "quote", displayName: "Quote" },
   { fieldName: "location", displayName: "Location" },
-  // { fieldName: "socialLinks", displayName: "Social Links" },
-]; //TODO Click to edit fields, on save send data back to database
-//TODO How to approach tags?
+  { fieldName: "facebookLink", displayName: "Facebook Account" },
+  { fieldName: "instagramLink", displayName: "Instagram Account" },
+  { fieldName: "twitterLink", displayName: "Twitter Account" },
+  { fieldName: "websiteLink", displayName: "Personal/Business Website" },
+];

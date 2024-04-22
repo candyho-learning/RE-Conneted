@@ -10,6 +10,7 @@ export default function TagSelector({
 }: TagSelectorProps) {
   console.log(userId);
   const [isEditing, setIsEditing] = useState(false);
+
   function toggleSelectedTags(tagName: string) {
     console.log(tagName);
     if (tags.includes(tagName)) {
@@ -34,9 +35,9 @@ export default function TagSelector({
   }
   return (
     <>
-      <h3>This is a tag selector</h3>
+      <h3>Choose Up to 5 Tags</h3>
 
-      <h4>You have {tags.length} tags</h4>
+      <h4>You have selected {tags?.length} tags</h4>
       {!isEditing && (
         <>
           <button

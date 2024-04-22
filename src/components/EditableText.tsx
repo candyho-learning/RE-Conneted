@@ -45,11 +45,15 @@ export default function EditableText({
                 "{textValue ? textValue : `Add your ${fieldName}...`}"
               </strong>
             </em>
+          ) : fieldName.includes("Link") && !textValue.includes("Add your") ? (
+            <a href={textValue} target="_blank" rel="noopener noreferrer">
+              {textValue}
+            </a>
           ) : textValue ? (
             textValue
           ) : (
             `Add your ${fieldName}...`
-          )}{" "}
+          )}
           {isProfileOwner && (
             <button
               onClick={() => {

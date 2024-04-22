@@ -43,7 +43,7 @@ export default function Settings() {
           />
         </>
       ))}
-      <TagSelector setTags={setTags} tags={tags} userId={userId} />
+      {tags && <TagSelector setTags={setTags} tags={tags} userId={userId} />}
     </div>
   );
 }
