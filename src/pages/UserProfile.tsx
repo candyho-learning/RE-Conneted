@@ -1,18 +1,22 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getUserData } from "../utils/utils";
 import { UserType } from "../interface/interfaces";
 import EditableText from "../components/EditableText";
+import { AuthContext } from "../context/authContext";
 
 export default function UserProfile() {
-  const { userId } = useParams<{ userId: string | undefined }>();
+  const { userId } = useContext(AuthContext);
+  const { userId: userIdParam } = useParams<{ userId: string | undefined }>();
   const [userData, setUserData] = useState<UserType>();
-  console.log(userId);
+  const isProfileOwner = userId === userIdParam;
+
+  console.log(userIdParam);
 
   useEffect(() => {
-    async function init(userId: string) {
+    async function init(userIdParam: string) {
       try {
-        const data = await getUserData(userId);
+        const data = await getUserData(userIdParam);
         setUserData(data as UserType);
       } catch (err) {
         console.error(err);
@@ -20,12 +24,12 @@ export default function UserProfile() {
       }
     }
 
-    if (userId) {
-      init(userId);
+    if (userIdParam) {
+      init(userIdParam);
     }
-  }, [userId]);
+  }, [userIdParam]);
 
-  if (!userData || !userId) {
+  if (!userData || !userIdParam) {
     return <h1>This user does not exist!</h1>;
   }
   return (
@@ -41,13 +45,15 @@ export default function UserProfile() {
         <EditableText
           fieldName="quote"
           databaseContent={userData.quote}
-          userId={userId}
+          userIdParam={userIdParam}
+          isProfileOwner={isProfileOwner}
         />
         <h4>📍</h4>
         <EditableText
           fieldName="location"
           databaseContent={userData.location}
-          userId={userId}
+          userIdParam={userIdParam}
+          isProfileOwner={isProfileOwner}
         />
         <br />
         <a>Go to profile settings</a>

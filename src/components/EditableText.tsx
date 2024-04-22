@@ -5,7 +5,8 @@ import { updateUserData } from "../utils/utils";
 export default function EditableText({
   fieldName,
   databaseContent,
-  userId,
+  userIdParam,
+  isProfileOwner,
 }: EditableTextProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [textValue, setTextValue] = useState(
@@ -14,7 +15,8 @@ export default function EditableText({
 
   async function confirmTextUpdate() {
     setIsEditing(false);
-    const result = await updateUserData(userId, fieldName, textValue);
+    if (textValue === databaseContent) return;
+    const result = await updateUserData(userIdParam, fieldName, textValue);
     if (result.success) {
       alert(`Updated your ${fieldName} successfully!`);
     } else {
@@ -37,14 +39,26 @@ export default function EditableText({
       )}
       {!isEditing && (
         <div>
-          <span>"{textValue ? textValue : `Add your ${fieldName}...`}"</span>
-          <button
-            onClick={() => {
-              setIsEditing(true);
-            }}
-          >
-            edit
-          </button>
+          {fieldName === "quote" ? (
+            <em>
+              <strong>
+                "{textValue ? textValue : `Add your ${fieldName}...`}"
+              </strong>
+            </em>
+          ) : textValue ? (
+            textValue
+          ) : (
+            `Add your ${fieldName}...`
+          )}{" "}
+          {isProfileOwner && (
+            <button
+              onClick={() => {
+                setIsEditing(true);
+              }}
+            >
+              edit
+            </button>
+          )}
         </div>
       )}
     </div>

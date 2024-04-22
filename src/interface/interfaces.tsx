@@ -94,5 +94,6 @@ export interface UserActivityType {
 export interface EditableTextProps {
   fieldName: string;
   databaseContent: string;
-  userId: string;
+  userIdParam: string;
+  isProfileOwner: boolean;
 }
