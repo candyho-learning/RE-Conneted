@@ -42,12 +42,6 @@ export default function UserProfile() {
         <h3>
           {userData.firstName} {userData.lastName}
         </h3>
-        <EditableText
-          fieldName="quote"
-          databaseContent={userData.quote}
-          userIdParam={userIdParam}
-          isProfileOwner={isProfileOwner}
-        />
         <h4>📍</h4>
         <EditableText
           fieldName="location"
@@ -55,8 +49,23 @@ export default function UserProfile() {
           userIdParam={userIdParam}
           isProfileOwner={isProfileOwner}
         />
-        <br />
-        <a>Go to profile settings</a>
+        <EditableText
+          fieldName="quote"
+          databaseContent={userData.quote}
+          userIdParam={userIdParam}
+          isProfileOwner={isProfileOwner}
+        />
+        <div className="tag-selector wide">
+          {userData.tags &&
+            userData.tags.map((tag) => (
+              <div key={tag} className="tag compact">
+                {tag}
+              </div>
+            ))}
+        </div>
+
+        <hr />
+        <a href="/settings">Go to profile settings</a>
       </div>
       <div className="left">
         <div className="stats">

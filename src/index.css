@@ -158,6 +158,7 @@ button:focus-visible {
   flex-direction: column;
   padding: 20px;
   align-items: center;
+  text-align: center;
 }
 
 .left {
@@ -193,9 +194,22 @@ button:focus-visible {
   flex-wrap: wrap;
 }
 
+.tag-selector.wide {
+  width: 100%;
+}
+
 .tag {
   background-color: #f1f1f1;
   margin: 10px;
   padding: 3px 13px;
   border-radius: 10px;
+}
+
+.tag.compact {
+  transform: scale(0.8);
+  margin: 0;
+}
+
+hr {
+  width: 100%;
 }

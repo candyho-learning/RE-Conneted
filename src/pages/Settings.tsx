@@ -19,7 +19,7 @@ export default function Settings() {
     const unsub = onSnapshot(doc(db, "users", userId), (doc) => {
       console.log("change in user settings!");
       setUserData(doc.data() as UserType);
-      setTags(doc.data()?.tags);
+      setTags(doc.data()?.tags || []);
     });
 
     return () => unsub();
@@ -29,7 +29,6 @@ export default function Settings() {
 
   return (
     <div>
-      settings page placeholder text
       <h1>This is {userData?.firstName}'s settings</h1>
       {SETTINGS_FIELDS.map((field) => (
         <>
@@ -43,7 +42,7 @@ export default function Settings() {
           />
         </>
       ))}
-      {tags && <TagSelector setTags={setTags} tags={tags} userId={userId} />}
+      <TagSelector setTags={setTags} tags={tags} userId={userId} />
     </div>
   );
 }

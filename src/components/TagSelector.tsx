@@ -19,6 +19,7 @@ export default function TagSelector({
     } else {
       //tag not yet selected -> add to list
       if (tags.length >= 5) return;
+
       setTags((prevList) => [...prevList, tagName]);
     }
   }
