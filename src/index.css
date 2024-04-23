@@ -145,7 +145,6 @@ button:focus-visible {
 
 .user-profile-wrapper {
   display: flex;
-  background: pink;
   justify-content: space-between;
   height: 100vh;
 }
@@ -166,19 +165,21 @@ button:focus-visible {
 }
 
 .stats {
-  height: 30%;
+  height: 25%;
   border: 1px solid grey;
   border-radius: 10px;
 }
 
 .future-sessions {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .session-card {
   border: 1px solid grey;
   border-radius: 10px;
   margin: 0 5px;
+  padding: 10px;
 }
 
 .profile-pic {
@@ -212,4 +213,19 @@ button:focus-visible {
 
 hr {
   width: 100%;
+}
+
+.editable-field-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.editable-field-wrapper > button {
+  transform: scale(0.6);
+}
+
+.social-links > a > i {
+  font-size: 26px;
+  margin: 10px 5px;
+  color: black;
 }

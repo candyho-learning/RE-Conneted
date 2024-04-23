@@ -8,6 +8,11 @@ export interface UserType {
   quote: string;
   location: string;
   tags?: Array<string>;
+  facebookLink?: string;
+  instagramLink?: string;
+  twitterLink?: string;
+  websiteLink?: string;
+  linkedinLink?: string;
 }
 export interface AuthContextType {
   isLoggedIn: boolean;
@@ -103,4 +108,9 @@ export interface TagSelectorProps {
   setTags: React.Dispatch<React.SetStateAction<string[]>>; // Function to update the tags
   tags: Array<string>;
   userId: string;
+}
+
+export interface ProfileSocialLinksProps {
+  userData: UserType;
+  hasSocialLinks: boolean;
 }

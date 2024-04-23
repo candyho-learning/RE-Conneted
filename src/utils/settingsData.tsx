@@ -35,4 +35,5 @@ export const SETTINGS_FIELDS = [
   { fieldName: "instagramLink", displayName: "Instagram Account" },
   { fieldName: "twitterLink", displayName: "Twitter Account" },
   { fieldName: "websiteLink", displayName: "Personal/Business Website" },
+  { fieldName: "linkedinLInk", displayName: "LinkedIn Account" },
 ];

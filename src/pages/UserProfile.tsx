@@ -4,12 +4,20 @@ import { getUserData } from "../utils/utils";
 import { UserType } from "../interface/interfaces";
 import EditableText from "../components/EditableText";
 import { AuthContext } from "../context/authContext";
+import ProfileSocialLinks from "../components/ProfileSocialLinks";
 
 export default function UserProfile() {
   const { userId } = useContext(AuthContext);
   const { userId: userIdParam } = useParams<{ userId: string | undefined }>();
   const [userData, setUserData] = useState<UserType>();
   const isProfileOwner = userId === userIdParam;
+  const hasSocialLink = Boolean(
+    userData?.facebookLink ||
+      userData?.instagramLink ||
+      userData?.twitterLink ||
+      userData?.websiteLink ||
+      userData?.linkedinLink
+  );
 
   console.log(userIdParam);
 
@@ -42,7 +50,6 @@ export default function UserProfile() {
         <h3>
           {userData.firstName} {userData.lastName}
         </h3>
-        <h4>📍</h4>
         <EditableText
           fieldName="location"
           databaseContent={userData.location}
@@ -55,6 +62,8 @@ export default function UserProfile() {
           userIdParam={userIdParam}
           isProfileOwner={isProfileOwner}
         />
+        <hr />
+
         <div className="tag-selector wide">
           {userData.tags &&
             userData.tags.map((tag) => (
@@ -65,6 +74,12 @@ export default function UserProfile() {
         </div>
 
         <hr />
+
+        <ProfileSocialLinks
+          userData={userData}
+          hasSocialLinks={hasSocialLink}
+        />
+
         <a href="/settings">Go to profile settings</a>
       </div>
       <div className="left">

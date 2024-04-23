@@ -38,7 +38,7 @@ export default function EditableText({
         </div>
       )}
       {!isEditing && (
-        <div>
+        <div className="editable-field-wrapper">
           {fieldName === "quote" ? (
             <em>
               <strong>
