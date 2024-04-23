@@ -67,7 +67,7 @@ export default function UserProfile() {
         <div className="tag-selector wide">
           {userData.tags &&
             userData.tags.map((tag) => (
-              <div key={tag} className="tag compact">
+              <div key={tag} className="tag">
                 {tag}
               </div>
             ))}
@@ -80,7 +80,7 @@ export default function UserProfile() {
           hasSocialLinks={hasSocialLink}
         />
 
-        <a href="/settings">Go to profile settings</a>
+        {isProfileOwner && <a href="/settings">Go to profile settings</a>}
       </div>
       <div className="left">
         <div className="stats">

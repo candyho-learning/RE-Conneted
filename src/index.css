@@ -168,6 +168,7 @@ button:focus-visible {
   height: 25%;
   border: 1px solid grey;
   border-radius: 10px;
+  padding: 10px;
 }
 
 .future-sessions {
@@ -206,13 +207,9 @@ button:focus-visible {
   border-radius: 10px;
 }
 
-.tag.compact {
-  transform: scale(0.8);
-  margin: 0;
-}
-
 hr {
   width: 100%;
+  margin: 20px 0;
 }
 
 .editable-field-wrapper {
