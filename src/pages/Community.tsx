@@ -19,25 +19,14 @@ export default function Community() {
   if (!isLoggedIn) return <Login context="force" />;
 
   return (
-    <div>
-      <h1>Community Page placeholder</h1>
+    <div style={{ display: "flex", width: "70%", flexWrap: "wrap" }}>
       {allUsers?.map((user) => (
-        <div key={user.userId}>
+        <div key={user.userId} className="community-card">
           <h3>
             {user.firstName} has {user?.futureSessions?.length || "no"} future
-            sessions:
+            sessions.
           </h3>
-          {user.futureSessions &&
-            user?.futureSessions.map((session) => (
-              <>
-                <a
-                  href={`/coworking-session?type=default&id=${session.sessionId}`}
-                >
-                  {session.sessionId}
-                </a>
-                <br />
-              </>
-            ))}
+
           <a href={`/connect/${user.userId}`}>
             <button> Link to {user.firstName}'s profile</button>
           </a>

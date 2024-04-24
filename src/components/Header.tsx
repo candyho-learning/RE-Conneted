@@ -22,6 +22,9 @@ export default function Header() {
         <a href="/community">
           <li>Community</li>
         </a>
+        <a href="/settings">
+          <li>Settings</li>
+        </a>
         {isLoggedIn && user && (
           <a onClick={logout}>Hi {user.firstName}! Log Out Here</a>
         )}

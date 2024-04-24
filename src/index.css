@@ -226,3 +226,8 @@ hr {
   margin: 10px 5px;
   color: black;
 }
+
+.community-card {
+  border: 1px solid grey;
+  margin: 10px;
+}

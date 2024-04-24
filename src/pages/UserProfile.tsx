@@ -79,8 +79,6 @@ export default function UserProfile() {
           userData={userData}
           hasSocialLinks={hasSocialLink}
         />
-
-        {isProfileOwner && <a href="/settings">Go to profile settings</a>}
       </div>
       <div className="left">
         <div className="stats">
@@ -100,7 +98,11 @@ export default function UserProfile() {
                   <p>{session.sessionName}</p>
                 </strong>
                 <p>{session.startTime.toDate().toLocaleString()}</p>
-                <button>Join</button>
+                <a
+                  href={`/coworking-session?type=default&id=${session.sessionId}`}
+                >
+                  <button>Join</button>
+                </a>
               </div>
             ))}
         </div>
