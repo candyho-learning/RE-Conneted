@@ -122,14 +122,17 @@ export default function Session2() {
           </StreamTheme>
         </StreamVideo>
       )}
-      {sessionData && <FocusTimer {...sessionData} />}
-      {sessionData && user && (
-        <GoalTracker
-          sessionId={sessionData.sessionId}
-          userId={userId}
-          userName={user?.firstName}
-        />
-      )}
+      <div className="wrapper">
+        {sessionData && <FocusTimer {...sessionData} />}
+        {sessionData && user && (
+          <GoalTracker
+            sessionId={sessionData.sessionId}
+            userId={userId}
+            userName={user?.firstName}
+          />
+        )}
+      </div>
+
       <div className="goals-display">
         {sessionData &&
           sessionData.participantsActivity?.map((item) => (
