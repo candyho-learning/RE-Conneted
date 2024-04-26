@@ -18,8 +18,8 @@ export default function Dashboard() {
   const { user, isLoggedIn } = useContext(AuthContext);
   if (!isLoggedIn) return <Login context="force" />;
   return (
-    <div className="bg-gray h-fit flex bg-red-300">
-      <div className="w-1/3  bg-slate-200 px-10 py-10">
+    <div className="bg-gray h-full flex">
+      <div className="w-1/3  px-10 py-10">
         <div className="flex mb-10 items-center">
           <Avatar className="w-20 h-20 static">
             <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
@@ -58,17 +58,21 @@ export default function Dashboard() {
             <CardDescription>Card Description</CardDescription>
           </CardHeader>
           <CardContent>
-            <SessionList />
+            {user && user.futureSessions && (
+              <SessionList
+                userSessions={user?.futureSessions.filter(
+                  (session) => session.role === "host"
+                )}
+              />
+            )}
           </CardContent>
         </Card>
         <Card>
           <CardHeader>
             <CardTitle>Upcoming Sessions You Are Joining</CardTitle>
-            <CardDescription>Card Description</CardDescription>
+            <CardDescription>This feature hasn't been built</CardDescription>
           </CardHeader>
-          <CardContent>
-            <SessionList />
-          </CardContent>
+          <CardContent>{/* <SessionList /> */}</CardContent>
         </Card>
       </div>
     </div>

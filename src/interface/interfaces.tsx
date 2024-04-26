@@ -114,3 +114,7 @@ export interface ProfileSocialLinksProps {
   userData: UserType;
   hasSocialLinks: boolean;
 }
+
+export interface SessionListProps {
+  userSessions: Array<FutureSessionDataType>;
+}
