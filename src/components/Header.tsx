@@ -1,35 +1,91 @@
 import { useContext } from "react";
 import { AuthContext } from "../context/authContext";
+import { Link } from "react-router-dom";
+import Logo from "@/assets/logo.svg";
+
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export default function Header() {
   const { isLoggedIn, user, logout } = useContext(AuthContext);
-  console.log(user);
   return (
-    <div>
-      <ul style={{ display: "flex" }}>
-        <a href="/dashboard">
-          <li>Dashboard</li>
-        </a>
-        <a href="/signup">
-          <li>SignUp</li>
-        </a>
-        <a href="/login">
-          <li>Log In</li>
-        </a>
-        <a href="/">
-          <li>HomePage</li>
-        </a>
-        <a href="/community">
-          <li>Community</li>
-        </a>
-        <a href="/settings">
-          <li>Settings</li>
-        </a>
+    <header className="sticky top-0 flex h-25 items-center gap-4 border-b bg-background px-4 md:px-6 justify-between">
+      <img src={Logo} alt="Logo" className="w-20" />
+
+      <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-lg lg:gap-6">
+        <Link
+          to="/"
+          className="text-muted-foreground transition-colors hover:text-foreground"
+        >
+          Home
+        </Link>
+        <Link
+          to="/dashboard"
+          className="text-muted-foreground transition-colors hover:text-foreground"
+        >
+          Dashboard
+        </Link>
+        <Link
+          to="/community"
+          className="text-muted-foreground transition-colors hover:text-foreground"
+        >
+          Community
+        </Link>
+      </nav>
+      <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4 justify-end">
         {isLoggedIn && user && (
-          <a onClick={logout}>Hi {user.firstName}! Log Out Here</a>
+          <>
+            <p className="text-xs">Welcome Back, {user.firstName}!</p>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="secondary"
+                  size="icon"
+                  className="rounded-full"
+                >
+                  <Avatar className="hidden h-9 w-9 sm:flex">
+                    <AvatarImage src="/avatars/03.png" alt="Avatar" />
+                    <AvatarFallback>
+                      {user?.firstName[0]}
+                      {user?.lastName[0]}
+                    </AvatarFallback>
+                  </Avatar>
+                  <span className="sr-only">Toggle user menu</span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <Link to="/create-session">
+                  <DropdownMenuLabel>Create a Session</DropdownMenuLabel>
+                </Link>
+                <DropdownMenuSeparator />
+                <Link to="/settings">
+                  <DropdownMenuItem>Profile Settings</DropdownMenuItem>
+                </Link>
+                <DropdownMenuItem>Manage My Sessions</DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={logout}>Logout</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </>
         )}
-        {!isLoggedIn && <a href="/login">Log in here</a>}
-      </ul>
-    </div>
+        {!isLoggedIn && (
+          <Link
+            to="/login"
+            className="text-muted-foreground transition-colors hover:text-foreground font-medium text-lg"
+          >
+            Login / Signup
+          </Link>
+        )}
+      </div>
+    </header>
   );
 }
