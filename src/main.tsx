@@ -14,6 +14,7 @@ import Community from "./pages/Community.tsx";
 import Session2 from "./pages/Session2.tsx";
 import UserProfile from "./pages/UserProfile.tsx";
 import Settings from "./pages/Settings.tsx";
+import FindSessions from "./pages/FindSessions.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -26,6 +27,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             <Route path="/login" element={<Login />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/create-session" element={<CreateSesssion />} />
+            <Route path="/find-sessions" element={<FindSessions />} />
             <Route path="/community" element={<Community />} />
             <Route path="/coworking-session" element={<Session2 />} />
             <Route path="/connect/:userId" element={<UserProfile />} />

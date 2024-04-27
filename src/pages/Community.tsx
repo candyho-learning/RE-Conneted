@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { TAGS } from "@/utils/settingsData";
 
 import {
   Card,
@@ -34,10 +35,35 @@ export default function Community() {
 
   return (
     <div className="flex">
-      <div className="left w-1/3 bg-slate-300">sidebar</div>
+      <div className="side-bar left w-1/4  p-10">
+        <h2 className="mb-2 px-4 text-xl font-semibold tracking-tight mt-5">
+          Feature Users
+        </h2>
+        <div className="featured-users space-y-1">
+          <Button variant="ghost" className="w-full justify-start">
+            New Users
+          </Button>
+          <Button variant="ghost" className="w-full justify-start">
+            Power Users
+          </Button>
+          <Button variant="ghost" className="w-full justify-start">
+            Popular Users
+          </Button>
+        </div>
+        <h2 className="px-4 text-xl font-semibold tracking-tight my-5">
+          Filter by Tags
+        </h2>
+        <div className="tag-selector">
+          {TAGS.map((tag) => (
+            <Badge variant="secondary" className="m-2 h-[17px] text-[12px]">
+              {tag}
+            </Badge>
+          ))}
+        </div>
+      </div>
       <div className="flex flex-wrap p-10">
         {allUsers?.map((user) => (
-          <Card className="w-80 h-96 my-5 mx-5">
+          <Card className="w-80 h-96 my-5 mx-5 relative">
             <CardHeader>
               <div className="flex items-center mb-2">
                 <Avatar className="w-28 h-28 static">
@@ -55,7 +81,10 @@ export default function Community() {
                 </CardTitle>
               </div>
 
-              <CardDescription className="italic">{user.quote}</CardDescription>
+              <CardDescription className="italic">
+                {user.quote ||
+                  "Let's get some work done and have fun! RE:Connected with me."}
+              </CardDescription>
             </CardHeader>
 
             <CardContent>
@@ -71,7 +100,7 @@ export default function Community() {
               </div>
             </CardContent>
 
-            <CardFooter>
+            <CardFooter className="absolute bottom-0">
               <Link to={`/connect/${user.userId}`}>
                 <Button>See Profile</Button>
               </Link>

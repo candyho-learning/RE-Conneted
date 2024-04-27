@@ -18,7 +18,7 @@ import {
 export default function Header() {
   const { isLoggedIn, user, logout } = useContext(AuthContext);
   return (
-    <header className="sticky top-0 flex h-20 items-center gap-4 border-b bg-background px-4 md:px-6 justify-between">
+    <header className="sticky top-0 flex h-20 items-center gap-4 border-b bg-background px-4 md:px-6 justify-between z-10">
       <img src={Logo} alt="Logo" className="w-20" />
 
       <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-lg lg:gap-6">
@@ -39,6 +39,12 @@ export default function Header() {
           className="text-muted-foreground transition-colors hover:text-foreground"
         >
           Community
+        </Link>
+        <Link
+          to="/find-sessions"
+          className="text-muted-foreground transition-colors hover:text-foreground"
+        >
+          Sessions
         </Link>
       </nav>
       <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4 justify-end">
