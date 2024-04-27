@@ -4,7 +4,6 @@ import { getCollection } from "../utils/utils";
 import { AuthContext } from "../context/authContext";
 import Login from "./Login";
 import { Link } from "react-router-dom";
-import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { TAGS } from "@/utils/settingsData";

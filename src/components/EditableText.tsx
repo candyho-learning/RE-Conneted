@@ -40,11 +40,7 @@ export default function EditableText({
       {!isEditing && (
         <div className="editable-field-wrapper">
           {fieldName === "quote" ? (
-            <em>
-              <strong>
-                "{textValue ? textValue : `Add your ${fieldName}...`}"
-              </strong>
-            </em>
+            <div>"{textValue ? textValue : `Add your ${fieldName}...`}"</div>
           ) : fieldName.includes("Link") && !textValue.includes("Add your") ? (
             <a href={textValue} target="_blank" rel="noopener noreferrer">
               {textValue}
