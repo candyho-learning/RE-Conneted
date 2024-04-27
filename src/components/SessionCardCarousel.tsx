@@ -21,18 +21,7 @@ interface SessionCardCarouselProps {
   sessions: Array<FutureSessionDataType>;
 }
 
-const dateOptions = {
-  weekday: "long",
-  year: "numeric",
-  month: "long",
-  day: "numeric",
-};
-
-const timeOptions = {
-  hour: "2-digit",
-  minute: "2-digit",
-  timeZoneName: "short",
-};
+import { dateOptions, timeOptions } from "@/utils/utils";
 
 export default function SessionCardCarousel({
   sessions,

@@ -201,3 +201,16 @@ export async function updateUserData(
     return { success: false, error: err };
   }
 }
+
+export const dateOptions = {
+  weekday: "long",
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+};
+
+export const timeOptions = {
+  hour: "2-digit",
+  minute: "2-digit",
+  timeZoneName: "short",
+};

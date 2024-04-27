@@ -50,7 +50,7 @@ export default function Header() {
       <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4 justify-end">
         {isLoggedIn && user && (
           <>
-            <p className="text-xs">Welcome Back, {user.firstName}!</p>
+            <p className="text-sm">Welcome Back, {user.firstName}!</p>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button
