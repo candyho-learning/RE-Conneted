@@ -60,13 +60,19 @@ export default function Community() {
             </Badge>
           ))}
         </div>
+        <h2 className="px-4 text-xl font-semibold tracking-tight my-5">
+          Explore Random Users
+        </h2>
+        <Button className="w-full" variant="outline">
+          🎲 Surprise Me!
+        </Button>
       </div>
       <div className="flex flex-wrap p-10">
         {allUsers?.map((user) => (
           <Card className="w-80 h-96 my-5 mx-5 relative">
             <CardHeader>
               <div className="flex items-center mb-2">
-                <Avatar className="w-28 h-28 static">
+                <Avatar className="w-28 h-28 static border-4 border-blue-400">
                   <AvatarImage
                     src="https://github.com/shadcn.png"
                     alt="@shadcn"
