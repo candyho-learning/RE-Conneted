@@ -2,6 +2,8 @@ import { TagSelectorProps } from "../interface/interfaces";
 import { TAGS } from "../utils/settingsData";
 import { useState } from "react";
 import { updateUserData } from "../utils/utils";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "./ui/button";
 
 export default function TagSelector({
   setTags,
@@ -36,35 +38,42 @@ export default function TagSelector({
   }
   return (
     <>
-      <h3>Choose Up to 5 Tags</h3>
+      <h3 className="text-sm xl:text-xl font-semibold">Choose Up to 5 Tags</h3>
+      <h4 className="text-gray-500">
+        This helps other users with similar interest find you.
+      </h4>
 
-      <h4>You have selected {tags?.length} tags</h4>
+      <h4 className="text-gray-500">You have selected {tags?.length} tags</h4>
       {!isEditing && (
         <>
-          <button
+          <div className="tag-selector my-10">
+            {tags.map((tag) => (
+              <Badge
+                className="mr-4 my-2 h-[28px] text-[16px] rounded-lg"
+                variant="secondary"
+              >
+                {tag}
+              </Badge>
+            ))}
+          </div>
+          <Button
             onClick={() => {
               setIsEditing(true);
             }}
           >
             Edit Tags
-          </button>
-          <div className="tag-selector">
-            {tags.map((tag) => (
-              <div key={tag} className="tag">
-                {tag}
-              </div>
-            ))}
-          </div>
+          </Button>
         </>
       )}
 
       {isEditing && (
         <>
-          <div className="tag-selector">
+          <div className="tag-selector w-3/5 my-10">
             {TAGS.map((tag) => (
-              <div
+              <Badge
                 key={tag}
-                className="tag"
+                className="mr-4 my-2 h-[28px] text-[16px] rounded-lg"
+                variant="secondary"
                 onClick={() => {
                   toggleSelectedTags(tag);
                 }}
@@ -73,10 +82,10 @@ export default function TagSelector({
                 }}
               >
                 {tag}
-              </div>
+              </Badge>
             ))}
           </div>
-          <button onClick={confirmTagSelection}>Confirm Tags</button>
+          <Button onClick={confirmTagSelection}>Confirm Tags</Button>
         </>
       )}
     </>

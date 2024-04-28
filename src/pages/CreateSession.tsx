@@ -111,7 +111,7 @@ export default function CreateSesssion() {
           <CardTitle className="text-6xl font-bold">
             Create a New Session
           </CardTitle>
-          <CardDescription>
+          <CardDescription className="text-md">
             RE:Connected sesssions are designed to help you focus and connect
             with your friends. <br />
             You have the option to customize it however you want in 4 easy

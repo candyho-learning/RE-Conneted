@@ -4,7 +4,7 @@ import { updateUserData } from "../utils/utils";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 
-export default function EditableText({
+export default function EditableQuote({
   fieldName,
   databaseContent,
   userIdParam,
@@ -27,33 +27,30 @@ export default function EditableText({
   return (
     <div>
       {isEditing && (
-        <div className="flex xl:h-12">
+        <div className="flex mt-5 w-full mb-10 relative rounded-lg border-l-8 border-l-gray-500 bg-gray-200 py-5 pl-16 pr-5 font-sans text-lg italic leading-relaxed text-gray-600 before:absolute before:left-3 before:top-3 before:font-serif before:text-6xl before:text-gray-700 before:content-['“']">
           <Input
             type="text"
             value={textValue}
             onChange={(e) => {
               setTextValue(e.target.value);
             }}
-            className="w-[300px] mr-3 text-lg h-full"
+            className="w-4/5 mr-3 text-lg h-full border-gray-400"
           />
-          <Button onClick={confirmTextUpdate} className="xl:h-full xl:text-md">
-            save
+          <Button onClick={confirmTextUpdate} className="absolute right-3">
+            save quote
           </Button>
         </div>
       )}
       {!isEditing && (
-        <div className="flex xl:h-12">
-          <div className="flex items-center h-full rounded-md border border-input bg-transparent px-3 py-1 text-lg shadow-sm transition-colors  placeholder:text-muted-foreground   w-[300px] mr-3">
-            {textValue ? textValue : `Add your ${fieldName}...`}
-          </div>
+        <div className="mt-5 w-full mb-10 relative rounded-lg border-l-8 border-l-gray-500 bg-gray-200 py-5 pl-16 pr-5 font-sans text-lg italic leading-relaxed text-gray-600 before:absolute before:left-3 before:top-3 before:font-serif before:text-6xl before:text-gray-700 before:content-['“']">
+          {databaseContent}
           <Button
+            className="absolute right-3"
             onClick={() => {
               setIsEditing(true);
             }}
-            variant="secondary"
-            className="xl:h-full xl:text-md"
           >
-            edit
+            edit quote
           </Button>
         </div>
       )}

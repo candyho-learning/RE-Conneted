@@ -26,11 +26,13 @@ export const TAGS = [
   "🌟 Astrology",
 ];
 
-export const SETTINGS_FIELDS = [
+export const ACCOUNT_SETTINGS_FIELDS = [
   { fieldName: "firstName", displayName: "First Name" },
   { fieldName: "lastName", displayName: "Last Name" },
-  { fieldName: "quote", displayName: "Quote" },
   { fieldName: "location", displayName: "Location" },
+];
+
+export const SOCIAL_LINKS_SETTINGS_FIELDS = [
   { fieldName: "facebookLink", displayName: "Facebook Account" },
   { fieldName: "instagramLink", displayName: "Instagram Account" },
   { fieldName: "twitterLink", displayName: "Twitter Account" },
