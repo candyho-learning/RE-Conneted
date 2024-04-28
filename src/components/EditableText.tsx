@@ -34,7 +34,7 @@ export default function EditableText({
             onChange={(e) => {
               setTextValue(e.target.value);
             }}
-            className="w-[300px] mr-3 text-lg h-full"
+            className="mr-3 w-full text-lg h-full"
           />
           <Button onClick={confirmTextUpdate} className="xl:h-full xl:text-md">
             save
@@ -43,7 +43,7 @@ export default function EditableText({
       )}
       {!isEditing && (
         <div className="flex xl:h-12">
-          <div className="flex items-center h-full rounded-md border border-input bg-transparent px-3 py-1 text-lg shadow-sm transition-colors  placeholder:text-muted-foreground   w-[300px] mr-3">
+          <div className="flex w-full items-center h-full rounded-md border border-input bg-transparent px-3 py-1 text-lg shadow-sm transition-colors  placeholder:text-muted-foreground mr-3">
             {textValue ? textValue : `Add your ${fieldName}...`}
           </div>
           <Button

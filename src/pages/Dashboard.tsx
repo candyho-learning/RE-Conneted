@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/card";
 import SessionList from "@/components/SessionList";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Input } from "@/components/ui/input";
 
 export default function Dashboard() {
   const { user, isLoggedIn } = useContext(AuthContext);
@@ -50,6 +51,13 @@ export default function Dashboard() {
             </li>
           </ul>
         </nav>
+        <div className="border mt-10 text-lg font-medium p-5 rounded-sm bg-gray-100">
+          Join a Session with Code
+          <div className="flex w-4/5 space-x-2 mt-3">
+            <Input className="bg-white" placeholder="Session Code" />
+            <Button>Add</Button>
+          </div>
+        </div>
       </div>
 
       <div className="w-2/3 p-5">

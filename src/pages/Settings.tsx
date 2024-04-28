@@ -34,7 +34,7 @@ export default function Settings() {
   if (!isLoggedIn || !userData) return <Login context="force" />;
 
   return (
-    <main className=" px-20 xl:px-40 py-20">
+    <main className="px-20 xl:px-28 py-20 max-w-screen-xl">
       <h1 className="text-3xl xl:text-4xl font-bold">
         This is {userData?.firstName}'s settings
       </h1>
@@ -68,9 +68,9 @@ export default function Settings() {
             Tag
           </TabsTrigger>
         </TabsList>
-        <TabsContent value="account">
+        <TabsContent value="account" className="grow">
           {ACCOUNT_SETTINGS_FIELDS.map((field) => (
-            <div className="mb-5">
+            <div className="mb-5 w-full">
               <h3 className="text-sm xl:text-xl font-semibold">
                 {field.displayName}
               </h3>
@@ -86,9 +86,9 @@ export default function Settings() {
             </div>
           ))}
         </TabsContent>
-        <TabsContent value="contact">
+        <TabsContent value="contact" className="grow">
           {SOCIAL_LINKS_SETTINGS_FIELDS.map((field) => (
-            <div className="mb-5">
+            <div className="mb-5 w-full">
               <h3 className="text-sm xl:text-xl font-semibold">
                 {field.displayName}
               </h3>
@@ -104,7 +104,7 @@ export default function Settings() {
             </div>
           ))}
         </TabsContent>
-        <TabsContent value="tags">
+        <TabsContent value="tags" className="grow">
           <TagSelector setTags={setTags} tags={tags} userId={userId} />
         </TabsContent>
       </Tabs>
