@@ -93,7 +93,7 @@ export async function getSessionData(sessionId: string) {
 
 export async function searchUnsplash(searchTerm: string) {
   const UNSPLASH_API_KEY = import.meta.env.VITE_UNSPLASH_API_KEY;
-  const URL = `https://api.unsplash.com/search/photos?query=${searchTerm}&client_id=${UNSPLASH_API_KEY}&orientation=landscape&per_page=9`;
+  const URL = `https://api.unsplash.com/search/photos?query=${searchTerm}&client_id=${UNSPLASH_API_KEY}&orientation=landscape&per_page=10`;
   console.log("searching on unsplash");
   try {
     const response = await fetch(URL);

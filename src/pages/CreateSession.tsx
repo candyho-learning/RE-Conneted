@@ -17,6 +17,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+
 const defaultBackground =
   "https://images.unsplash.com/photo-1631679706909-1844bbd07221?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MTMyNzk5Mzl8&ixlib=rb-4.0.3&q=85";
 
@@ -131,6 +132,7 @@ export default function CreateSesssion() {
           <div className="grid w-full max-w-sm items-center gap-1.5 mb-10">
             <Label className="font-bold">Session Start Time</Label>
             <Input
+              className="w-fit"
               type="datetime-local"
               name="session-start-time"
               value={sessionStartTime}
@@ -142,12 +144,17 @@ export default function CreateSesssion() {
               <p className="warning">Start time must be in the future.</p>
             )}
           </div>
-          <div className="w-1/3">
+          <div className="w-full mb-10">
             <Label className="font-bold">Choose a Backgroung Image</Label>
-            {/* <BackgroundPicker
-            setBackgroundImage={setBackgroundImage}
-            backgroundImage={backgroundImage}
-          /> */}
+            {backgroundImage && (
+              <img className="w-1/3" src={backgroundImage}></img>
+            )}
+            <div className="mt-5">
+              <BackgroundPicker
+                setBackgroundImage={setBackgroundImage}
+                backgroundImage={backgroundImage}
+              />
+            </div>
           </div>
 
           <div className="grid w-full max-w-sm items-center gap-1.5 mb-10">
