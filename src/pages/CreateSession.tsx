@@ -99,98 +99,109 @@ export default function CreateSesssion() {
   if (!isLoggedIn) return <Login context="force" />;
 
   return (
-    <Card className="mx-auto w-2/5 my-10">
-      <CardHeader>
-        <CardTitle className="text-4xl font-bold">
-          Create a New Session
-        </CardTitle>
-        <CardDescription>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ut possimus
-          laudantium quia impedit, dolores vel omnis tempore repudiandae qui
-          facere.
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <form onSubmit={handleSubmit} className="mt-10">
-          <div className="grid w-full max-w-sm items-center gap-1.5 mb-10">
-            <Label className="font-bold">Session Name</Label>
-            <Input
-              type="text"
-              name="session-name"
-              required
-              value={sessionName}
-              onChange={(e) => {
-                setSessionName(e.target.value);
-              }}
-            />
-            {!hasSessionName && (
-              <p className="text-destructive">
-                Must contain as least 5 characters.
-              </p>
-            )}
-          </div>
-
-          <div className="grid w-full max-w-sm items-center gap-1.5 mb-10">
-            <Label className="font-bold">Session Start Time</Label>
-            <Input
-              className="w-fit"
-              type="datetime-local"
-              name="session-start-time"
-              value={sessionStartTime}
-              onChange={(e) => {
-                setSessionStartTime(e.target.value);
-              }}
-            />
-            {!isStartTimeValid && (
-              <p className="text-destructive">
-                Start time must be in the future.
-              </p>
-            )}
-          </div>
-          <div className="w-full mb-10">
-            <Label className="font-bold">Choose a Backgroung Image</Label>
-            {backgroundImage && (
-              <img className="w-1/3" src={backgroundImage}></img>
-            )}
-            <div className="mt-5">
-              <BackgroundPicker
-                setBackgroundImage={setBackgroundImage}
-                backgroundImage={backgroundImage}
+    <main
+      style={{
+        backgroundImage: `url('${backgroundImage}')`,
+        backgroundSize: "cover",
+      }}
+      className="p-20"
+    >
+      <Card className="mx-auto w-2/5 py-10 bg-white">
+        <CardHeader>
+          <CardTitle className="text-6xl font-bold">
+            Create a New Session
+          </CardTitle>
+          <CardDescription>
+            RE:Connected sesssions are designed to help you focus and connect
+            with your friends. <br />
+            You have the option to customize it however you want in 4 easy
+            steps!
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={handleSubmit} className="mt-10">
+            <div className="grid w-full max-w-sm items-center gap-1.5 mb-10">
+              <Label className="font-bold text-xl">Session Name</Label>
+              <Input
+                type="text"
+                name="session-name"
+                required
+                value={sessionName}
+                onChange={(e) => {
+                  setSessionName(e.target.value);
+                }}
               />
+              {!hasSessionName && (
+                <p className="text-destructive">
+                  Must contain as least 5 characters.
+                </p>
+              )}
             </div>
-          </div>
 
-          <div className="grid w-full max-w-sm items-center gap-1.5 mb-10">
-            <Label className="font-bold">Session Timer Setting</Label>
-            {timeBlocks.map((timeBlock) => (
-              <TimeBlockInput
-                key={timeBlock.id}
-                id={timeBlock.id}
-                setTimeBlocks={setTimeBlocks}
-                timeBlocks={timeBlocks}
+            <div className="grid w-full max-w-sm items-center gap-1.5 mb-10">
+              <Label className="font-bold text-xl">Session Start Time</Label>
+              <Input
+                className="w-fit"
+                type="datetime-local"
+                name="session-start-time"
+                value={sessionStartTime}
+                onChange={(e) => {
+                  setSessionStartTime(e.target.value);
+                }}
               />
-            ))}
-          </div>
-          <Button
-            onClick={createNewTimeBlock}
-            variant="secondary"
-            className="mb-2"
-          >
-            Add Another Time Block
-          </Button>
-          {!isTimerValid && (
-            <p className="text-destructive">
-              To enjoy the best RE:Conneted experience, sessions should be
-              between 30~180 mins.
-            </p>
-          )}
-          <div className="mt-20">
-            <Button type="submit" size="lg">
-              Create Session
+              {!isStartTimeValid && (
+                <p className="text-destructive">
+                  Start time must be in the future.
+                </p>
+              )}
+            </div>
+            <div className="w-full mb-10">
+              <Label className="font-bold text-xl">
+                Choose a Backgroung Image
+              </Label>
+              {backgroundImage && (
+                <img className="w-1/3 mt-3" src={backgroundImage}></img>
+              )}
+              <div className="mt-5">
+                <BackgroundPicker
+                  setBackgroundImage={setBackgroundImage}
+                  backgroundImage={backgroundImage}
+                />
+              </div>
+            </div>
+
+            <div className="grid w-full max-w-sm items-center gap-1.5 mb-10">
+              <Label className="font-bold text-xl">Session Timer Setting</Label>
+              {timeBlocks.map((timeBlock) => (
+                <TimeBlockInput
+                  key={timeBlock.id}
+                  id={timeBlock.id}
+                  setTimeBlocks={setTimeBlocks}
+                  timeBlocks={timeBlocks}
+                />
+              ))}
+            </div>
+            <Button
+              onClick={createNewTimeBlock}
+              variant="secondary"
+              className="mb-2"
+            >
+              Add Another Time Block
             </Button>
-          </div>
-        </form>
-      </CardContent>
-    </Card>
+            {!isTimerValid && (
+              <p className="text-destructive">
+                To enjoy the best RE:Conneted experience, sessions should be
+                between 30~180 mins.
+              </p>
+            )}
+            <div className="mt-20">
+              <Button type="submit" size="lg">
+                Create Session
+              </Button>
+            </div>
+          </form>
+        </CardContent>
+      </Card>
+    </main>
   );
 }

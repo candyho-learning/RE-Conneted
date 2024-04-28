@@ -67,13 +67,13 @@ export default function TimeBlockInput({
         required
         onChange={handleDurationChange}
         value={currentBlock?.duration}
-        className="w-16"
+        className="w-16 ml-2"
       />
       <Button
         onClick={handleDeleteTimeBlock}
         variant="destructive"
         size="sm"
-        className="ml-3"
+        className="ml-2"
       >
         remove
       </Button>
