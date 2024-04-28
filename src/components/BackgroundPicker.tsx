@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { searchUnsplash } from "../utils/utils";
 import {
   BackgroundPickerProps,
@@ -24,10 +24,11 @@ export default function BackgroundPicker({
   setBackgroundImage,
   backgroundImage,
 }: BackgroundPickerProps) {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState("living room");
   const [searchResults, setSearchResults] = useState<Array<UnsplashResponse>>(
     []
   );
+  const searchPage = useRef(1);
   useEffect(() => {
     (async () => {
       const resultPlaceholder = await searchUnsplash("living room");
@@ -39,6 +40,7 @@ export default function BackgroundPicker({
   function submitSearch(e: React.MouseEvent) {
     e.preventDefault();
     console.log(searchTerm);
+    if (!searchTerm) return;
     (async () => {
       const searchResult = await searchUnsplash(searchTerm);
       setSearchResults(searchResult.results);
@@ -47,7 +49,17 @@ export default function BackgroundPicker({
 
   function loadMore(e: React.MouseEvent) {
     e.preventDefault();
+    if (!searchTerm) return;
+
+    searchPage.current += 1;
     console.log("loading more images");
+    (async () => {
+      const searchResult = await searchUnsplash(searchTerm, searchPage.current);
+      setSearchResults((prevResults) => [
+        ...prevResults,
+        ...searchResult.results,
+      ]);
+    })();
   }
   return (
     <Sheet>
@@ -62,7 +74,7 @@ export default function BackgroundPicker({
           </SheetDescription>
         </SheetHeader>
         <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
+          <form className="grid grid-cols-4 items-center gap-4">
             <Input
               type="text"
               name="bg-image-search"
@@ -76,8 +88,8 @@ export default function BackgroundPicker({
             <Button onClick={submitSearch} variant="outline">
               Search
             </Button>
-          </div>
-          <ScrollArea className="search-results w-full h-96">
+          </form>
+          <ScrollArea className="search-results w-full h-80 xl:h-[620px]">
             <div className="flex flex-wrap justify-between gap-2">
               {searchResults &&
                 searchResults.map((item) => (
@@ -111,6 +123,9 @@ export default function BackgroundPicker({
                 ))}
             </div>
           </ScrollArea>
+          <Button variant="outline" onClick={loadMore}>
+            Load More
+          </Button>
         </div>
         <SheetFooter className="fixed bottom-5 w-96">
           <SheetClose asChild>

@@ -91,10 +91,11 @@ export async function getSessionData(sessionId: string) {
   }
 }
 
-export async function searchUnsplash(searchTerm: string) {
+export async function searchUnsplash(searchTerm: string, page: number = 1) {
   const UNSPLASH_API_KEY = import.meta.env.VITE_UNSPLASH_API_KEY;
-  const URL = `https://api.unsplash.com/search/photos?query=${searchTerm}&client_id=${UNSPLASH_API_KEY}&orientation=landscape&per_page=10`;
-  console.log("searching on unsplash");
+  const URL = `https://api.unsplash.com/search/photos?query=${searchTerm}&client_id=${UNSPLASH_API_KEY}&orientation=landscape&per_page=10&page=${page}`;
+  console.log("searching on unsplash page", page);
+  console.log(URL);
   try {
     const response = await fetch(URL);
     if (!response.ok) {
