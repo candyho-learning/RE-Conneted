@@ -106,7 +106,7 @@ export default function CreateSesssion() {
       }}
       className="p-20"
     >
-      <Card className="mx-auto w-2/5 py-10 bg-white">
+      <Card className="mx-auto w-2/5 py-10">
         <CardHeader>
           <CardTitle className="text-6xl font-bold">
             Create a New Session

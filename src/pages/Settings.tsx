@@ -12,7 +12,6 @@ import { onSnapshot, doc } from "firebase/firestore";
 import { db } from "../firebase";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Button } from "@/components/ui/button";
 import EditableQuote from "@/components/EditableQuote";
 
 export default function Settings() {
