@@ -1,4 +1,13 @@
 import { TimeBlockProps } from "../interface/interfaces";
+import { Input } from "./ui/input";
+import { Button } from "./ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export default function TimeBlockInput({
   id,
@@ -41,22 +50,33 @@ export default function TimeBlockInput({
   const currentBlock = timeBlocks.find((block) => block.id === id);
   return (
     <div style={{ display: "flex" }}>
-      <select onChange={handleSelectChange} value={currentBlock?.type}>
-        <option value="deep-work">Deep Work</option>
-        <option value="rest">Rest</option>
-        <option value="free-chat">Free Chat</option>
-        <option value="ice-breaking">Ice-Breaking</option>
-      </select>
-      <input
+      <Select defaultValue={currentBlock?.type}>
+        <SelectTrigger className="w-[180px]">
+          <SelectValue onChange={handleSelectChange} />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="deep-work">Deep Work</SelectItem>
+          <SelectItem value="rest">Rest</SelectItem>
+          <SelectItem value="free-chat">Free Chat</SelectItem>
+          <SelectItem value="ice-breaking">Ice-Breaking</SelectItem>
+        </SelectContent>
+      </Select>
+      <Input
         type="number"
         name="minute"
-        min={1}
-        max={180}
         required
         onChange={handleDurationChange}
         value={currentBlock?.duration}
+        className="w-16"
       />
-      <button onClick={handleDeleteTimeBlock}>delete</button>
+      <Button
+        onClick={handleDeleteTimeBlock}
+        variant="destructive"
+        size="sm"
+        className="ml-3"
+      >
+        remove
+      </Button>
     </div>
   );
 }

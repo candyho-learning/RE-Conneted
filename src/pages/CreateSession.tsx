@@ -125,7 +125,9 @@ export default function CreateSesssion() {
               }}
             />
             {!hasSessionName && (
-              <p className="destructive">Must contain as least 5 characters.</p>
+              <p className="text-destructive">
+                Must contain as least 5 characters.
+              </p>
             )}
           </div>
 
@@ -141,7 +143,9 @@ export default function CreateSesssion() {
               }}
             />
             {!isStartTimeValid && (
-              <p className="warning">Start time must be in the future.</p>
+              <p className="text-destructive">
+                Start time must be in the future.
+              </p>
             )}
           </div>
           <div className="w-full mb-10">
@@ -168,11 +172,15 @@ export default function CreateSesssion() {
               />
             ))}
           </div>
-          <Button onClick={createNewTimeBlock} variant="secondary">
+          <Button
+            onClick={createNewTimeBlock}
+            variant="secondary"
+            className="mb-2"
+          >
             Add Another Time Block
           </Button>
           {!isTimerValid && (
-            <p className="warning">
+            <p className="text-destructive">
               To enjoy the best RE:Conneted experience, sessions should be
               between 30~180 mins.
             </p>

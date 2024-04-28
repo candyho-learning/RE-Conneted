@@ -52,7 +52,7 @@ export default function BackgroundPicker({
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="outline">Change Selection</Button>
+        <Button variant="secondary">Change Selection</Button>
       </SheetTrigger>
       <SheetContent className="w-[420px] sm:max-w-none">
         <SheetHeader>
