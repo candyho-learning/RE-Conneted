@@ -116,7 +116,7 @@ export default function FocusTimer(sessionData: SessionDataType) {
   }, [isTimerActive]);
 
   return (
-    <div className="timer">
+    <div className="timer glass">
       <div className="progress-bar">
         {timeBlocks.map((block, i) => (
           <div

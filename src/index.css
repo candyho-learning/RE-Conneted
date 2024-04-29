@@ -84,13 +84,12 @@
 }
 
 .str-video__participant-view {
-  border-radius: 100%;
-  width: 120px;
-  height: 120px;
+  width: 180px;
 }
 
 .str-video__paginated-grid-layout .str-video__paginated-grid-layout__group {
   width: auto;
+  flex-direction: column;
 }
 
 .str-video__participant-view
@@ -99,9 +98,23 @@
 }
 
 .str-video__participant-view .str-video__participant-details {
-  left: 18px;
+  left: 0px;
   bottom: 0;
   height: 17px;
   border-radius: 0;
-  background-color: #f1f1f1;
+  background-color: gray;
+  color: white;
+  width: 100%;
+}
+
+.str-video__participant-view > .str-video__call-controls__button {
+  top: 2px;
+  left: 2px;
+}
+
+.str-video__call-controls {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
 }

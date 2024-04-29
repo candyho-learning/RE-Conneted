@@ -6,6 +6,7 @@ import {
   StreamCall,
   StreamVideo,
   StreamTheme,
+  CallControls,
 } from "@stream-io/video-react-sdk";
 import { getStreamUserToken } from "../utils/utils";
 import { useContext, useEffect, useState } from "react";
@@ -31,6 +32,7 @@ import FocusTimer from "../components/FocusTimer";
 import { getSessionData } from "../utils/utils";
 import { SessionDataType } from "../interface/interfaces";
 import GoalTracker from "../components/GoalTracker";
+import Loading from "@/components/Loading";
 //@ts-ignore
 const userCredential = JSON.parse(localStorage.getItem("userCredential"));
 
@@ -52,7 +54,7 @@ const chatClient = new StreamChat(API_KEY);
 chatClient.connectUser(user, () => getStreamUserToken(userId));
 
 export default function Session2() {
-  const { isLoggedIn, user } = useContext(AuthContext);
+  const { isLoggedIn, user, isLoading } = useContext(AuthContext);
   const [searchParams] = useSearchParams();
   const callId = searchParams.get("id");
   const callType = searchParams.get("type") || "default";
@@ -98,7 +100,10 @@ export default function Session2() {
       call.join({ create: true });
     }
   }, [call]);
-  if (!isLoggedIn) return <Login context="force" />;
+  if (!isLoggedIn) {
+    if (isLoading) return <Loading hint="Setting up the call..." />;
+    return <Login context="force" />;
+  }
 
   return (
     <div
@@ -111,7 +116,7 @@ export default function Session2() {
         backgroundSize: "cover",
         position: "relative",
       }}
-      className="session-wrapper"
+      className="flex"
     >
       {client && call && (
         <StreamVideo client={client}>
@@ -158,6 +163,7 @@ export default function Session2() {
           </Channel>
         </Chat>
       </div>
+      {/* <CallControls /> */}
     </div>
   );
 }
