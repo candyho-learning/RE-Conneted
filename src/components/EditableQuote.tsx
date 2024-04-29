@@ -42,8 +42,8 @@ export default function EditableQuote({
         </div>
       )}
       {!isEditing && (
-        <div className="mt-5 w-full mb-10 relative rounded-lg border-l-8 border-l-gray-500 bg-gray-200 py-5 pl-16 pr-5 font-sans text-lg italic leading-relaxed text-gray-600 before:absolute before:left-3 before:top-3 before:font-serif before:text-6xl before:text-gray-700 before:content-['“']">
-          {databaseContent}
+        <div className="mt-5 w-full h-16 mb-10 relative rounded-lg border-l-8 border-l-gray-500 bg-gray-200 py-5 pl-16 pr-5 font-sans text-lg italic leading-relaxed text-gray-600 before:absolute before:left-3 before:top-3 before:font-serif before:text-6xl before:text-gray-700 before:content-['“']">
+          {databaseContent || "Hi, I'm new here. RE:Connect with me!"}
           <Button
             className="absolute right-3"
             onClick={() => {

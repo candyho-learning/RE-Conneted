@@ -78,3 +78,30 @@
 .glass {
   @apply backdrop-filter backdrop-blur-2xl bg-transparent;
 }
+
+.str-video {
+  width: 50%;
+}
+
+.str-video__participant-view {
+  border-radius: 100%;
+  width: 120px;
+  height: 120px;
+}
+
+.str-video__paginated-grid-layout .str-video__paginated-grid-layout__group {
+  width: auto;
+}
+
+.str-video__participant-view
+  .str-video__participant-details__connection-quality {
+  display: none;
+}
+
+.str-video__participant-view .str-video__participant-details {
+  left: 18px;
+  bottom: 0;
+  height: 17px;
+  border-radius: 0;
+  background-color: #f1f1f1;
+}

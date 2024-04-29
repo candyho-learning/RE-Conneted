@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import friendsMainImage from "@/assets/friends.jpg";
+import Loading from "@/components/Loading";
 
 export function Dashboard() {
   return (
@@ -81,6 +82,8 @@ export default function Login({ context = "normal" }: LoginProps) {
     setEmail("");
     setPassword("");
   }
+
+  if (isLoading) return <Loading hint="Logging In..." />;
 
   return (
     <>

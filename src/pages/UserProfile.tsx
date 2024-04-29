@@ -10,9 +10,11 @@ import { Button } from "@/components/ui/button";
 import EditableQuote from "@/components/EditableQuote";
 
 import SessionCardCarousel from "@/components/SessionCardCarousel";
+import Loading from "@/components/Loading";
+import Login from "./Login";
 
 export default function UserProfile() {
-  const { userId } = useContext(AuthContext);
+  const { userId, isLoading, isLoggedIn } = useContext(AuthContext);
   const { userId: userIdParam } = useParams<{ userId: string | undefined }>();
   const [userData, setUserData] = useState<UserType>();
   const isProfileOwner = userId === userIdParam;
@@ -45,6 +47,7 @@ export default function UserProfile() {
   if (!userData || !userIdParam) {
     return <h1>This user does not exist!</h1>;
   }
+
   return (
     <div className="user-profile-wrapper pb-20 px-32 flex flex-col justify-center">
       <div className="main-info flex py-10 items-center w-4/5 mx-auto">
