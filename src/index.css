@@ -76,15 +76,16 @@
 }
 
 .glass {
-  @apply backdrop-filter backdrop-blur-2xl bg-transparent;
+  @apply backdrop-filter backdrop-blur-2xl bg-transparent rounded-lg;
 }
 
 .str-video {
-  width: 50%;
+  width: 300px;
 }
 
 .str-video__participant-view {
   width: 180px;
+  margin: 20px 0;
 }
 
 .str-video__paginated-grid-layout .str-video__paginated-grid-layout__group {

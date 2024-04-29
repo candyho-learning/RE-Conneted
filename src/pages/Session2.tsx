@@ -6,7 +6,6 @@ import {
   StreamCall,
   StreamVideo,
   StreamTheme,
-  CallControls,
 } from "@stream-io/video-react-sdk";
 import { getStreamUserToken } from "../utils/utils";
 import { useContext, useEffect, useState } from "react";
@@ -26,13 +25,19 @@ import {
 import { onSnapshot, doc } from "firebase/firestore";
 
 import { db } from "../firebase";
-
+import { Button } from "@/components/ui/button";
 import "stream-chat-react/dist/css/v2/index.css";
 import FocusTimer from "../components/FocusTimer";
 import { getSessionData } from "../utils/utils";
 import { SessionDataType } from "../interface/interfaces";
 import GoalTracker from "../components/GoalTracker";
 import Loading from "@/components/Loading";
+import ParticipantInfoDrawer from "@/components/ParticipantInfoDrawer";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 //@ts-ignore
 const userCredential = JSON.parse(localStorage.getItem("userCredential"));
 
@@ -96,9 +101,9 @@ export default function Session2() {
   }, [sessionData]);
 
   useEffect(() => {
-    if (client && call) {
-      call.join({ create: true });
-    }
+    // if (client && call) {
+    //   call.join({ create: true });
+    // }
   }, [call]);
   if (!isLoggedIn) {
     if (isLoading) return <Loading hint="Setting up the call..." />;
@@ -112,11 +117,10 @@ export default function Session2() {
           ? `url(${sessionData?.backgroundImageUrl})`
           : "none",
         width: "100vw",
-        height: "100vh",
+        height: "calc(100vh - 80px)",
         backgroundSize: "cover",
-        position: "relative",
       }}
-      className="flex"
+      className="flex justify-between relative p-10"
     >
       {client && call && (
         <StreamVideo client={client}>
@@ -127,30 +131,27 @@ export default function Session2() {
           </StreamTheme>
         </StreamVideo>
       )}
-      <div className="wrapper">
-        {sessionData && <FocusTimer {...sessionData} />}
-        {sessionData && user && (
-          <GoalTracker
-            sessionId={sessionData.sessionId}
-            userId={userId}
-            userName={user?.firstName}
-          />
-        )}
+      <div className="wrapper flex justify-between flex-1">
+        <div className="flex flex-col items-center flex-1">
+          {sessionData && <FocusTimer {...sessionData} />}
+
+          {sessionData && user && (
+            <div>
+              <GoalTracker
+                sessionId={sessionData.sessionId}
+                userId={userId}
+                userName={user?.firstName}
+              />
+            </div>
+          )}
+        </div>
+        <div className=" p-10">
+          {sessionData && user && (
+            <ParticipantInfoDrawer sessionData={sessionData} />
+          )}
+        </div>
       </div>
 
-      <div className="goals-display">
-        {sessionData &&
-          sessionData.participantsActivity?.map((item) => (
-            <>
-              <h4>{item.userName}</h4>
-              {item.goals?.map((task) => (
-                <p>
-                  {task.task} {task.isDone ? "🎉" : ""}
-                </p>
-              ))}
-            </>
-          ))}
-      </div>
       <div className="chat-window">
         <Chat client={chatClient} theme="str-chat__theme-light">
           <Channel channel={chatChannel}>
