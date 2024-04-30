@@ -43,22 +43,26 @@ export default function SessionCardCarousel({
   useEffect(() => {
     (async () => {
       console.log("getting individual session data");
-      const hostingSessionIds = sessions
-        .filter((session) => session.role === "host")
-        .map((session) => session.sessionId);
-      const q = query(
-        collection(db, "sessions"),
-        where(documentId(), "in", hostingSessionIds)
-      );
+      try {
+        const hostingSessionIds = sessions
+          .filter((session) => session.role === "host")
+          .map((session) => session.sessionId);
+        const q = query(
+          collection(db, "sessions"),
+          where(documentId(), "in", hostingSessionIds)
+        );
 
-      const sessionsDocsSnap = await getDocs(q);
-      let data: Array<SessionDataType> = [];
+        const sessionsDocsSnap = await getDocs(q);
+        let data: Array<SessionDataType> = [];
 
-      sessionsDocsSnap.forEach((doc) => {
-        data.push(doc.data() as SessionDataType);
-        console.log(doc.data());
-      });
-      setHostingSessionDetails(data);
+        sessionsDocsSnap.forEach((doc) => {
+          data.push(doc.data() as SessionDataType);
+          console.log(doc.data());
+        });
+        setHostingSessionDetails(data);
+      } catch (err) {
+        console.error(err);
+      }
     })();
   }, []);
 
@@ -87,8 +91,9 @@ export default function SessionCardCarousel({
                     <CardHeader>
                       <img
                         src={session.backgroundImageUrl}
-                        className="w-full h-60 object-cover"
+                        className="w-full h-60 object-cover bg-gray-200"
                       ></img>
+
                       <CardTitle className="text-2xl">
                         {session.sessionName}
                       </CardTitle>

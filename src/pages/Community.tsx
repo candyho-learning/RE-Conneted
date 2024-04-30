@@ -21,6 +21,7 @@ import { Button } from "@/components/ui/button";
 export default function Community() {
   const { isLoggedIn } = useContext(AuthContext);
   const [allUsers, setAllUsers] = useState<undefined | Array<UserType>>();
+  const [filterTags, setFilterTags] = useState<Array<string>>([]);
   useEffect(() => {
     async function loadUsers() {
       const data = await getCollection("users");
@@ -30,37 +31,59 @@ export default function Community() {
     loadUsers();
   }, []);
 
+  function toggleSelectedTags(tagName: string) {
+    console.log(tagName);
+    if (filterTags.includes(tagName)) {
+      //tag already selected -> remove from list
+      setFilterTags(filterTags.filter((tag) => tag !== tagName));
+    } else {
+      //tag not yet selected -> add to list
+      if (filterTags.length >= 5) return;
+
+      setFilterTags((prevList) => [...prevList, tagName]);
+    }
+  }
+
   if (!isLoggedIn) return <Login context="force" />;
 
   return (
     <div className="flex py-10 px-20">
-      <div className="side-bar left w-1/3  p-10">
-        <h2 className="mb-2 px-4 text-xl font-semibold tracking-tight mt-5">
+      <div className="side-bar left w-2/5  p-10">
+        <h2 className="mb-4 px-4 text-3xl font-semibold tracking-tight mt-5">
           Featured Users
         </h2>
         <div className="featured-users space-y-1">
-          <Button variant="ghost" className="w-full justify-start">
+          <Button variant="ghost" className="w-full justify-start text-lg">
             New Users
           </Button>
-          <Button variant="ghost" className="w-full justify-start">
+          <Button variant="ghost" className="w-full justify-start text-lg">
             Power Users
           </Button>
-          <Button variant="ghost" className="w-full justify-start">
+          <Button variant="ghost" className="w-full justify-start text-lg">
             Popular Users
           </Button>
         </div>
-        <h2 className="px-4 text-xl font-semibold tracking-tight my-5">
+        <h2 className="px-4 text-3xl font-semibold tracking-tight my-5">
           Filter by Tags
         </h2>
         <div className="tag-selector">
           {TAGS.map((tag) => (
-            <Badge variant="secondary" className="m-2 h-[17px] text-[12px]">
+            <Badge
+              variant="secondary"
+              className="m-2 h-[22px] text-[12px] hover:cursor-pointer rounded-xl"
+              style={{
+                border: filterTags.includes(tag) ? "2px solid black" : "none",
+              }}
+              onClick={() => {
+                toggleSelectedTags(tag);
+              }}
+            >
               {tag}
             </Badge>
           ))}
         </div>
-        <h2 className="px-4 text-xl font-semibold tracking-tight my-5">
-          Explore Random Users
+        <h2 className="px-4 text-3xl font-semibold tracking-tight my-5">
+          Visit A Random User
         </h2>
         <Button className="w-full" variant="outline">
           🎲 Surprise Me!
