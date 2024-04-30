@@ -23,8 +23,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <Routes>
           <Route path="/" element={<App />}>
             <Route index element={<Homepage />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/login" element={<Login />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/create-session" element={<CreateSesssion />} />
             <Route path="/find-sessions" element={<FindSessions />} />
@@ -33,6 +31,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             <Route path="/connect/:userId" element={<UserProfile />} />
             <Route path="/settings" element={<Settings />} />
           </Route>
+          <Route path="/signup" element={<Signup />} />
+
+          <Route path="/login" element={<Login />} />
         </Routes>
       </BrowserRouter>
     </AuthContextProvider>
