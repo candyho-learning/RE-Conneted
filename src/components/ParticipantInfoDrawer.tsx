@@ -10,7 +10,6 @@ import {
   Card,
   CardContent,
   CardTitle,
-  CardDescription,
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
@@ -45,37 +44,42 @@ export default function ParticipantInfoDrawer({
             together!
           </SheetDescription>
         </SheetHeader>
-        <div className="goals-display glass">
+        <div className="goals-display glass flex space-x-3">
           {sessionData &&
             sessionData.participantsActivity?.map((item) => (
               <Card key={item.userId} className="w-80">
                 <CardHeader>
-                  <div className="flex items-center">
-                    <CardTitle className="text-xl font-bold">
-                      {item.userName}
-                    </CardTitle>
-                    <CardDescription className="ml-2">
-                      {item?.userLocation ? `📍 ${item.userLocation}` : ""}
-                    </CardDescription>
-                  </div>
+                  <CardTitle className="text-xl font-bold">
+                    {item.userName}'s Session Goals
+                  </CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <div className="flex">
-                    <h4 className="font-semibold mr-3">Session Goals</h4>
+                <CardContent className="min-h-40">
+                  <div>
                     {item.goals &&
                       item.goals?.length > 0 &&
                       item.goals?.every((goal) => goal.isDone) && (
                         <Badge variant="secondary">All Done 🎉</Badge>
                       )}
                   </div>
+
                   {item.goals?.map((task) => (
                     <p>
                       {task.task} {task.isDone ? "✅" : ""}
                     </p>
                   ))}
+                  {item.goals?.length === 0 && (
+                    <p className="text-gray-400">
+                      {item.userName} hasn't shared any goals yet.
+                    </p>
+                  )}
                 </CardContent>
                 <CardFooter>
-                  <Button>Visit {item.userName}'s Profile</Button>
+                  <a href={`/connect/${item.userId}`} target="_blank">
+                    <Button>
+                      Visit {item.userName}'s Profile
+                      <i className="fa-solid fa-arrow-up-right-from-square ml-1"></i>
+                    </Button>
+                  </a>
                 </CardFooter>
               </Card>
             ))}

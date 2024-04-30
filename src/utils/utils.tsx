@@ -112,8 +112,7 @@ export async function updateUserSessionGoal(
   sessionId: string,
   userId: string,
   goalArr: Array<GoalsType>,
-  userName: string,
-  userLocation?: string
+  userName: string
 ) {
   const docRef = doc(db, "sessions", sessionId);
   try {
@@ -134,7 +133,6 @@ export async function updateUserSessionGoal(
 
       if (index === -1) {
         newUserActivity = {
-          userLocation,
           userName,
           userId,
           goals: goalArr,

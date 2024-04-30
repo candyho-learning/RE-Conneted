@@ -22,7 +22,6 @@ export default function GoalTracker({
   sessionId,
   userId,
   userName,
-  userLocation,
 }: GoalTrackerProps) {
   const [allGoals, setAllGoals] = useState<Array<GoalsType>>([]);
   const [newTask, setNewTask] = useState("");
@@ -37,17 +36,7 @@ export default function GoalTracker({
 
   useEffect(() => {
     //send to firebase
-    if (userLocation) {
-      updateUserSessionGoal(
-        sessionId,
-        userId,
-        allGoals,
-        userName,
-        userLocation
-      );
-    } else {
-      updateUserSessionGoal(sessionId, userId, allGoals, userName);
-    }
+    updateUserSessionGoal(sessionId, userId, allGoals, userName);
   }, [allGoals]);
 
   function changeGoalStatus(goalId: number) {
