@@ -130,7 +130,15 @@ export default function FocusTimer(sessionData: SessionDataType) {
           >
             {/* Progress bar */}
             <div
-              className="h-6 bg-red-400 text-sm text-gray-400 transition-width duration-300 ease-in-out absolute inset-0"
+              className={`h-6 ${
+                block.type === "deep-work"
+                  ? "bg-timeblock-deepWork"
+                  : block.type === "rest"
+                  ? "bg-timeblock-rest"
+                  : block.type === "ice-breaking"
+                  ? "bg-timeblock-iceBreaking"
+                  : "bg-timeblock-freeChat"
+              } text-sm text-gray-400 transition-width duration-300 ease-in-out absolute inset-0`}
               style={{
                 width: `${progress[i] * 100}%`,
               }}
@@ -148,7 +156,7 @@ export default function FocusTimer(sessionData: SessionDataType) {
           {displayTime[0]} : {displayTime[1]}
         </h1>
 
-        <div className="flex justify-between">
+        <div className="flex justify-between items-center">
           {userId === sessionData.host && (
             <Button
               onClick={toggleTimerState}

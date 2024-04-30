@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { SessionDataType } from "@/interface/interfaces";
+import { Badge } from "./ui/badge";
 
 interface ParticipantInfoDrawerProps {
   sessionData: SessionDataType;
@@ -34,9 +35,11 @@ export default function ParticipantInfoDrawer({
           See Eveyone's Goals
         </Button>
       </SheetTrigger>
-      <SheetContent>
+      <SheetContent side="top">
         <SheetHeader className="mb-5">
-          <SheetTitle>Session Partners</SheetTitle>
+          <SheetTitle className="text-2xl font-extrabold">
+            Session Partners
+          </SheetTitle>
           <SheetDescription>
             Meet new friends, see what's they're up to in this session and focus
             together!
@@ -45,7 +48,7 @@ export default function ParticipantInfoDrawer({
         <div className="goals-display glass">
           {sessionData &&
             sessionData.participantsActivity?.map((item) => (
-              <Card key={item.userId}>
+              <Card key={item.userId} className="w-80">
                 <CardHeader>
                   <div className="flex items-center">
                     <CardTitle className="text-xl font-bold">
@@ -57,10 +60,17 @@ export default function ParticipantInfoDrawer({
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <h4 className="font-semibold">Session Goals</h4>
+                  <div className="flex">
+                    <h4 className="font-semibold mr-3">Session Goals</h4>
+                    {item.goals &&
+                      item.goals?.length > 0 &&
+                      item.goals?.every((goal) => goal.isDone) && (
+                        <Badge variant="secondary">All Done 🎉</Badge>
+                      )}
+                  </div>
                   {item.goals?.map((task) => (
                     <p>
-                      {task.task} {task.isDone ? "🎉" : ""}
+                      {task.task} {task.isDone ? "✅" : ""}
                     </p>
                   ))}
                 </CardContent>
