@@ -58,7 +58,7 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
 }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userId, setUserId] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState<UserType | null>(null);
 
   useEffect(() => {

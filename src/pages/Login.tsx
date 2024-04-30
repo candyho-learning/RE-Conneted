@@ -83,7 +83,7 @@ export default function Login({ context = "normal" }: LoginProps) {
     setPassword("");
   }
 
-  if (isLoading) return <Loading hint="Logging In..." />;
+  if (isLoading) return <Loading />;
 
   return (
     <>
