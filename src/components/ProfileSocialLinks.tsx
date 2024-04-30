@@ -8,7 +8,7 @@ export default function ProfileSocialLinks({
     return <p>This user hasn't provided social links.</p>;
   }
   return (
-    <div className="social-links">
+    <div className="social-links text-5xl space-x-5">
       {userData.facebookLink && (
         <a href={userData.facebookLink}>
           <i className="fa-brands fa-square-facebook"></i>
