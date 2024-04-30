@@ -63,7 +63,6 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
 
   useEffect(() => {
     console.log("auth useEffect triggered");
-    setIsLoading(true);
     const unsub = onAuthStateChanged(auth, (user) => {
       if (user) {
         // User is signed in, see docs for a list of available properties

@@ -4,7 +4,7 @@ import Friends2 from "@/assets/friends2.jpg";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import TagSelector from "@/components/TagSelector";
+import { useNavigate } from "react-router-dom";
 
 const defaultFormValues = {
   firstName: "",
@@ -16,6 +16,7 @@ const defaultFormValues = {
 export default function Signup() {
   const { createAccount } = useContext(AuthContext);
   const [signupForm, setSignupForm] = useState(defaultFormValues);
+  const navigate = useNavigate();
 
   function handleFieldChange(e: React.ChangeEvent<HTMLInputElement>) {
     setSignupForm({
@@ -31,6 +32,7 @@ export default function Signup() {
     console.log(firstName, lastName);
     createAccount(email, password, firstName, lastName);
     setSignupForm(defaultFormValues);
+    navigate("/dashboard");
   }
   return (
     <>
@@ -44,28 +46,31 @@ export default function Signup() {
               </p>
             </div>
             <form onSubmit={handleSubmit} className="grid gap-4">
-              <div className="grid gap-2">
-                <Label htmlFor="email">First Name</Label>
-                <Input
-                  required
-                  type="text"
-                  name="firstName"
-                  onChange={handleFieldChange}
-                  value={signupForm.firstName}
-                  placeholder="First Name"
-                />
+              <div className="flex space-x-2">
+                <div className="grid gap-2">
+                  <Label htmlFor="email">First Name</Label>
+                  <Input
+                    required
+                    type="text"
+                    name="firstName"
+                    onChange={handleFieldChange}
+                    value={signupForm.firstName}
+                    placeholder="First Name"
+                  />
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="email">Last Name</Label>
+                  <Input
+                    required
+                    type="text"
+                    name="lastName"
+                    onChange={handleFieldChange}
+                    value={signupForm.lastName}
+                    placeholder="Last Name"
+                  />
+                </div>
               </div>
-              <div className="grid gap-2">
-                <Label htmlFor="email">Last Name</Label>
-                <Input
-                  required
-                  type="text"
-                  name="lastName"
-                  onChange={handleFieldChange}
-                  value={signupForm.lastName}
-                  placeholder="Last Name"
-                />
-              </div>
+
               <div className="grid gap-2">
                 <Label htmlFor="email">Email</Label>
                 <Input
