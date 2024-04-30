@@ -83,6 +83,7 @@ export interface GoalTrackerProps {
   sessionId: string;
   userId: string;
   userName: string;
+  userLocation?: string;
 }
 
 export interface GoalsType {
@@ -95,6 +96,7 @@ export interface UserActivityType {
   userName: string;
   userId: string;
   goals?: Array<GoalsType>;
+  userLocation?: string;
 }
 
 export interface EditableTextProps {

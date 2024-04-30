@@ -141,6 +141,7 @@ export default function Session2() {
                 sessionId={sessionData.sessionId}
                 userId={userId}
                 userName={user?.firstName}
+                userLocation={user?.location}
               />
             </div>
           )}

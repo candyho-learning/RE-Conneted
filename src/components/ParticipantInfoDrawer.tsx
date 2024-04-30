@@ -6,6 +6,14 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import {
+  Card,
+  CardContent,
+  CardTitle,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { SessionDataType } from "@/interface/interfaces";
 
@@ -27,24 +35,39 @@ export default function ParticipantInfoDrawer({
         </Button>
       </SheetTrigger>
       <SheetContent>
-        <SheetHeader>
-          <SheetTitle>Meet New Friends</SheetTitle>
+        <SheetHeader className="mb-5">
+          <SheetTitle>Session Partners</SheetTitle>
           <SheetDescription>
-            This action cannot be undone. This will permanently delete your
-            account and remove your data from our servers.
+            Meet new friends, see what's they're up to in this session and focus
+            together!
           </SheetDescription>
         </SheetHeader>
         <div className="goals-display glass">
           {sessionData &&
             sessionData.participantsActivity?.map((item) => (
-              <>
-                <h4>{item.userName}</h4>
-                {item.goals?.map((task) => (
-                  <p>
-                    {task.task} {task.isDone ? "🎉" : ""}
-                  </p>
-                ))}
-              </>
+              <Card key={item.userId}>
+                <CardHeader>
+                  <div className="flex items-center">
+                    <CardTitle className="text-xl font-bold">
+                      {item.userName}
+                    </CardTitle>
+                    <CardDescription className="ml-2">
+                      {item?.userLocation ? `📍 ${item.userLocation}` : ""}
+                    </CardDescription>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <h4 className="font-semibold">Session Goals</h4>
+                  {item.goals?.map((task) => (
+                    <p>
+                      {task.task} {task.isDone ? "🎉" : ""}
+                    </p>
+                  ))}
+                </CardContent>
+                <CardFooter>
+                  <Button>Visit {item.userName}'s Profile</Button>
+                </CardFooter>
+              </Card>
             ))}
         </div>
       </SheetContent>

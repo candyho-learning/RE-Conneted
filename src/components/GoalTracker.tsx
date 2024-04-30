@@ -3,6 +3,7 @@ import { updateUserSessionGoal } from "../utils/utils";
 import { GoalTrackerProps, GoalsType } from "../interface/interfaces";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
+import { CheckboxIcon, BoxIcon } from "@radix-ui/react-icons";
 
 // const userId = '123'
 // const sampleData = [
@@ -21,12 +22,14 @@ export default function GoalTracker({
   sessionId,
   userId,
   userName,
+  userLocation,
 }: GoalTrackerProps) {
   const [allGoals, setAllGoals] = useState<Array<GoalsType>>([]);
   const [newTask, setNewTask] = useState("");
   let nextId = useRef(3);
 
   function addGoal() {
+    if (newTask.length === 0) return;
     const newGoal = { task: newTask, isDone: false, id: nextId.current++ };
     setAllGoals([...allGoals, newGoal]);
     setNewTask("");
@@ -34,7 +37,17 @@ export default function GoalTracker({
 
   useEffect(() => {
     //send to firebase
-    updateUserSessionGoal(sessionId, userId, allGoals, userName);
+    if (userLocation) {
+      updateUserSessionGoal(
+        sessionId,
+        userId,
+        allGoals,
+        userName,
+        userLocation
+      );
+    } else {
+      updateUserSessionGoal(sessionId, userId, allGoals, userName);
+    }
   }, [allGoals]);
 
   function changeGoalStatus(goalId: number) {
@@ -54,22 +67,27 @@ export default function GoalTracker({
     );
   }
   return (
-    <div className="goal-tracker p-5 bg-gray-200 rounded-md w-96">
+    <div className="goal-tracker p-5 bg-gray-100 rounded-md w-96">
       <h3 className="text-xl font-semibold mb-2">What are your goals today?</h3>
       <div className="h-4/5 min-h-5">
         {allGoals.map((goal) => (
-          <p
-            style={{
-              textDecorationLine: goal.isDone ? "line-through" : "none",
-            }}
+          <div
+            className="flex items-center hover:cursor-pointer"
             onClick={() => {
               changeGoalStatus(goal.id);
             }}
-            key={goal.id}
-            className="text-lg hover:cursor-pointer"
           >
-            {goal.task}
-          </p>
+            {goal.isDone ? <CheckboxIcon /> : <BoxIcon />}
+            <p
+              style={{
+                textDecorationLine: goal.isDone ? "line-through" : "none",
+              }}
+              key={goal.id}
+              className={`${goal.isDone ? "line-through" : ""} text-lg ml-2`}
+            >
+              {goal.task}
+            </p>
+          </div>
         ))}
       </div>
       <div className="flex mt-2">

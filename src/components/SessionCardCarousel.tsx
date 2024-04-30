@@ -35,6 +35,11 @@ export default function SessionCardCarousel({
         className="w-full"
       >
         <CarouselContent>
+          {sessions.length === 0 && (
+            <h4 className="ml-10 font-semibold text-lg">
+              This user isn't hosting any sessions for now.
+            </h4>
+          )}
           {sessions.map((session) => (
             <CarouselItem
               key={session.sessionId}

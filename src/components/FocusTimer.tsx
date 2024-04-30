@@ -119,42 +119,53 @@ export default function FocusTimer(sessionData: SessionDataType) {
 
   return (
     <div className="timer text-black my-10 w-96 bg-gray-100 rounded-md">
-      <div className="h-4 flex">
+      <div className="h-6 flex relative">
         {timeBlocks.map((block, i) => (
           <div
             key={block.id}
             style={{
               width: `${(block.duration / timerTotalTime) * 100}%`,
             }}
-            className="bg-white border border-gray-400"
+            className="bg-white border border-gray-400 relative"
           >
+            {/* Progress bar */}
             <div
-              className="h-4 bg-slate-300"
+              className="h-6 bg-red-400 text-sm text-gray-400 transition-width duration-300 ease-in-out absolute inset-0"
               style={{
                 width: `${progress[i] * 100}%`,
-                transition: "width .3s ease-in-out",
               }}
             ></div>
+            {/* Overlay text */}
+            <p className="absolute inset-0 flex items-center justify-center z-10 text-center text-gray-400">
+              {block.duration}
+            </p>
           </div>
         ))}
       </div>
       <div className="p-10">
         <h4>Current Time Block: {timeBlocks[currentTimeBlockIndex].type}</h4>
-        <h1 className="text-5xl font-bold my-5 tracking-wide">
+        <h1 className="text-6xl font-bold my-5 tracking-wide">
           {displayTime[0]} : {displayTime[1]}
         </h1>
-        {currentTimeBlockIndex < timeBlocks.length - 1 && (
-          <h4>Next:{timeBlocks[currentTimeBlockIndex + 1].type}</h4>
-        )}
-        {userId === sessionData.host && (
-          <Button onClick={toggleTimerState} className="text-white" size="icon">
-            {isTimerActive ? (
-              <i className="fa-solid fa-pause"></i>
-            ) : (
-              <i className="fa-solid fa-play"></i>
-            )}
-          </Button>
-        )}
+
+        <div className="flex justify-between">
+          {userId === sessionData.host && (
+            <Button
+              onClick={toggleTimerState}
+              className="text-white"
+              size="icon"
+            >
+              {isTimerActive ? (
+                <i className="fa-solid fa-pause"></i>
+              ) : (
+                <i className="fa-solid fa-play"></i>
+              )}
+            </Button>
+          )}
+          {currentTimeBlockIndex < timeBlocks.length - 1 && (
+            <h4>Next: {timeBlocks[currentTimeBlockIndex + 1].type}</h4>
+          )}
+        </div>
       </div>
     </div>
   );
