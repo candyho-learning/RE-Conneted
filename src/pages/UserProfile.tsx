@@ -14,9 +14,10 @@ import Loading from "@/components/Loading";
 import Login from "./Login";
 
 export default function UserProfile() {
-  const { userId, isLoading, isLoggedIn } = useContext(AuthContext);
+  const { userId, isLoggedIn } = useContext(AuthContext);
   const { userId: userIdParam } = useParams<{ userId: string | undefined }>();
   const [userData, setUserData] = useState<UserType>();
+  const [isLoading, setIsLoading] = useState(true);
   const isProfileOwner = userId === userIdParam;
   const hasSocialLink = Boolean(
     userData?.facebookLink ||
@@ -36,6 +37,8 @@ export default function UserProfile() {
       } catch (err) {
         console.error(err);
         console.log("this user does not exist.");
+      } finally {
+        setIsLoading(false);
       }
     }
 
@@ -45,15 +48,14 @@ export default function UserProfile() {
   }, [userIdParam]);
 
   if (!userData || !userIdParam) {
+    if (isLoading) {
+      return <Loading hint="Loading Profile..." />;
+    }
     return <h1>This user does not exist!</h1>;
   }
 
   if (!isLoggedIn) {
     return <Login />;
-  }
-
-  if (isLoading) {
-    return <Loading />;
   }
 
   return (
