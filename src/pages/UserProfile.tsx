@@ -48,6 +48,14 @@ export default function UserProfile() {
     return <h1>This user does not exist!</h1>;
   }
 
+  if (!isLoggedIn) {
+    return <Login />;
+  }
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
   return (
     <div className="user-profile-wrapper pb-20 px-32 flex flex-col justify-center">
       <div className="main-info flex py-10 items-center w-4/5 mx-auto">

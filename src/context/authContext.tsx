@@ -153,11 +153,13 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
           "userCredential",
           JSON.stringify(userCredential.user)
         );
+        return true;
       }
     } catch (err) {
       setIsLoading(false);
       console.error(err);
     }
+    return false;
   }
 
   async function logout() {

@@ -3,6 +3,7 @@ import { AuthContext } from "../context/authContext";
 type LoginProps = {
   context?: string;
 };
+import { useNavigate } from "react-router-dom";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -75,12 +76,19 @@ export default function Login({ context = "normal" }: LoginProps) {
   const { login, isLoggedIn, isLoading } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    await login(email, password);
-    setEmail("");
-    setPassword("");
+    const loginResult = await login(email, password);
+    if (loginResult) {
+      setEmail("");
+      setPassword("");
+      navigate("/dashboard");
+    } else {
+      setErrorMessage("Incorrect email or password. Please try again.");
+    }
   }
 
   if (isLoading) return <Loading />;
@@ -137,6 +145,9 @@ export default function Login({ context = "normal" }: LoginProps) {
               Login
             </Button>
           </form>
+          {errorMessage && (
+            <div className="text-destructive">{errorMessage}</div>
+          )}
           <div className="mt-4 text-center text-sm">
             Don&apos;t have an account?{" "}
             <a href="/signup" className="underline">

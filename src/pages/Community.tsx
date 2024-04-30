@@ -33,10 +33,10 @@ export default function Community() {
   if (!isLoggedIn) return <Login context="force" />;
 
   return (
-    <div className="flex">
-      <div className="side-bar left w-1/4  p-10">
+    <div className="flex py-10 px-20">
+      <div className="side-bar left w-1/3  p-10">
         <h2 className="mb-2 px-4 text-xl font-semibold tracking-tight mt-5">
-          Feature Users
+          Featured Users
         </h2>
         <div className="featured-users space-y-1">
           <Button variant="ghost" className="w-full justify-start">

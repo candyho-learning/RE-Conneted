@@ -22,7 +22,7 @@ export interface AuthContextType {
     firstName: string,
     lastName: string
   ) => Promise<void>;
-  login: (email: string, password: string) => Promise<void>;
+  login: (email: string, password: string) => Promise<boolean>;
   logout: () => void;
   userId: string;
   isLoading: boolean;
