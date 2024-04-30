@@ -12,14 +12,12 @@ export default function VideoView({ isHost }: VideoViewProps) {
   const call = useCall();
   const { useCallCallingState, useParticipantCount } = useCallStateHooks();
   const callingState = useCallCallingState();
-  const participantCount = useParticipantCount();
   console.log(`calling state is ${callingState}`);
   if (callingState !== CallingState.JOINED) {
     return <div>You are not in the call.</div>;
   }
   return (
     <div>
-      Call "{call?.id}" has {participantCount} participants...
       <div style={{ width: "50%", height: "450px" }}>
         <PaginatedGridLayout groupSize={4} pageArrowsVisible={true} />
       </div>
@@ -30,7 +28,7 @@ export default function VideoView({ isHost }: VideoViewProps) {
             call?.endCall();
           }}
           variant="destructive"
-          className="absolute bottom-8 left-16"
+          className="absolute bottom-8 left-28"
         >
           End Call For Everyone
         </Button>

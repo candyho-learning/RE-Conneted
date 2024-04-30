@@ -33,11 +33,7 @@ import { SessionDataType } from "../interface/interfaces";
 import GoalTracker from "../components/GoalTracker";
 import Loading from "@/components/Loading";
 import ParticipantInfoDrawer from "@/components/ParticipantInfoDrawer";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+
 //@ts-ignore
 const userCredential = JSON.parse(localStorage.getItem("userCredential"));
 
@@ -101,9 +97,9 @@ export default function Session2() {
   }, [sessionData]);
 
   useEffect(() => {
-    // if (client && call) {
-    //   call.join({ create: true });
-    // }
+    if (client && call) {
+      call.join({ create: true });
+    }
   }, [call]);
   if (!isLoggedIn) {
     if (isLoading) return <Loading hint="Setting up the call..." />;
@@ -120,7 +116,7 @@ export default function Session2() {
         height: "calc(100vh - 80px)",
         backgroundSize: "cover",
       }}
-      className="flex justify-between relative p-10"
+      className="flex justify-between relative p-14"
     >
       {client && call && (
         <StreamVideo client={client}>
@@ -146,7 +142,7 @@ export default function Session2() {
             </div>
           )}
         </div>
-        <div className=" p-10">
+        <div className="p-10 pt-0">
           {sessionData && user && (
             <ParticipantInfoDrawer sessionData={sessionData} />
           )}

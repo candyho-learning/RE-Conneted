@@ -85,7 +85,7 @@
 
 .str-video__participant-view {
   width: 180px;
-  margin: 20px 0;
+  margin-bottom: 20px;
 }
 
 .str-video__paginated-grid-layout .str-video__paginated-grid-layout__group {

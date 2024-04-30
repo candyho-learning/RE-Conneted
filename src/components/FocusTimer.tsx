@@ -118,7 +118,7 @@ export default function FocusTimer(sessionData: SessionDataType) {
   }, [isTimerActive]);
 
   return (
-    <div className="timer text-black my-10 w-96 bg-gray-100 rounded-md">
+    <div className="timer text-black mb-10 w-96 bg-gray-100 rounded-md">
       <div className="h-6 flex relative">
         {timeBlocks.map((block, i) => (
           <div
@@ -156,7 +156,7 @@ export default function FocusTimer(sessionData: SessionDataType) {
           {displayTime[0]} : {displayTime[1]}
         </h1>
 
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-end">
           {userId === sessionData.host && (
             <Button
               onClick={toggleTimerState}
