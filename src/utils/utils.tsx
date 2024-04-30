@@ -215,3 +215,10 @@ export const timeOptions = {
   minute: "2-digit",
   timeZoneName: "short",
 };
+
+export function hyphenatedToReadable(hyphenatedString: string) {
+  return hyphenatedString
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+}
