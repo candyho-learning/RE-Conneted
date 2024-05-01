@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { TAGS } from "@/utils/settingsData";
+import { ChatBubbleIcon } from "@radix-ui/react-icons";
 
 import {
   Card,
@@ -17,6 +18,7 @@ import {
   CardHeader,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 export default function Community() {
   const { isLoggedIn } = useContext(AuthContext);
@@ -104,11 +106,21 @@ export default function Community() {
         <h2 className="px-4 text-3xl font-semibold tracking-tight my-5">
           Visit A Random User
         </h2>
-        <Button className="w-full" variant="outline">
-          🎲 Surprise Me!
+        <Button className="w-full h-12 group" variant="outline">
+          <p className="mr-5 text-xl group-hover:animate-roll-dice">🎲</p>
+          <p className="text-lg group-hover:scale-110">Surprise Me!</p>
         </Button>
       </div>
-      <div className="flex flex-wrap p-10 flex-grow-1 w-min-[500px] bg-blue-200 basis-4/5">
+      <div className="flex flex-wrap p-10 flex-grow-1 w-min-[500px] bg-blue-200 basis-4/5 ">
+        {filteredUsers?.length === 0 && (
+          <Alert className="border w-1/4 h-fit border-primary mx-auto my-auto p-3 scale-150">
+            <ChatBubbleIcon className="h-4 w-4 p-0" />
+            <AlertTitle>Seems like we're out of matches!</AlertTitle>
+            <AlertDescription className="text-gray-600">
+              Adjust your tags and try again?
+            </AlertDescription>
+          </Alert>
+        )}
         {filteredUsers?.map((user) => (
           <Card className="w-80 h-96 my-5 mx-5 relative">
             <CardHeader>

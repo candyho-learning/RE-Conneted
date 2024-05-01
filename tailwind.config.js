@@ -72,10 +72,19 @@ module.exports = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        "roll-dice": {
+          "0%, 100%": {
+            transform: "rotate(-30deg) scale(1)",
+          },
+          "50%": {
+            transform: "rotate(0deg) scale(1.5)",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "roll-dice": "roll-dice 0.8s ease-in-out",
       },
     },
   },
