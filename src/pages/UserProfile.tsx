@@ -59,8 +59,8 @@ export default function UserProfile() {
   }
 
   return (
-    <div className="user-profile-wrapper pb-20 px-32 flex flex-col justify-center">
-      <div className="main-info flex py-10 items-center w-4/5 mx-auto">
+    <div className="user-profile-wrapper pb-20 px-20 flex flex-col justify-center bg-brand-mutedblue h-screen">
+      <div className="main-info flex pb-10 items-center w-4/5 mx-auto">
         <Avatar className="w-48 h-48 static border-4 border-gray-600">
           <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
           <AvatarFallback>
@@ -82,7 +82,7 @@ export default function UserProfile() {
           {userData.location && (
             <h1 className="text-xl my-2">📍{userData.location}</h1>
           )}
-          <div className="text-gray-400 italic text-sm">
+          <div className="text-brand-dark italic text-sm">
             Member since{" "}
             {userData.accountCreatedTimestamp.toDate().toDateString()}
           </div>

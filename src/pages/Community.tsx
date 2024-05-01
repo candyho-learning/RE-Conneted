@@ -78,32 +78,31 @@ export default function Community() {
 
   return (
     <div className="flex py-10 px-12">
-      <div className="side-bar left w-1/4 p-10 grow-0">
-        <h2 className="mb-4 px-4 text-3xl font-semibold tracking-tight mt-5">
+      <div className="side-bar left w-[500px] p-10 grow-0 bg-brand-darkgrey text-brand-lightgrey">
+        <h2 className="mb-4 px-4 text-3xl font-bold tracking-tight mt-5">
           Featured Users
         </h2>
         <div className="featured-users space-y-1">
-          <Button variant="ghost" className="w-full justify-start text-lg">
+          <Button variant="ghost" className=" w-full justify-start text-lg">
             New Users
           </Button>
-          <Button variant="ghost" className="w-full justify-start text-lg">
+          <Button variant="ghost" className=" w-full justify-start text-lg">
             Power Users
           </Button>
-          <Button variant="ghost" className="w-full justify-start text-lg">
+          <Button variant="ghost" className=" w-full justify-start text-lg">
             Popular Users
           </Button>
         </div>
-        <h2 className="px-4 text-3xl font-semibold tracking-tight my-5">
+        <h2 className="px-4 text-3xl font-bold tracking-tight my-10">
           Filter by Tags
         </h2>
         <div className="tag-selector">
           {TAGS.map((tag) => (
             <Badge
               variant="secondary"
-              className="m-2 h-[22px] text-[12px] hover:cursor-pointer rounded-xl"
-              style={{
-                border: filterTags.includes(tag) ? "2px solid black" : "none",
-              }}
+              className={`m-2 h-[33px] text-[18px] hover:cursor-pointer rounded-xl ${
+                filterTags.includes(tag) ? "bg-brand-lightblue" : ""
+              }`}
               onClick={() => {
                 toggleSelectedTags(tag);
               }}
@@ -112,25 +111,29 @@ export default function Community() {
             </Badge>
           ))}
         </div>
-        <h2 className="px-4 text-3xl font-semibold tracking-tight my-5">
+        <h2 className="px-4 text-3xl font-bold tracking-tight my-10">
           Visit A Random User
         </h2>
         <Button
-          className={`w-full h-12 group disabled`}
+          className="w-full h-12 group"
           variant="outline"
           onClick={() => {
             allUsers && visitRandomProfile(allUsers);
           }}
         >
           <p className="mr-5 text-xl group-hover:animate-roll-dice">🎲</p>
-          <p className="text-lg group-hover:scale-110">Surprise Me!</p>
+          <p className="text-lg group-hover:scale-110 text-brand-dark font-semibold">
+            Surprise Me!
+          </p>
         </Button>
       </div>
-      <div className="flex flex-wrap p-10 flex-grow-1 w-min-[500px] basis-4/5 ">
+      <div className="flex flex-wrap p-10 pt-0 flex-grow-1 w-min-[500px] basis-4/5">
         {filteredUsers?.length === 0 && (
-          <Alert className="border w-1/4 h-fit border-primary mx-auto my-auto p-3 scale-150">
+          <Alert className="border w-1/3 h-fit border-primary mx-auto my-auto p-3 scale-150">
             <ChatBubbleIcon className="h-4 w-4 p-0" />
-            <AlertTitle>Seems like we're out of matches!</AlertTitle>
+            <AlertTitle className="font-semibold">
+              Seems like we're out of matches!
+            </AlertTitle>
             <AlertDescription className="text-gray-600">
               Adjust your tags and try again?
             </AlertDescription>

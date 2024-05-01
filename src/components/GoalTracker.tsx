@@ -72,7 +72,9 @@ export default function GoalTracker({
                 textDecorationLine: goal.isDone ? "line-through" : "none",
               }}
               key={goal.id}
-              className={`${goal.isDone ? "line-through" : ""} text-lg ml-2`}
+              className={`${
+                goal.isDone ? "line-through" : ""
+              } text-lg ml-2 font-thin`}
             >
               {goal.task}
             </p>

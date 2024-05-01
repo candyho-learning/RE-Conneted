@@ -17,11 +17,11 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
 
 export default function Dashboard() {
-  const { user, isLoggedIn } = useContext(AuthContext);
+  const { user, isLoggedIn, userId } = useContext(AuthContext);
   if (!isLoggedIn) return <Login context="force" />;
   return (
-    <div className="bg-gray h-full flex py-20 px-40">
-      <div className="w-1/3  px-10">
+    <div className="bg-gray h-full flex">
+      <div className="w-1/3  p-10 bg-brand-dark h-screen text-white">
         <div className="flex mb-10 items-center ">
           <Avatar className="w-40 h-40 static">
             <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
@@ -41,18 +41,26 @@ export default function Dashboard() {
           </Link>
           <ul className="text-lg font-medium  space-y-8 mt-10">
             <li>
-              <Link to="#">Sessions</Link>
+              <Link to="#">
+                <h3>Sessions</h3>
+              </Link>
             </li>
             <li>
-              <Link to="#">My Profile</Link>
+              <Link to={`/connect/${userId}`}>
+                <h3>View My Profile</h3>
+              </Link>
             </li>
             <li>
-              <Link to="#">Share RE:Connected With a Friend</Link>
+              <Link to="#">
+                <h3>Share RE:Connected With a Friend</h3>
+              </Link>
             </li>
           </ul>
         </nav>
-        <div className="border mt-10 text-lg font-medium p-5 rounded-sm bg-gray-100">
-          Join a Session with Code
+        <div className="border mt-10 text-lg font-medium p-5 rounded-sm bg-background">
+          <h4 className="text-brand-dark font-semibold">
+            Join a Session with Code
+          </h4>
           <div className="flex w-4/5 space-x-2 mt-3">
             <Input className="bg-white" placeholder="Session Code" />
             <Button>Add</Button>
@@ -60,7 +68,7 @@ export default function Dashboard() {
         </div>
       </div>
 
-      <div className="w-2/3 p-5">
+      <div className="w-2/3 p-10 bg-brand-mutedblue">
         <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight mb-10">
           Your Upcoming Sessions
         </h3>

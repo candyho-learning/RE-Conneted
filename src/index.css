@@ -141,3 +141,7 @@
   left: 50%;
   transform: translateX(-50%);
 }
+
+.str-video__notification {
+  display: none;
+}

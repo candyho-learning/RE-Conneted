@@ -13,6 +13,7 @@ import { db } from "../firebase";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import EditableQuote from "@/components/EditableQuote";
+import Background from "@/assets/background2.png";
 
 export default function Settings() {
   //TODO get userId from authcontext
@@ -34,7 +35,10 @@ export default function Settings() {
   if (!isLoggedIn || !userData) return <Login context="force" />;
 
   return (
-    <main className="px-20 xl:px-28 py-20 max-w-screen-2xl mx-auto">
+    <main
+      className="px-20 xl:px-28 py-20 max-w-screen mx-auto"
+      style={{ backgroundImage: `url(${Background})` }}
+    >
       <h1 className="text-3xl xl:text-4xl font-bold">
         This is {userData?.firstName}'s settings
       </h1>
@@ -48,24 +52,24 @@ export default function Settings() {
         userIdParam={userId}
       />
       <Tabs defaultValue="account" className="flex mt-10 h-[500px]">
-        <TabsList className="flex-col h-full w-1/4 shrink-0 items-start justify-start mr-20 bg-white">
+        <TabsList className="flex-col h-full w-1/4 shrink-0 items-start justify-start mr-20 bg-transparent">
           <TabsTrigger
             value="account"
             className="text-lg font-semibold py-3 w-full justify-start  data-[state=active]:bg-gray-200"
           >
-            Account
+            <h4>Account</h4>
           </TabsTrigger>
           <TabsTrigger
             value="contact"
             className="text-lg font-semibold py-3 w-full justify-start  data-[state=active]:bg-gray-200"
           >
-            Contact
+            <h4>Contact</h4>
           </TabsTrigger>
           <TabsTrigger
             value="tags"
             className="text-lg font-semibold py-3 w-full justify-start  data-[state=active]:bg-gray-200"
           >
-            Tag
+            <h4>Tag</h4>
           </TabsTrigger>
         </TabsList>
         <TabsContent value="account" className="grow">

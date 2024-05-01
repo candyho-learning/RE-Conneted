@@ -58,7 +58,12 @@ export default function ParticipantInfoDrawer({
                     {item.goals &&
                       item.goals?.length > 0 &&
                       item.goals?.every((goal) => goal.isDone) && (
-                        <Badge variant="secondary">All Done 🎉</Badge>
+                        <Badge
+                          variant="secondary"
+                          className="w-28 h-8 text-md mb-2"
+                        >
+                          All Done 🎉
+                        </Badge>
                       )}
                   </div>
 

@@ -122,7 +122,9 @@ export default function CreateSesssion() {
         <CardContent className=" w-1/2 border-r border-gray">
           <form onSubmit={handleSubmit} className="mt-10">
             <div className="grid w-full max-w-sm items-center gap-1.5 mb-10">
-              <Label className="font-bold text-xl">Session Name</Label>
+              <Label className="font-bold text-xl">
+                <h4>Session Name</h4>
+              </Label>
               <Input
                 type="text"
                 name="session-name"
@@ -140,7 +142,9 @@ export default function CreateSesssion() {
             </div>
 
             <div className="grid w-full max-w-sm items-center gap-1.5 mb-10">
-              <Label className="font-bold text-xl">Session Start Time</Label>
+              <Label className="font-bold text-xl">
+                <h4>Session Start Time</h4>
+              </Label>
               <Input
                 className="w-fit"
                 type="datetime-local"
@@ -158,7 +162,7 @@ export default function CreateSesssion() {
             </div>
             <div className="w-full mb-10">
               <Label className="font-bold text-xl">
-                Choose a Backgroung Image
+                <h4>Choose a Backgroung Image</h4>
               </Label>
               {backgroundImage && (
                 <img className="w-1/3 mt-3" src={backgroundImage}></img>
@@ -172,7 +176,9 @@ export default function CreateSesssion() {
             </div>
 
             <div className="grid w-full max-w-sm items-center gap-1.5 mb-10">
-              <Label className="font-bold text-xl">Session Timer Setting</Label>
+              <Label className="font-bold text-xl">
+                <h4>Session Timer Setting</h4>
+              </Label>
               {timeBlocks.map((timeBlock) => (
                 <TimeBlockInput
                   key={timeBlock.id}
@@ -196,7 +202,7 @@ export default function CreateSesssion() {
               </p>
             )}
             <div className="mt-20">
-              <Button type="submit" size="lg">
+              <Button type="submit" size="lg" className="text-xl font-bold">
                 Create Session
               </Button>
             </div>

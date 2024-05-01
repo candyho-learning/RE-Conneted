@@ -40,7 +40,7 @@ async function getUserProfile(userId: string) {
 const defaultAuthContext = {
   isLoggedIn: true,
   createAccount: async (_email: string, _password: string): Promise<void> => {},
-  login: async (_email: string, _password: string): Promise<void> => {},
+  login: async (_email: string, _password: string): Promise<boolean> => {},
   logout: () => {},
   userId: "",
   isLoading: false,

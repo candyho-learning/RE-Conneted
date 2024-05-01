@@ -18,33 +18,24 @@ import {
 export default function Header() {
   const { isLoggedIn, user, logout } = useContext(AuthContext);
   return (
-    <header className="sticky top-0 flex h-20 p-16 items-center gap-4 bg-background px-5 md:px-6 justify-between z-10 text-white w-full">
+    <header className="sticky top-0 flex h-20 p-16 items-center gap-4 bg-background px-5 md:px-6 justify-between z-10 text-brand-dark w-full">
       <Link to="/">
         <img src={Logo} alt="Logo" className="w-44 mt-2 mr-40" />
       </Link>
 
       <nav className="hidden flex-col gap-6 text-md font-thin md:flex md:flex-row md:items-center md:gap-5 md:text-xl lg:gap-6">
-        <Link
-          to="/"
-          className="text-brand-dark transition-colors hover:font-bold"
-        >
+        <Link to="/" className=" transition-colors hover:font-bold">
           <h4>Home</h4>
         </Link>
-        <Link
-          to="/dashboard"
-          className="text-brand-dark transition-colors hover:font-bold"
-        >
+        <Link to="/dashboard" className=" transition-colors hover:font-bold">
           <h4>Dashboard</h4>
         </Link>
-        <Link
-          to="/community"
-          className="text-brand-dark transition-colors hover:font-bold"
-        >
+        <Link to="/community" className=" transition-colors hover:font-bold">
           <h4>Community</h4>
         </Link>
         <Link
           to="/find-sessions"
-          className="text-brand-dark transition-colors hover:font-bold"
+          className=" transition-colors hover:font-bold"
         >
           <h4>Sessions</h4>
         </Link>
