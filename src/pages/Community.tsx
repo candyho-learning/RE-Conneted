@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { TAGS } from "@/utils/settingsData";
 import { ChatBubbleIcon } from "@radix-ui/react-icons";
+import { useNavigate } from "react-router-dom";
 
 import {
   Card,
@@ -21,6 +22,7 @@ import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 export default function Community() {
+  const navigate = useNavigate();
   const { isLoggedIn } = useContext(AuthContext);
   const [allUsers, setAllUsers] = useState<undefined | Array<UserType>>();
   const [filterTags, setFilterTags] = useState<Array<string>>([]);
@@ -65,6 +67,13 @@ export default function Community() {
     }
   }
 
+  function visitRandomProfile(userArr: Array<UserType>) {
+    const randomIndex = Math.floor(Math.random() * userArr.length);
+    console.log(randomIndex);
+    const randomUser = userArr[randomIndex].userId;
+    navigate(`/connect/${randomUser}`);
+  }
+
   if (!isLoggedIn) return <Login context="force" />;
 
   return (
@@ -106,7 +115,13 @@ export default function Community() {
         <h2 className="px-4 text-3xl font-semibold tracking-tight my-5">
           Visit A Random User
         </h2>
-        <Button className="w-full h-12 group" variant="outline">
+        <Button
+          className={`w-full h-12 group disabled`}
+          variant="outline"
+          onClick={() => {
+            allUsers && visitRandomProfile(allUsers);
+          }}
+        >
           <p className="mr-5 text-xl group-hover:animate-roll-dice">🎲</p>
           <p className="text-lg group-hover:scale-110">Surprise Me!</p>
         </Button>
