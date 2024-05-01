@@ -22,14 +22,33 @@ export default function Community() {
   const { isLoggedIn } = useContext(AuthContext);
   const [allUsers, setAllUsers] = useState<undefined | Array<UserType>>();
   const [filterTags, setFilterTags] = useState<Array<string>>([]);
+  const [filteredUsers, setFilteredUsers] = useState<
+    undefined | Array<UserType>
+  >();
   useEffect(() => {
     async function loadUsers() {
       const data = await getCollection("users");
       console.log(allUsers);
       setAllUsers(data);
+      setFilteredUsers(data);
     }
     loadUsers();
   }, []);
+
+  //filter users
+  useEffect(() => {
+    if (allUsers) {
+      let filtered = [...allUsers];
+      if (filterTags.length === 0) {
+        setFilteredUsers(filtered);
+        return;
+      }
+      for (let tag of filterTags) {
+        filtered = filtered?.filter((user) => user.tags?.includes(tag));
+      }
+      setFilteredUsers(filtered);
+    }
+  }, [filterTags]);
 
   function toggleSelectedTags(tagName: string) {
     console.log(tagName);
@@ -47,8 +66,8 @@ export default function Community() {
   if (!isLoggedIn) return <Login context="force" />;
 
   return (
-    <div className="flex py-10 px-20">
-      <div className="side-bar left w-2/5  p-10">
+    <div className="flex py-5 px-12">
+      <div className="side-bar left w-1/4 p-10 grow-0 bg-red-100">
         <h2 className="mb-4 px-4 text-3xl font-semibold tracking-tight mt-5">
           Featured Users
         </h2>
@@ -89,8 +108,8 @@ export default function Community() {
           🎲 Surprise Me!
         </Button>
       </div>
-      <div className="flex flex-wrap p-10">
-        {allUsers?.map((user) => (
+      <div className="flex flex-wrap p-10 flex-grow-1 w-min-[500px] bg-blue-200 basis-4/5">
+        {filteredUsers?.map((user) => (
           <Card className="w-80 h-96 my-5 mx-5 relative">
             <CardHeader>
               <div className="flex items-center mb-2">
