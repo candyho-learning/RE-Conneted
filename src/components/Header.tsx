@@ -18,39 +18,43 @@ import {
 export default function Header() {
   const { isLoggedIn, user, logout } = useContext(AuthContext);
   return (
-    <header className="absolute top-0 flex h-20 items-center gap-4 bg-transparent px-4 md:px-6 justify-between z-10 text-white w-full">
-      <img src={Logo} alt="Logo" className="w-44 mt-2 mr-10" />
+    <header className="sticky top-0 flex h-20 p-16 items-center gap-4 bg-background px-5 md:px-6 justify-between z-10 text-white w-full">
+      <Link to="/">
+        <img src={Logo} alt="Logo" className="w-44 mt-2 mr-40" />
+      </Link>
 
-      <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-2xl lg:gap-6">
+      <nav className="hidden flex-col gap-6 text-md font-thin md:flex md:flex-row md:items-center md:gap-5 md:text-xl lg:gap-6">
         <Link
           to="/"
-          className="text-white transition-colors hover:text-foreground"
+          className="text-brand-dark transition-colors hover:font-bold"
         >
-          Home
+          <h4>Home</h4>
         </Link>
         <Link
           to="/dashboard"
-          className="text-white transition-colors hover:text-foreground"
+          className="text-brand-dark transition-colors hover:font-bold"
         >
-          Dashboard
+          <h4>Dashboard</h4>
         </Link>
         <Link
           to="/community"
-          className="text-white transition-colors hover:text-foreground"
+          className="text-brand-dark transition-colors hover:font-bold"
         >
-          Community
+          <h4>Community</h4>
         </Link>
         <Link
           to="/find-sessions"
-          className="text-white transition-colors hover:text-foreground"
+          className="text-brand-dark transition-colors hover:font-bold"
         >
-          Sessions
+          <h4>Sessions</h4>
         </Link>
       </nav>
       <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4 justify-end">
         {isLoggedIn && user && (
           <>
-            <p className="text-sm">Welcome Back, {user.firstName}!</p>
+            <h4 className="text-lg text-brand-dark font-bold tracking-wide">
+              Welcome Back, {user.firstName}!
+            </h4>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button

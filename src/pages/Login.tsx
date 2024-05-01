@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../context/authContext";
 type LoginProps = {
   context?: string;
@@ -79,6 +79,12 @@ export default function Login({ context = "normal" }: LoginProps) {
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/dashboard");
+    }
+  }, []);
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     const loginResult = await login(email, password);
@@ -92,9 +98,6 @@ export default function Login({ context = "normal" }: LoginProps) {
   }
 
   if (isLoading) return <Loading />;
-  if (isLoggedIn) {
-    navigate("/dashboard");
-  }
 
   return (
     <div className="w-full h-screen lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
