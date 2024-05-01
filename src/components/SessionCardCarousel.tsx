@@ -24,6 +24,7 @@ import {
   documentId,
   getDocs,
 } from "firebase/firestore";
+import { hidePastSessions } from "@/utils/utils";
 
 import { hyphenatedToReadable } from "@/utils/utils";
 interface SessionCardCarouselProps {
@@ -33,6 +34,7 @@ import { db } from "@/firebase";
 
 import { dateOptions, timeOptions } from "@/utils/utils";
 import { useEffect } from "react";
+import { sortSessions } from "@/utils/utils";
 
 export default function SessionCardCarousel({
   sessions,
@@ -81,74 +83,76 @@ export default function SessionCardCarousel({
             </h4>
           )}
           {hostingSessionDetails &&
-            hostingSessionDetails.map((session) => (
-              <CarouselItem
-                key={session.sessionId}
-                className="md:basis-1/2 lg:basis-1/3"
-              >
-                <div className="p-1">
-                  <Card className="w-full h-full">
-                    <CardHeader>
-                      <img
-                        src={session.backgroundImageUrl}
-                        className="w-full h-60 object-cover bg-gray-200"
-                      ></img>
+            hidePastSessions(sortSessions(hostingSessionDetails)).map(
+              (session) => (
+                <CarouselItem
+                  key={session.sessionId}
+                  className="md:basis-1/2 lg:basis-1/3"
+                >
+                  <div className="p-1">
+                    <Card className="w-full h-full">
+                      <CardHeader>
+                        <img
+                          src={session.backgroundImageUrl}
+                          className="w-full h-60 object-cover bg-gray-200"
+                        ></img>
 
-                      <CardTitle className="text-2xl">
-                        {session.sessionName}
-                      </CardTitle>
-                      <CardDescription className="min-h-12">
-                        {session.timeBlocks.map((block, i) => {
-                          if (i === session.timeBlocks.length - 1) {
-                            return (
-                              <span>
-                                {hyphenatedToReadable(block.type)}{" "}
-                                {block.duration}m{" "}
-                              </span>
-                            );
-                          } else {
-                            return (
-                              <span>
-                                {hyphenatedToReadable(block.type)}{" "}
-                                {block.duration}m / <>&nbsp;</>
-                              </span>
-                            );
-                          }
-                        })}
-                      </CardDescription>
-                    </CardHeader>
+                        <CardTitle className="text-2xl">
+                          {session.sessionName}
+                        </CardTitle>
+                        <CardDescription className="min-h-12">
+                          {session.timeBlocks.map((block, i) => {
+                            if (i === session.timeBlocks.length - 1) {
+                              return (
+                                <span>
+                                  {hyphenatedToReadable(block.type)}{" "}
+                                  {block.duration}m{" "}
+                                </span>
+                              );
+                            } else {
+                              return (
+                                <span>
+                                  {hyphenatedToReadable(block.type)}{" "}
+                                  {block.duration}m / <>&nbsp;</>
+                                </span>
+                              );
+                            }
+                          })}
+                        </CardDescription>
+                      </CardHeader>
 
-                    <CardContent>
-                      <div className="flex items-center">
-                        <CalendarIcon />
-                        <p className="ml-3">
-                          {session.startTime
-                            .toDate()
-                            .toLocaleString("en-US", dateOptions)}
-                        </p>
-                      </div>
+                      <CardContent>
+                        <div className="flex items-center">
+                          <CalendarIcon />
+                          <p className="ml-3">
+                            {session.startTime
+                              .toDate()
+                              .toLocaleString("en-US", dateOptions)}
+                          </p>
+                        </div>
 
-                      <div className="flex items-center">
-                        <ClockIcon />
-                        <p className="ml-3">
-                          {session.startTime
-                            .toDate()
-                            .toLocaleString("en-US", timeOptions)}
-                        </p>
-                      </div>
-                    </CardContent>
+                        <div className="flex items-center">
+                          <ClockIcon />
+                          <p className="ml-3">
+                            {session.startTime
+                              .toDate()
+                              .toLocaleString("en-US", timeOptions)}
+                          </p>
+                        </div>
+                      </CardContent>
 
-                    <CardFooter>
-                      <a
-                        href={`/coworking-session?type=default&id=${session.sessionId}`}
-                      >
-                        <Button>Join</Button>
-                      </a>
-                    </CardFooter>
-                  </Card>
-                </div>
-              </CarouselItem>
-            ))}
+                      <CardFooter>
+                        <a
+                          href={`/coworking-session?type=default&id=${session.sessionId}`}
+                        >
+                          <Button>Join</Button>
+                        </a>
+                      </CardFooter>
+                    </Card>
+                  </div>
+                </CarouselItem>
+              )
+            )}
         </CarouselContent>
         <CarouselPrevious />
         <CarouselNext />

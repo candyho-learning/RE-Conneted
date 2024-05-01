@@ -40,7 +40,7 @@ async function getUserProfile(userId: string) {
 const defaultAuthContext = {
   isLoggedIn: true,
   createAccount: async (_email: string, _password: string): Promise<void> => {},
-  login: async (_email: string, _password: string): Promise<boolean> => {},
+  login: async (_email: string, _password: string): Promise<any> => {},
   logout: () => {},
   userId: "",
   isLoading: false,
@@ -158,6 +158,7 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
     } catch (err) {
       setIsLoading(false);
       console.error(err);
+      return false;
     }
     return false;
   }

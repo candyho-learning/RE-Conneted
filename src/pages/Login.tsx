@@ -1,8 +1,6 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import { AuthContext } from "../context/authContext";
-type LoginProps = {
-  context?: string;
-};
+
 import { useNavigate } from "react-router-dom";
 
 import { Button } from "@/components/ui/button";
@@ -72,8 +70,8 @@ export function Dashboard() {
   );
 }
 
-export default function Login({ context = "normal" }: LoginProps) {
-  const { login, isLoggedIn, isLoading } = useContext(AuthContext);
+export default function Login() {
+  const { login, isLoading } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");

@@ -10,7 +10,7 @@ import { Button } from "./ui/button";
 
 export default function VideoView({ isHost }: VideoViewProps) {
   const call = useCall();
-  const { useCallCallingState, useParticipantCount } = useCallStateHooks();
+  const { useCallCallingState } = useCallStateHooks();
   const callingState = useCallCallingState();
   console.log(`calling state is ${callingState}`);
   if (callingState !== CallingState.JOINED) {

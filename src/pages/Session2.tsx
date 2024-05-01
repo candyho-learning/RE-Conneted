@@ -25,7 +25,6 @@ import {
 import { onSnapshot, doc } from "firebase/firestore";
 
 import { db } from "../firebase";
-import { Button } from "@/components/ui/button";
 import "stream-chat-react/dist/css/v2/index.css";
 import FocusTimer from "../components/FocusTimer";
 import { getSessionData } from "../utils/utils";
@@ -103,7 +102,7 @@ export default function Session2() {
   }, [call]);
   if (!isLoggedIn) {
     if (isLoading) return <Loading hint="Setting up the call..." />;
-    return <Login context="force" />;
+    return <Login />;
   }
 
   return (

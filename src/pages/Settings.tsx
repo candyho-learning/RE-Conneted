@@ -32,11 +32,11 @@ export default function Settings() {
     return () => unsub();
   }, [userId]);
 
-  if (!isLoggedIn || !userData) return <Login context="force" />;
+  if (!isLoggedIn || !userData) return <Login />;
 
   return (
     <main
-      className="px-20 xl:px-28 py-20 max-w-screen mx-auto"
+      className="px-20 xl:px-28 py-20 max-w-screen mx-auto h-screen"
       style={{ backgroundImage: `url(${Background})` }}
     >
       <h1 className="text-3xl xl:text-4xl font-bold">

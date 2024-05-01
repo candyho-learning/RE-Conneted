@@ -96,7 +96,7 @@ export default function CreateSesssion() {
       return;
     }
   }
-  if (!isLoggedIn) return <Login context="force" />;
+  if (!isLoggedIn) return <Login />;
 
   return (
     //TODO split form in half, limit height
@@ -107,7 +107,7 @@ export default function CreateSesssion() {
       }}
       className="p-20"
     >
-      <Card className="mx-auto w-3/5 py-4 px-10">
+      <Card className="mx-auto w-2/5 py-4 px-10">
         <CardHeader>
           <CardTitle className="text-6xl font-bold">
             Create a New Session
@@ -119,7 +119,7 @@ export default function CreateSesssion() {
             steps!
           </CardDescription>
         </CardHeader>
-        <CardContent className=" w-1/2 border-r border-gray">
+        <CardContent className=" w-1/2">
           <form onSubmit={handleSubmit} className="mt-10">
             <div className="grid w-full max-w-sm items-center gap-1.5 mb-10">
               <Label className="font-bold text-xl">

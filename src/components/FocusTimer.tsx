@@ -3,7 +3,6 @@ import { SessionDataType } from "../interface/interfaces";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { AuthContext } from "../context/authContext";
-import { PlayIcon, PauseIcon } from "@radix-ui/react-icons";
 import { Button } from "./ui/button";
 
 export default function FocusTimer(sessionData: SessionDataType) {

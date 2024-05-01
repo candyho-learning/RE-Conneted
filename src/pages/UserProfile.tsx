@@ -59,7 +59,7 @@ export default function UserProfile() {
   }
 
   return (
-    <div className="user-profile-wrapper pb-20 px-20 flex flex-col justify-center bg-brand-mutedblue h-screen">
+    <div className="user-profile-wrapper py-20 px-20 flex flex-col justify-center bg-brand-mutedblue">
       <div className="main-info flex pb-10 items-center w-4/5 mx-auto">
         <Avatar className="w-48 h-48 static border-4 border-gray-600">
           <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />

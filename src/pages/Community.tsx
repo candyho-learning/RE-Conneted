@@ -74,7 +74,7 @@ export default function Community() {
     navigate(`/connect/${randomUser}`);
   }
 
-  if (!isLoggedIn) return <Login context="force" />;
+  if (!isLoggedIn) return <Login />;
 
   return (
     <div className="flex py-10 px-12">

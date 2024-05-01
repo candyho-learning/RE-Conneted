@@ -18,7 +18,7 @@ import { Input } from "@/components/ui/input";
 
 export default function Dashboard() {
   const { user, isLoggedIn, userId } = useContext(AuthContext);
-  if (!isLoggedIn) return <Login context="force" />;
+  if (!isLoggedIn) return <Login />;
   return (
     <div className="bg-gray h-full flex">
       <div className="w-1/3  p-10 bg-brand-dark h-screen text-white">
@@ -86,9 +86,12 @@ export default function Dashboard() {
               <CardContent>
                 {user && user.futureSessions && (
                   <SessionList
-                    userSessions={user?.futureSessions.filter(
-                      (session) => session.role === "host"
-                    )}
+                    userSessions={user?.futureSessions
+                      .filter((session) => session.role === "host")
+                      .filter((session) => {
+                        const timestamp = session.startTime.toDate();
+                        return timestamp > new Date();
+                      })}
                   />
                 )}
               </CardContent>

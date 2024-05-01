@@ -222,3 +222,20 @@ export function hyphenatedToReadable(hyphenatedString: string) {
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
 }
+
+export function sortSessions(arr: Array<SessionDataType>) {
+  return arr.sort((a, b) => {
+    const dateA = a.startTime?.toDate(); // Convert Firestore timestamp to JavaScript Date object
+    const dateB = b.startTime?.toDate(); // Convert Firestore timestamp to JavaScript Date object
+    const diffA = Math.abs(dateA.getTime() - Date.now()); // Calculate difference in milliseconds
+    const diffB = Math.abs(dateB.getTime() - Date.now()); // Calculate difference in milliseconds
+    return diffA - diffB; // Sort by closest start time first
+  });
+}
+
+export function hidePastSessions(arr: Array<SessionDataType>) {
+  return arr.filter((session) => {
+    const timestamp = session.startTime.toDate(); // Convert Firestore timestamp to JavaScript Date object
+    return timestamp > new Date(); // Compare with current time
+  });
+}
