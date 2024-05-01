@@ -92,6 +92,9 @@ export default function Login({ context = "normal" }: LoginProps) {
   }
 
   if (isLoading) return <Loading />;
+  if (isLoggedIn) {
+    navigate("/dashboard");
+  }
 
   return (
     <div className="w-full h-screen lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">

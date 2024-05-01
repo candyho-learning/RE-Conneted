@@ -18,6 +18,14 @@ module.exports = {
     },
     extend: {
       colors: {
+        brand: {
+          yellow: "#FAD02C",
+          lightblue: "#BEEFFF",
+          mutedblue: "#90adc6",
+          lightgrey: "#E9EAEC",
+          darkgrey: "#5c646b",
+          dark: "#333652",
+        },
         timeblock: {
           rest: "#ff595e",
           deepWork: "#8ac926",

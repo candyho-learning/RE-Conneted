@@ -1,5 +1,5 @@
 import { Separator } from "@radix-ui/react-separator";
-import Rainbow from "@/assets/rainbow.png";
+import Logo from "@/assets/logo-dark.png";
 
 export default function Footer() {
   return (
@@ -7,9 +7,9 @@ export default function Footer() {
       <div className="flex justify-between my-10">
         <div>
           <img
-            src={Rainbow}
+            src={Logo}
             alt="Rainbow"
-            className="w-16                                                         "
+            className="w-40                                                         "
           />
 
           <h1 className="text-3xl font-bold mb-5">

@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../context/authContext";
 import { Link } from "react-router-dom";
-import Logo from "@/assets/logo.svg";
+import Logo from "@/assets/logo-dark.png";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -18,31 +18,31 @@ import {
 export default function Header() {
   const { isLoggedIn, user, logout } = useContext(AuthContext);
   return (
-    <header className="sticky top-0 flex h-20 items-center gap-4 border-b bg-background px-4 md:px-6 justify-between z-10">
-      <img src={Logo} alt="Logo" className="w-20" />
+    <header className="absolute top-0 flex h-20 items-center gap-4 bg-transparent px-4 md:px-6 justify-between z-10 text-white w-full">
+      <img src={Logo} alt="Logo" className="w-44 mt-2 mr-10" />
 
-      <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-lg lg:gap-6">
+      <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-2xl lg:gap-6">
         <Link
           to="/"
-          className="text-muted-foreground transition-colors hover:text-foreground"
+          className="text-white transition-colors hover:text-foreground"
         >
           Home
         </Link>
         <Link
           to="/dashboard"
-          className="text-muted-foreground transition-colors hover:text-foreground"
+          className="text-white transition-colors hover:text-foreground"
         >
           Dashboard
         </Link>
         <Link
           to="/community"
-          className="text-muted-foreground transition-colors hover:text-foreground"
+          className="text-white transition-colors hover:text-foreground"
         >
           Community
         </Link>
         <Link
           to="/find-sessions"
-          className="text-muted-foreground transition-colors hover:text-foreground"
+          className="text-white transition-colors hover:text-foreground"
         >
           Sessions
         </Link>
@@ -86,7 +86,7 @@ export default function Header() {
         {!isLoggedIn && (
           <Link
             to="/login"
-            className="text-muted-foreground transition-colors hover:text-foreground font-medium text-lg"
+            className="text-white transition-colors hover:text-foreground font-medium text-lg"
           >
             Login / Signup
           </Link>

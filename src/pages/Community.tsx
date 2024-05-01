@@ -77,8 +77,8 @@ export default function Community() {
   if (!isLoggedIn) return <Login context="force" />;
 
   return (
-    <div className="flex py-5 px-12">
-      <div className="side-bar left w-1/4 p-10 grow-0 bg-red-100">
+    <div className="flex py-10 px-12">
+      <div className="side-bar left w-1/4 p-10 grow-0">
         <h2 className="mb-4 px-4 text-3xl font-semibold tracking-tight mt-5">
           Featured Users
         </h2>
@@ -126,7 +126,7 @@ export default function Community() {
           <p className="text-lg group-hover:scale-110">Surprise Me!</p>
         </Button>
       </div>
-      <div className="flex flex-wrap p-10 flex-grow-1 w-min-[500px] bg-blue-200 basis-4/5 ">
+      <div className="flex flex-wrap p-10 flex-grow-1 w-min-[500px] basis-4/5 ">
         {filteredUsers?.length === 0 && (
           <Alert className="border w-1/4 h-fit border-primary mx-auto my-auto p-3 scale-150">
             <ChatBubbleIcon className="h-4 w-4 p-0" />
