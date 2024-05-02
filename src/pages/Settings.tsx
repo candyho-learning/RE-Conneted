@@ -13,7 +13,7 @@ import { db } from "../firebase";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import EditableQuote from "@/components/EditableQuote";
-import Background from "@/assets/background2.png";
+import Background from "@/assets/background1.png";
 
 export default function Settings() {
   //TODO get userId from authcontext
@@ -36,8 +36,8 @@ export default function Settings() {
 
   return (
     <main
-      className="px-20 xl:px-28 py-20 max-w-screen mx-auto h-screen"
-      style={{ backgroundImage: `url(${Background})` }}
+      className="px-20 xl:px-60 py-20 max-w-screen mx-auto h-screen"
+      // style={{ backgroundImage: `url(${Background})` }}
     >
       <h1 className="text-3xl xl:text-4xl font-bold">
         This is {userData?.firstName}'s settings

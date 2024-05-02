@@ -18,7 +18,7 @@ import {
 export default function Header() {
   const { isLoggedIn, user, logout } = useContext(AuthContext);
   return (
-    <header className="sticky top-0 flex h-20 p-16 items-center gap-4 bg-background px-5 md:px-6 justify-between z-10 text-brand-dark w-full">
+    <header className="sticky top-0 flex h-20 p-12 items-center gap-4 bg-gray-100 px-5 md:px-6 justify-between z-10 text-brand-dark w-full shadow-md mb-5">
       <Link to="/">
         <img src={Logo} alt="Logo" className="w-44 mt-2 mr-40" />
       </Link>

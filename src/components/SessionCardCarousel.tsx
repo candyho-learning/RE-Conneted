@@ -69,7 +69,7 @@ export default function SessionCardCarousel({
   }, []);
 
   return (
-    <div className="w-full relative px-10">
+    <div className="w-full relative px-0">
       <Carousel
         opts={{
           align: "start",

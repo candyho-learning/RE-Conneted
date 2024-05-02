@@ -77,31 +77,30 @@ export default function Community() {
   if (!isLoggedIn) return <Login />;
 
   return (
-    <div className="flex py-10 px-12">
-      <div className="side-bar left w-[500px] p-10 grow-0 bg-brand-darkgrey text-brand-lightgrey">
-        <h2 className="mb-4 px-4 text-3xl font-bold tracking-tight mt-5">
+    <div className="flex py-10 px-24">
+      <div className="side-bar left w-[500px] p-10 grow-0 bg-brand-dark text-brand-lightgrey rounded-3xl mr-10">
+        {/* <h2 className="mb-4 px-4 text-3xl font-bold tracking-tight mt-5">
           Featured Users
         </h2>
         <div className="featured-users space-y-1">
           <Button variant="ghost" className=" w-full justify-start text-lg">
-            New Users
+            <i className="fa-regular fa-heart mr-3"></i>New Users
           </Button>
           <Button variant="ghost" className=" w-full justify-start text-lg">
-            Power Users
+            <i className="fa-regular fa-heart mr-3"></i> Power Users
           </Button>
           <Button variant="ghost" className=" w-full justify-start text-lg">
-            Popular Users
+            <i className="fa-regular fa-heart mr-3"></i> Popular Users
           </Button>
-        </div>
-        <h2 className="px-4 text-3xl font-bold tracking-tight my-10">
+        </div> */}
+        <h2 className="px-4 text-md font-thin tracking-tight mb-5">
           Filter by Tags
         </h2>
-        <div className="tag-selector">
+        <div className="tag-selector mb-20">
           {TAGS.map((tag) => (
             <Badge
-              variant="secondary"
-              className={`m-2 h-[33px] text-[18px] hover:cursor-pointer rounded-xl ${
-                filterTags.includes(tag) ? "bg-brand-lightblue" : ""
+              className={`bg-gray-300 m-2 h-[33px] text-[16px] font-normal hover:cursor-pointer rounded-xl ${
+                filterTags.includes(tag) ? "bg-brand-yellow" : ""
               }`}
               onClick={() => {
                 toggleSelectedTags(tag);
@@ -111,7 +110,7 @@ export default function Community() {
             </Badge>
           ))}
         </div>
-        <h2 className="px-4 text-3xl font-bold tracking-tight my-10">
+        <h2 className="px-4 text-md font-thin tracking-tight my-5">
           Visit A Random User
         </h2>
         <Button
@@ -127,7 +126,7 @@ export default function Community() {
           </p>
         </Button>
       </div>
-      <div className="flex flex-wrap p-10 pt-0 flex-grow-1 w-min-[500px] basis-4/5">
+      <div className="flex flex-wrap px-10 pt-0 flex-grow-1 w-min-[500px] basis-4/5 ">
         {filteredUsers?.length === 0 && (
           <Alert className="border w-1/3 h-fit border-primary mx-auto my-auto p-3 scale-150">
             <ChatBubbleIcon className="h-4 w-4 p-0" />
@@ -140,7 +139,7 @@ export default function Community() {
           </Alert>
         )}
         {filteredUsers?.map((user) => (
-          <Card className="w-80 h-96 my-5 mx-5 relative">
+          <Card className="w-80 h-96 mb-10 mx-5 relative bg-transparent border-brand-darkgrey rounded-3xl">
             <CardHeader>
               <div className="flex items-center mb-2">
                 <Avatar className="w-28 h-28 static border-4 border-blue-400">
@@ -167,10 +166,7 @@ export default function Community() {
             <CardContent>
               <div className="flex flex-wrap my-5 h-10">
                 {user.tags?.map((tag) => (
-                  <Badge
-                    variant="secondary"
-                    className="m-1 h-[15px] text-[11px]"
-                  >
+                  <Badge className="m-1 h-[15px] text-[11px] bg-white font-normal">
                     {tag}
                   </Badge>
                 ))}

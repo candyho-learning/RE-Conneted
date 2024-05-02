@@ -59,7 +59,7 @@ export default function UserProfile() {
   }
 
   return (
-    <div className="user-profile-wrapper py-20 px-20 flex flex-col justify-center bg-brand-mutedblue">
+    <div className="user-profile-wrapper py-20 px-20 flex flex-col justify-center">
       <div className="main-info flex pb-10 items-center w-4/5 mx-auto">
         <Avatar className="w-48 h-48 static border-4 border-gray-600">
           <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
@@ -90,7 +90,9 @@ export default function UserProfile() {
           <div className="flex mt-5">
             {userData.tags &&
               userData.tags.map((tag) => (
-                <Badge className="mr-2 h-[20px] text-[13px]">{tag}</Badge>
+                <Badge className="mr-2 h-[20px] text-[13px] bg-white">
+                  {tag}
+                </Badge>
               ))}
           </div>
         </div>
