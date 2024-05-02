@@ -20,7 +20,11 @@ export default function Header() {
   return (
     <header className="sticky top-0 flex h-20 p-12 items-center gap-4 bg-gray-100 px-5 md:px-6 justify-between z-10 text-brand-dark w-full shadow-md">
       <Link to="/">
-        <img src={Logo} alt="Logo" className="w-44 mt-2 mr-40" />
+        <img
+          src={Logo}
+          alt="Logo"
+          className="w-44 mt-2 mr-40 hover:cursor-pointer"
+        />
       </Link>
 
       <nav className="hidden flex-col gap-6 text-md font-thin md:flex md:flex-row md:items-center md:gap-5 md:text-xl lg:gap-6">
