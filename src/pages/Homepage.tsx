@@ -21,7 +21,7 @@ export default function Homepage() {
 
         <img src={Hero} className="h-full w-full object-cover"></img>
         <div className="w-1/3 absolute top-36 left-40 text-white">
-          <h1 className=" text-[72px] font-extrabold leading-tight mb-5">
+          <h1 className=" text-8xl font-extrabold leading-tight mb-5">
             Work Remotely, Stay Connected.
           </h1>
           <p className="w-4/5 font-extralight tracking-widest text-lg">
