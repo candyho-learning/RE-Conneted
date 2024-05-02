@@ -89,7 +89,7 @@ export default function BackgroundPicker({
               Search
             </Button>
           </form>
-          <ScrollArea className="search-results w-full h-80 xl:h-[620px]">
+          <ScrollArea className="search-results w-full h-80 xl:h-[480px]">
             <div className="flex flex-wrap justify-between gap-2">
               {searchResults &&
                 searchResults.map((item) => (

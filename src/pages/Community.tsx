@@ -96,10 +96,10 @@ export default function Community() {
         <h2 className="px-4 text-md font-thin tracking-tight mb-5">
           Filter by Tags
         </h2>
-        <div className="tag-selector mb-20">
+        <div className="tag-selector mb-10">
           {TAGS.map((tag) => (
             <Badge
-              className={`bg-gray-300 m-2 h-[33px] text-[16px] font-normal hover:cursor-pointer rounded-xl ${
+              className={`bg-gray-300 m-2 h-[24px] text-[12px] font-normal hover:cursor-pointer rounded-xl ${
                 filterTags.includes(tag) ? "bg-brand-yellow" : ""
               }`}
               onClick={() => {
@@ -110,7 +110,7 @@ export default function Community() {
             </Badge>
           ))}
         </div>
-        <h2 className="px-4 text-md font-thin tracking-tight my-5">
+        <h2 className="px-4 text-md font-thin tracking-tight my-2">
           Visit A Random User
         </h2>
         <Button
