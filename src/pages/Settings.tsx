@@ -55,19 +55,19 @@ export default function Settings() {
         <TabsList className="flex-col h-full w-1/4 shrink-0 items-start justify-start mr-20 bg-transparent">
           <TabsTrigger
             value="account"
-            className="text-lg font-semibold py-3 w-full justify-start  data-[state=active]:bg-gray-200"
+            className="text-lg font-semibold py-3 w-full justify-start  data-[state=active]:bg-gray-300"
           >
             <h4>Account</h4>
           </TabsTrigger>
           <TabsTrigger
             value="contact"
-            className="text-lg font-semibold py-3 w-full justify-start  data-[state=active]:bg-gray-200"
+            className="text-lg font-semibold py-3 w-full justify-start  data-[state=active]:bg-gray-300"
           >
             <h4>Contact</h4>
           </TabsTrigger>
           <TabsTrigger
             value="tags"
-            className="text-lg font-semibold py-3 w-full justify-start  data-[state=active]:bg-gray-200"
+            className="text-lg font-semibold py-3 w-full justify-start  data-[state=active]:bg-gray-300"
           >
             <h4>Tag</h4>
           </TabsTrigger>
