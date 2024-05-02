@@ -7,7 +7,7 @@ import Logo from "@/assets/logo-light.png";
 export default function Homepage() {
   return (
     <div className="bg-background">
-      <div className="relative">
+      <div className="relative h-screen">
         <img src={Logo} className="absolute top-10 left-10 w-60" />
         <Link to="/login">
           <Button
@@ -15,13 +15,13 @@ export default function Homepage() {
             variant="ghost"
             size="lg"
           >
-            Log In
+            <h4>Log In</h4>
           </Button>
         </Link>
 
-        <img src={Hero}></img>
-        <div className="w-1/3 absolute top-44 left-40 text-white">
-          <h1 className=" text-8xl font-extrabold leading-tight mb-5">
+        <img src={Hero} className="h-full w-full object-cover"></img>
+        <div className="w-1/3 absolute top-36 left-40 text-white">
+          <h1 className=" text-[72px] font-extrabold leading-tight mb-5">
             Work Remotely, Stay Connected.
           </h1>
           <p className="w-4/5 font-extralight tracking-widest text-lg">

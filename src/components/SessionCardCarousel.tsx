@@ -118,6 +118,8 @@ export default function SessionCardCarousel({
                               );
                             }
                           })}
+                          {hidePastSessions(sortSessions(hostingSessionDetails))
+                            .length === 0 && <p>nope</p>}
                         </CardDescription>
                       </CardHeader>
 

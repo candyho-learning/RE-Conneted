@@ -77,8 +77,8 @@ export default function Community() {
   if (!isLoggedIn) return <Login />;
 
   return (
-    <div className="flex py-10 px-24">
-      <div className="side-bar left w-[500px] p-10 grow-0 bg-brand-dark text-brand-lightgrey rounded-3xl mr-10">
+    <div className="flex py-10 px-10">
+      <div className="side-bar left w-[500px] p-10 grow-0 bg-brand-dark text-brand-lightgrey rounded-3xl">
         {/* <h2 className="mb-4 px-4 text-3xl font-bold tracking-tight mt-5">
           Featured Users
         </h2>
@@ -128,7 +128,7 @@ export default function Community() {
       </div>
       <div className="flex flex-wrap px-10 pt-0 flex-grow-1 w-min-[500px] basis-4/5 ">
         {filteredUsers?.length === 0 && (
-          <Alert className="border w-1/3 h-fit border-primary mx-auto my-auto p-3 scale-150">
+          <Alert className="border w-1/3 h-fit border-primary mx-auto my-40 p-3 scale-150">
             <ChatBubbleIcon className="h-4 w-4 p-0" />
             <AlertTitle className="font-semibold">
               Seems like we're out of matches!
