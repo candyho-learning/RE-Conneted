@@ -120,3 +120,8 @@ export interface ProfileSocialLinksProps {
 export interface SessionListProps {
   userSessions: Array<FutureSessionDataType>;
 }
+
+export interface BookSessionDialogProps {
+  userId: string;
+  sessionId: string;
+}

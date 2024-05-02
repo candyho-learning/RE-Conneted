@@ -37,6 +37,7 @@ import { dateOptions, timeOptions } from "@/utils/utils";
 import { useEffect } from "react";
 import { sortSessions } from "@/utils/utils";
 import { AuthContext } from "@/context/authContext";
+import BookSessionDialog from "./BookSessionDialog";
 
 export default function SessionCardCarousel({
   sessions,
@@ -45,7 +46,7 @@ export default function SessionCardCarousel({
   const [hostingSessionDetails, setHostingSessionDetails] = useState<
     SessionDataType[]
   >([]);
-  const { user } = useContext(AuthContext);
+  const { userId } = useContext(AuthContext);
   console.log("in carousel, is profile owner?", isProfileOwner);
   useEffect(() => {
     (async () => {
@@ -151,11 +152,17 @@ export default function SessionCardCarousel({
                           <Button variant="secondary">You are the Host</Button>
                         )}
                         {!isProfileOwner && (
-                          <a
-                            href={`/coworking-session?type=default&id=${session.sessionId}`}
-                          >
-                            <Button>Book to Join</Button>
-                          </a>
+                          <>
+                            <a
+                              href={`/coworking-session?type=default&id=${session.sessionId}`}
+                            >
+                              <Button>Book to Join</Button>
+                            </a>
+                            <BookSessionDialog
+                              userId={userId}
+                              sessionId={session.sessionId}
+                            />
+                          </>
                         )}
                       </CardFooter>
                     </Card>
