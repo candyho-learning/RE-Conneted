@@ -68,7 +68,7 @@ export default function Settings() {
             value="tags"
             className="text-lg font-semibold py-3 w-full justify-start  data-[state=active]:bg-gray-300"
           >
-            <h4>Tag</h4>
+            <h4>My Tags</h4>
           </TabsTrigger>
         </TabsList>
         <TabsContent value="account" className="grow">

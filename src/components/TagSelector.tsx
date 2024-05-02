@@ -72,7 +72,7 @@ export default function TagSelector({
             {TAGS.map((tag) => (
               <Badge
                 key={tag}
-                className="mr-4 my-2 h-[28px] text-[16px] rounded-lg"
+                className="mr-4 my-2 h-[28px] text-[16px] rounded-lg hover:cursor-pointer"
                 variant="secondary"
                 onClick={() => {
                   toggleSelectedTags(tag);

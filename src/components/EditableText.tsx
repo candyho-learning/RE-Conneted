@@ -17,6 +17,11 @@ export default function EditableText({
   async function confirmTextUpdate() {
     setIsEditing(false);
     if (textValue === databaseContent) return;
+    if (fieldName.includes("Link") && !textValue.includes("https://")) {
+      alert("Please add a valid link!");
+      setTextValue("");
+      return;
+    }
     const result = await updateUserData(userIdParam, fieldName, textValue);
     if (result.success) {
       alert(`Updated your ${fieldName} successfully!`);
