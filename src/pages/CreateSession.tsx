@@ -16,11 +16,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { useNavigate } from "react-router-dom";
 
 const defaultBackground =
   "https://images.unsplash.com/photo-1631679706909-1844bbd07221?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MTMyNzk5Mzl8&ixlib=rb-4.0.3&q=85";
 
 export default function CreateSesssion() {
+  const navigate = useNavigate();
   const { userId, isLoggedIn } = useContext(AuthContext);
   const [sessionName, setSessionName] = useState<string>("");
   const [sessionStartTime, setSessionStartTime] = useState("");
@@ -91,6 +93,7 @@ export default function CreateSesssion() {
       await createNewSession(sessionData);
       await addFutureSession(userId, futureSessionData);
       resetForm();
+      navigate("/dashboard");
     } else {
       console.log("nope");
       return;
