@@ -25,12 +25,12 @@ export default function Signup() {
     });
   }
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     console.log("creating an account...");
     const { email, password, firstName, lastName } = signupForm;
     console.log(firstName, lastName);
-    createAccount(email, password, firstName, lastName);
+    await createAccount(email, password, firstName, lastName);
     setSignupForm(defaultFormValues);
     navigate("/dashboard");
   }
