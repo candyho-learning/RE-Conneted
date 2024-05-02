@@ -16,7 +16,7 @@ import {
 import { FutureSessionDataType, SessionDataType } from "@/interface/interfaces";
 import { Button } from "./ui/button";
 import { CalendarIcon, ClockIcon } from "@radix-ui/react-icons";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import {
   query,
   collection,
@@ -29,19 +29,24 @@ import { hidePastSessions } from "@/utils/utils";
 import { hyphenatedToReadable } from "@/utils/utils";
 interface SessionCardCarouselProps {
   sessions: Array<FutureSessionDataType>;
+  isProfileOwner: boolean;
 }
 import { db } from "@/firebase";
 
 import { dateOptions, timeOptions } from "@/utils/utils";
 import { useEffect } from "react";
 import { sortSessions } from "@/utils/utils";
+import { AuthContext } from "@/context/authContext";
 
 export default function SessionCardCarousel({
   sessions,
+  isProfileOwner,
 }: SessionCardCarouselProps) {
   const [hostingSessionDetails, setHostingSessionDetails] = useState<
     SessionDataType[]
   >([]);
+  const { user } = useContext(AuthContext);
+  console.log("in carousel, is profile owner?", isProfileOwner);
   useEffect(() => {
     (async () => {
       console.log("getting individual session data");
@@ -142,11 +147,16 @@ export default function SessionCardCarousel({
                       </CardContent>
 
                       <CardFooter>
-                        <a
-                          href={`/coworking-session?type=default&id=${session.sessionId}`}
-                        >
-                          <Button>Join</Button>
-                        </a>
+                        {isProfileOwner && (
+                          <Button variant="secondary">You are the Host</Button>
+                        )}
+                        {!isProfileOwner && (
+                          <a
+                            href={`/coworking-session?type=default&id=${session.sessionId}`}
+                          >
+                            <Button>Book to Join</Button>
+                          </a>
+                        )}
                       </CardFooter>
                     </Card>
                   </div>

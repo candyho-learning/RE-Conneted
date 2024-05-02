@@ -20,7 +20,7 @@ export default function Dashboard() {
   const { user, isLoggedIn, userId } = useContext(AuthContext);
   if (!isLoggedIn) return <Login />;
   return (
-    <div className="bg-gray h-full flex px-10">
+    <div className="bg-gray h-full flex p-10">
       <div className="w-1/3  p-10 bg-gray-400 rounded-lg text-white h-screen">
         <div className="flex mb-10 items-center ">
           <Avatar className="w-40 h-40 static">

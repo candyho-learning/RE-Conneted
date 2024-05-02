@@ -18,7 +18,8 @@ export default function UserProfile() {
   const { userId: userIdParam } = useParams<{ userId: string | undefined }>();
   const [userData, setUserData] = useState<UserType>();
   const [isLoading, setIsLoading] = useState(true);
-  const isProfileOwner = userId === userIdParam;
+  const [isProfileOwner, setIsProfileOwnder] = useState(false);
+  // const isProfileOwner = userId === userIdParam;
   const hasSocialLink = Boolean(
     userData?.facebookLink ||
       userData?.instagramLink ||
@@ -34,6 +35,7 @@ export default function UserProfile() {
       try {
         const data = await getUserData(userIdParam);
         setUserData(data as UserType);
+        setIsProfileOwnder(userId === userIdParam);
       } catch (err) {
         console.error(err);
         console.log("this user does not exist.");
@@ -60,8 +62,8 @@ export default function UserProfile() {
 
   return (
     <div className="user-profile-wrapper py-20 px-20 flex flex-col justify-center">
-      <div className="main-info w-4/5 mx-auto bg-white rounded-[60px] relative py-4">
-        <div className="flex px-16 items-center">
+      <div className="main-info w-4/5 mx-auto bg-white rounded-[60px] relative py-6">
+        <div className="flex px-28 items-center">
           <div className="avatar-location flex- flex-col items-center">
             <Avatar className="w-48 h-48 static border-4 border-gray-600 mt-[-50%]">
               <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
@@ -77,7 +79,7 @@ export default function UserProfile() {
             )}
           </div>
 
-          <div className="wrapper ml-10">
+          <div className="wrapper ml-10 mb-20">
             <div className="flex items-center">
               <h1 className="text-5xl font-extrabold mr-5">
                 {userData.firstName} {userData.lastName}
@@ -131,7 +133,10 @@ export default function UserProfile() {
           Hosting Sessions
         </h2>
         {userData.futureSessions && (
-          <SessionCardCarousel sessions={userData.futureSessions} />
+          <SessionCardCarousel
+            sessions={userData.futureSessions}
+            isProfileOwner={isProfileOwner}
+          />
         )}
         {!userData.futureSessions && (
           <p>This user isn't hosting any sessions.</p>
