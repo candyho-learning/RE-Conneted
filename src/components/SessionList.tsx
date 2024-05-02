@@ -10,7 +10,6 @@ import { Button, buttonVariants } from "./ui/button";
 import { SessionListProps } from "@/interface/interfaces";
 import { Link } from "react-router-dom";
 import { dateOptions, timeOptions } from "@/utils/utils";
-import { sortSessions } from "@/utils/utils";
 
 export default function SessionList({ userSessions }: SessionListProps) {
   return (

@@ -13,7 +13,6 @@ import { db } from "../firebase";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import EditableQuote from "@/components/EditableQuote";
-import Background from "@/assets/background1.png";
 
 export default function Settings() {
   //TODO get userId from authcontext
