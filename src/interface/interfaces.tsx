@@ -122,6 +122,5 @@ export interface SessionListProps {
 }
 
 export interface BookSessionDialogProps {
-  userId: string;
   sessionId: string;
 }

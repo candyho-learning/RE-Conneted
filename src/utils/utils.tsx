@@ -82,9 +82,7 @@ export async function getSessionData(sessionId: string) {
       console.log("Document data:", docSnap.data());
       return docSnap.data();
     } else {
-      throw new Error(
-        "Cannot get session data because document does not exist."
-      );
+      return null;
     }
   } catch (err) {
     console.error(err);
@@ -238,4 +236,19 @@ export function hidePastSessions(arr: Array<SessionDataType>) {
     const timestamp = session.startTime.toDate(); // Convert Firestore timestamp to JavaScript Date object
     return timestamp > new Date(); // Compare with current time
   });
+}
+
+export function getDaysFromNow(date: any) {
+  const now = new Date();
+  const start = date.toDate();
+  const diffTime = start.getTime() - now.getTime();
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+  if (diffDays === 0) {
+    return "today";
+  } else if (diffDays > 0) {
+    return `${diffDays} days from now`;
+  } else {
+    return "already started";
+  }
 }

@@ -152,17 +152,7 @@ export default function SessionCardCarousel({
                           <Button variant="secondary">You are the Host</Button>
                         )}
                         {!isProfileOwner && (
-                          <>
-                            <a
-                              href={`/coworking-session?type=default&id=${session.sessionId}`}
-                            >
-                              <Button>Book to Join</Button>
-                            </a>
-                            <BookSessionDialog
-                              userId={userId}
-                              sessionId={session.sessionId}
-                            />
-                          </>
+                          <BookSessionDialog sessionId={session.sessionId} />
                         )}
                       </CardFooter>
                     </Card>
