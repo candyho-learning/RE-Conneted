@@ -240,7 +240,9 @@ export function sortSessions(arr: Array<SessionDataType>) {
   });
 }
 
-export function hidePastSessions(arr: Array<SessionDataType>) {
+export function hidePastSessions(
+  arr: Array<SessionDataType | FutureSessionDataType>
+) {
   return arr.filter((session) => {
     const timestamp = session.startTime.toDate(); // Convert Firestore timestamp to JavaScript Date object
     return timestamp > new Date(); // Compare with current time
@@ -277,5 +279,6 @@ export async function getMultipleSessionDetails(sessionIdArr: Array<string>) {
     return data;
   } catch (err) {
     console.error(err);
+    return null;
   }
 }

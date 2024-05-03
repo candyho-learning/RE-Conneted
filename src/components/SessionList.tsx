@@ -43,16 +43,6 @@ export default function SessionList({ userSessions }: SessionListProps) {
             </TableCell>
           </TableRow>
         ))}
-        <TableRow>
-          <TableCell className="font-medium">2024/05/01</TableCell>
-          <TableCell>15:32PM</TableCell>
-          <TableCell>Sample Data in case it's empty</TableCell>
-          <TableCell className="text-right">
-            <Button className={buttonVariants({ variant: "secondary" })}>
-              Join
-            </Button>
-          </TableCell>
-        </TableRow>
       </TableBody>
     </Table>
   );

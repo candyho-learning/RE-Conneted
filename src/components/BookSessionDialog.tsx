@@ -158,11 +158,20 @@ export default function BookSessionDialog({
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogCancel
+            onClick={() => {
+              setHostDetails(undefined);
+              setSessionDetails(undefined);
+            }}
+          >
+            Cancel
+          </AlertDialogCancel>
           {sessionDetails && (
             <AlertDialogAction
               onClick={() => {
                 confirmSessionBooking(userId, sessionId);
+                setSessionDetails(undefined);
+                setHostDetails(undefined);
               }}
               className="font-bold"
               disabled={
