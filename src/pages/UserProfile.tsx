@@ -139,7 +139,7 @@ export default function UserProfile() {
           />
         )}
         {!userData.futureSessions && (
-          <p>This user isn't hosting any sessions.</p>
+          <p>This user isn't hosting any sessions for now.</p>
         )}
       </div>
       <div className="w-4/5 mx-auto">

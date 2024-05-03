@@ -8,6 +8,9 @@ import {
   collection,
   getDocs,
   getDoc,
+  query,
+  where,
+  documentId,
 } from "firebase/firestore";
 
 import {
@@ -256,5 +259,23 @@ export function getDaysFromNow(date: any) {
     return `${diffDays} days from now`;
   } else {
     return "expired";
+  }
+}
+
+export async function getMultipleSessionDetails(sessionIdArr: Array<string>) {
+  try {
+    const q = query(
+      collection(db, "sessions"),
+      where(documentId(), "in", sessionIdArr)
+    );
+    const sessionsDocsSnap = await getDocs(q);
+    let data: Array<SessionDataType> = [];
+    sessionsDocsSnap.forEach((doc) => {
+      data.push(doc.data() as SessionDataType);
+      console.log(doc.data());
+    });
+    return data;
+  } catch (err) {
+    console.error(err);
   }
 }
