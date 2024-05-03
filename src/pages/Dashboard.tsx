@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../context/authContext";
 import Login from "./Login";
 import { Button } from "@/components/ui/button";
@@ -15,9 +15,11 @@ import {
 import SessionList from "@/components/SessionList";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
+import BookSessionDialog from "@/components/BookSessionDialog";
 
 export default function Dashboard() {
   const { user, isLoggedIn, userId } = useContext(AuthContext);
+  const [sessionCode, setSessionCode] = useState("");
   if (!isLoggedIn) return <Login />;
   return (
     <div className="bg-gray h-full flex p-10">
@@ -62,8 +64,19 @@ export default function Dashboard() {
             Join a Session with Code
           </h4>
           <div className="flex w-4/5 space-x-2 mt-3">
-            <Input className="bg-white" placeholder="Session Code" />
-            <Button>Add</Button>
+            <Input
+              className="bg-white text-brand-dark"
+              placeholder="Session Code"
+              name="session-code"
+              value={sessionCode}
+              onChange={(e) => {
+                setSessionCode(e.target.value);
+              }}
+              onFocus={() => {
+                setSessionCode("");
+              }}
+            />
+            <BookSessionDialog buttonText="Add" sessionId={sessionCode} />
           </div>
         </div>
       </div>

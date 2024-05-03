@@ -37,11 +37,17 @@ export async function addFutureSession(
   userId: string,
   futureSessionData: FutureSessionDataType
 ) {
-  const userRef = doc(db, "users", userId);
-  await updateDoc(userRef, {
-    futureSessions: arrayUnion(futureSessionData),
-  });
-  console.log("added to future sessions");
+  try {
+    const userRef = doc(db, "users", userId);
+    await updateDoc(userRef, {
+      futureSessions: arrayUnion(futureSessionData),
+    });
+    console.log("added to future sessions");
+    return true;
+  } catch (err) {
+    console.error(err);
+    return false;
+  }
 }
 
 export async function getCollection(collectionName: string) {
@@ -249,6 +255,6 @@ export function getDaysFromNow(date: any) {
   } else if (diffDays > 0) {
     return `${diffDays} days from now`;
   } else {
-    return "already started";
+    return "expired";
   }
 }

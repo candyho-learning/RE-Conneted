@@ -17,29 +17,72 @@ import {
 } from "@/interface/interfaces";
 import { useContext, useState } from "react";
 import { AuthContext } from "@/context/authContext";
-import { getSessionData, getUserData } from "@/utils/utils";
+import { addFutureSession, getSessionData, getUserData } from "@/utils/utils";
 import { hyphenatedToReadable, getDaysFromNow } from "@/utils/utils";
 import { CalendarIcon, ClockIcon } from "@radix-ui/react-icons";
 import { dateOptions, timeOptions } from "@/utils/utils";
 import { Badge } from "./ui/badge";
+import { useToast } from "@/components/ui/use-toast";
 
 export default function BookSessionDialog({
   sessionId,
+  buttonText = "Book",
 }: BookSessionDialogProps) {
-  const { userId } = useContext(AuthContext);
+  const { userId, user } = useContext(AuthContext);
+  const { toast } = useToast();
+
   const [sessionDetails, setSessionDetails] = useState<SessionDataType>();
   const [hostDetails, setHostDetails] = useState<UserType>();
-  const [errorMessage, setErrorMessage] = useState("");
 
   async function handleGetSessionDetails(sessionId: string) {
     const data = await getSessionData(sessionId);
     if (!data) {
-      setErrorMessage("This session does not exist.");
+      toast({
+        variant: "destructive",
+        title: "Session Doesn't Exist",
+        description: "Please try again with a different session ID.",
+      });
+      return;
+    }
+    if (data.host === userId) {
+      toast({
+        variant: "destructive",
+        title: "You don't need to book to join your session.",
+        description:
+          "You are the host. This sesssion is already in your dashboard.",
+      });
       return;
     }
     const hostData = await getUserData(data.host);
     setSessionDetails(data as SessionDataType);
     setHostDetails(hostData as UserType);
+  }
+
+  async function confirmSessionBooking(userId: string, sessionId: string) {
+    if (
+      user?.futureSessions?.some((session) => session.sessionId === sessionId)
+    ) {
+      toast({
+        variant: "destructive",
+        title: "Booking failed",
+        description:
+          "You already booked this session before. Please check your dashboard for more details.",
+      });
+      return;
+    }
+
+    const futureSessionData = {
+      sessionId,
+      role: "participant",
+    };
+    const result = await addFutureSession(userId, futureSessionData);
+    console.log("triggering toast");
+    if (result)
+      toast({
+        title: "Session Successfully Booked!",
+        description:
+          "Added to your personal dashboard. Remember to join on time!",
+      });
   }
   return (
     <AlertDialog>
@@ -48,8 +91,9 @@ export default function BookSessionDialog({
           onClick={() => {
             handleGetSessionDetails(sessionId);
           }}
+          disabled={sessionId ? false : true}
         >
-          Book!!!
+          {buttonText}
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
@@ -58,7 +102,6 @@ export default function BookSessionDialog({
             Book this session?
           </AlertDialogTitle>
           <AlertDialogDescription>
-            {errorMessage && <p>{errorMessage}</p>}
             {sessionDetails && (
               <div>
                 <div className="flex items-center mb-3">
@@ -91,9 +134,15 @@ export default function BookSessionDialog({
                       .toDate()
                       .toLocaleString("en-US", dateOptions)}
                   </p>
-                  <Badge className="ml-3" variant="secondary">
-                    {getDaysFromNow(sessionDetails.startTime)}
-                  </Badge>
+                  {getDaysFromNow(sessionDetails.startTime) === "expired" ? (
+                    <Badge className="ml-3" variant="destructive">
+                      {getDaysFromNow(sessionDetails.startTime)}
+                    </Badge>
+                  ) : (
+                    <Badge className="ml-3" variant="secondary">
+                      {getDaysFromNow(sessionDetails.startTime)}
+                    </Badge>
+                  )}
                 </div>
 
                 <div className="flex items-center">
@@ -110,14 +159,21 @@ export default function BookSessionDialog({
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction
-            onClick={() => {
-              console.log("book");
-            }}
-            className="font-bold"
-          >
-            Confirm
-          </AlertDialogAction>
+          {sessionDetails && (
+            <AlertDialogAction
+              onClick={() => {
+                confirmSessionBooking(userId, sessionId);
+              }}
+              className="font-bold"
+              disabled={
+                getDaysFromNow(sessionDetails.startTime) === "expired"
+                  ? true
+                  : false
+              }
+            >
+              Confirm
+            </AlertDialogAction>
+          )}
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

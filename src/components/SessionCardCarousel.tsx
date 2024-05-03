@@ -36,7 +36,6 @@ import { db } from "@/firebase";
 import { dateOptions, timeOptions } from "@/utils/utils";
 import { useEffect } from "react";
 import { sortSessions } from "@/utils/utils";
-import { AuthContext } from "@/context/authContext";
 import BookSessionDialog from "./BookSessionDialog";
 
 export default function SessionCardCarousel({
@@ -46,7 +45,6 @@ export default function SessionCardCarousel({
   const [hostingSessionDetails, setHostingSessionDetails] = useState<
     SessionDataType[]
   >([]);
-  const { userId } = useContext(AuthContext);
   console.log("in carousel, is profile owner?", isProfileOwner);
   useEffect(() => {
     (async () => {
