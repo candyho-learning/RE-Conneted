@@ -55,8 +55,8 @@ export interface SessionDataType {
 export interface FutureSessionDataType {
   sessionId: string;
   role: string;
-  startTime: any;
-  sessionName: string;
+  startTime?: any;
+  sessionName?: string;
 }
 
 export interface VideoViewProps {
@@ -118,5 +118,10 @@ export interface ProfileSocialLinksProps {
 }
 
 export interface SessionListProps {
-  userSessions: Array<FutureSessionDataType>;
+  userSessions: Array<SessionDataType>;
+}
+
+export interface BookSessionDialogProps {
+  sessionId: string;
+  buttonText?: string;
 }

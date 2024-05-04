@@ -17,53 +17,44 @@ import { FutureSessionDataType, SessionDataType } from "@/interface/interfaces";
 import { Button } from "./ui/button";
 import { CalendarIcon, ClockIcon } from "@radix-ui/react-icons";
 import { useState } from "react";
-import {
-  query,
-  collection,
-  where,
-  documentId,
-  getDocs,
-} from "firebase/firestore";
-import { hidePastSessions } from "@/utils/utils";
+
+import { getMultipleSessionDetails, hidePastSessions } from "@/utils/utils";
 
 import { hyphenatedToReadable } from "@/utils/utils";
 interface SessionCardCarouselProps {
   sessions: Array<FutureSessionDataType>;
+  isProfileOwner: boolean;
 }
-import { db } from "@/firebase";
 
 import { dateOptions, timeOptions } from "@/utils/utils";
 import { useEffect } from "react";
 import { sortSessions } from "@/utils/utils";
+import BookSessionDialog from "./BookSessionDialog";
 
 export default function SessionCardCarousel({
   sessions,
+  isProfileOwner,
 }: SessionCardCarouselProps) {
   const [hostingSessionDetails, setHostingSessionDetails] = useState<
     SessionDataType[]
   >([]);
+  const [errorMessage, setErrorMessage] = useState("");
+  console.log("in carousel, is profile owner?", isProfileOwner);
   useEffect(() => {
     (async () => {
       console.log("getting individual session data");
-      try {
-        const hostingSessionIds = sessions
-          .filter((session) => session.role === "host")
-          .map((session) => session.sessionId);
-        const q = query(
-          collection(db, "sessions"),
-          where(documentId(), "in", hostingSessionIds)
-        );
-
-        const sessionsDocsSnap = await getDocs(q);
-        let data: Array<SessionDataType> = [];
-
-        sessionsDocsSnap.forEach((doc) => {
-          data.push(doc.data() as SessionDataType);
-          console.log(doc.data());
-        });
-        setHostingSessionDetails(data);
-      } catch (err) {
-        console.error(err);
+      const hostingSessionIds = sessions
+        .filter((session) => session.role === "host")
+        .map((session) => session.sessionId);
+      if (hostingSessionIds.length > 0) {
+        const data = await getMultipleSessionDetails(hostingSessionIds);
+        if (data) {
+          setHostingSessionDetails(data);
+        } else {
+          setErrorMessage("Error ");
+        }
+      } else {
+        setErrorMessage("This user isn't hosting any sessions for now.");
       }
     })();
   }, []);
@@ -78,9 +69,7 @@ export default function SessionCardCarousel({
       >
         <CarouselContent>
           {sessions.length === 0 && (
-            <h4 className="ml-10 font-semibold text-lg">
-              This user isn't hosting any sessions for now.
-            </h4>
+            <p className="ml-10 font-semibold text-lg">{errorMessage}</p>
           )}
           {hostingSessionDetails &&
             hidePastSessions(sortSessions(hostingSessionDetails)).map(
@@ -144,11 +133,12 @@ export default function SessionCardCarousel({
                       </CardContent>
 
                       <CardFooter>
-                        <a
-                          href={`/coworking-session?type=default&id=${session.sessionId}`}
-                        >
-                          <Button>Join</Button>
-                        </a>
+                        {isProfileOwner && (
+                          <Button variant="secondary">You are the Host</Button>
+                        )}
+                        {!isProfileOwner && (
+                          <BookSessionDialog sessionId={session.sessionId} />
+                        )}
                       </CardFooter>
                     </Card>
                   </div>

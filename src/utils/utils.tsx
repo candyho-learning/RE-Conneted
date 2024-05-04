@@ -8,6 +8,9 @@ import {
   collection,
   getDocs,
   getDoc,
+  query,
+  where,
+  documentId,
 } from "firebase/firestore";
 
 import {
@@ -17,6 +20,7 @@ import {
   UserActivityType,
   UserType,
 } from "../interface/interfaces";
+import { Session } from "inspector";
 
 //TODO check error handling for each function
 
@@ -37,11 +41,17 @@ export async function addFutureSession(
   userId: string,
   futureSessionData: FutureSessionDataType
 ) {
-  const userRef = doc(db, "users", userId);
-  await updateDoc(userRef, {
-    futureSessions: arrayUnion(futureSessionData),
-  });
-  console.log("added to future sessions");
+  try {
+    const userRef = doc(db, "users", userId);
+    await updateDoc(userRef, {
+      futureSessions: arrayUnion(futureSessionData),
+    });
+    console.log("added to future sessions");
+    return true;
+  } catch (err) {
+    console.error(err);
+    return false;
+  }
 }
 
 export async function getCollection(collectionName: string) {
@@ -82,9 +92,7 @@ export async function getSessionData(sessionId: string) {
       console.log("Document data:", docSnap.data());
       return docSnap.data();
     } else {
-      throw new Error(
-        "Cannot get session data because document does not exist."
-      );
+      return null;
     }
   } catch (err) {
     console.error(err);
@@ -238,4 +246,38 @@ export function hidePastSessions(arr: Array<SessionDataType>) {
     const timestamp = session.startTime.toDate(); // Convert Firestore timestamp to JavaScript Date object
     return timestamp > new Date(); // Compare with current time
   });
+}
+
+export function getDaysFromNow(date: any) {
+  const now = new Date();
+  const start = date.toDate();
+  const diffTime = start.getTime() - now.getTime();
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+  if (diffDays === 0) {
+    return "today";
+  } else if (diffDays > 0) {
+    return `${diffDays} days from now`;
+  } else {
+    return "expired";
+  }
+}
+
+export async function getMultipleSessionDetails(sessionIdArr: Array<string>) {
+  try {
+    const q = query(
+      collection(db, "sessions"),
+      where(documentId(), "in", sessionIdArr)
+    );
+    const sessionsDocsSnap = await getDocs(q);
+    let data: Array<SessionDataType> = [];
+    sessionsDocsSnap.forEach((doc) => {
+      data.push(doc.data() as SessionDataType);
+      console.log(doc.data());
+    });
+    return data;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
 }

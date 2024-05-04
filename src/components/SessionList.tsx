@@ -10,6 +10,7 @@ import { Button, buttonVariants } from "./ui/button";
 import { SessionListProps } from "@/interface/interfaces";
 import { Link } from "react-router-dom";
 import { dateOptions, timeOptions } from "@/utils/utils";
+import { hyphenatedToReadable } from "@/utils/utils";
 
 export default function SessionList({ userSessions }: SessionListProps) {
   return (
@@ -31,7 +32,27 @@ export default function SessionList({ userSessions }: SessionListProps) {
             <TableCell>
               {session.startTime.toDate().toLocaleString("en-US", timeOptions)}
             </TableCell>
-            <TableCell>{session.sessionName}</TableCell>
+            <TableCell className="flex">
+              <p>{session.sessionName}</p>
+              <p>
+                {session.timeBlocks.map((block, i) => {
+                  if (i === session.timeBlocks.length - 1) {
+                    return (
+                      <span>
+                        {hyphenatedToReadable(block.type)} {block.duration}m{" "}
+                      </span>
+                    );
+                  } else {
+                    return (
+                      <span>
+                        {hyphenatedToReadable(block.type)} {block.duration}m /{" "}
+                        <>&nbsp;</>
+                      </span>
+                    );
+                  }
+                })}
+              </p>
+            </TableCell>
             <TableCell className="text-right">
               <Link
                 to={`/coworking-session?type=default&id=${session.sessionId}`}
@@ -43,16 +64,6 @@ export default function SessionList({ userSessions }: SessionListProps) {
             </TableCell>
           </TableRow>
         ))}
-        <TableRow>
-          <TableCell className="font-medium">2024/05/01</TableCell>
-          <TableCell>15:32PM</TableCell>
-          <TableCell>Sample Data in case it's empty</TableCell>
-          <TableCell className="text-right">
-            <Button className={buttonVariants({ variant: "secondary" })}>
-              Join
-            </Button>
-          </TableCell>
-        </TableRow>
       </TableBody>
     </Table>
   );
