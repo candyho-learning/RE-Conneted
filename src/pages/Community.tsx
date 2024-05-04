@@ -79,23 +79,22 @@ export default function Community() {
   return (
     <div className="flex py-10 px-10">
       <div className="side-bar left w-[500px] p-10 grow-0 bg-brand-dark text-brand-lightgrey rounded-3xl">
-        {/* <h2 className="mb-4 px-4 text-3xl font-bold tracking-tight mt-5">
-          Featured Users
-        </h2>
-        <div className="featured-users space-y-1">
-          <Button variant="ghost" className=" w-full justify-start text-lg">
-            <i className="fa-regular fa-heart mr-3"></i>New Users
+        <div className="flex items-center mb-5">
+          <h2 className="px-4 text-md font-thin tracking-tight">
+            Filter by Tags
+          </h2>
+          <Button
+            size="sm"
+            variant="secondary"
+            className="h-[16px]"
+            onClick={() => {
+              setFilterTags([]);
+            }}
+          >
+            Reset
           </Button>
-          <Button variant="ghost" className=" w-full justify-start text-lg">
-            <i className="fa-regular fa-heart mr-3"></i> Power Users
-          </Button>
-          <Button variant="ghost" className=" w-full justify-start text-lg">
-            <i className="fa-regular fa-heart mr-3"></i> Popular Users
-          </Button>
-        </div> */}
-        <h2 className="px-4 text-md font-thin tracking-tight mb-5">
-          Filter by Tags
-        </h2>
+        </div>
+
         <div className="tag-selector mb-10">
           {TAGS.map((tag) => (
             <Badge
