@@ -14,6 +14,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import UserAvatar from "./UserAvatar";
 
 export default function Header() {
   const { isLoggedIn, user, logout } = useContext(AuthContext);
@@ -54,13 +55,7 @@ export default function Header() {
                   size="icon"
                   className="rounded-full"
                 >
-                  <Avatar className="hidden h-9 w-9 sm:flex">
-                    <AvatarImage src="/avatars/03.png" alt="Avatar" />
-                    <AvatarFallback className="bg-brand-mutedblue">
-                      {user?.firstName[0]}
-                      {user?.lastName[0]}
-                    </AvatarFallback>
-                  </Avatar>
+                  <UserAvatar />
                   <span className="sr-only">Toggle user menu</span>
                 </Button>
               </DropdownMenuTrigger>

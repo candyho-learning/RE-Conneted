@@ -13,6 +13,7 @@ import { db } from "../firebase";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import EditableQuote from "@/components/EditableQuote";
+import AvatarPicker from "@/components/AvatarPicker";
 
 export default function Settings() {
   //TODO get userId from authcontext
@@ -70,6 +71,12 @@ export default function Settings() {
           >
             <h4>My Tags</h4>
           </TabsTrigger>
+          <TabsTrigger
+            value="avatar"
+            className="text-lg font-semibold py-3 w-full justify-start  data-[state=active]:bg-gray-300"
+          >
+            <h4>My Avatar</h4>
+          </TabsTrigger>
         </TabsList>
         <TabsContent value="account" className="grow">
           {ACCOUNT_SETTINGS_FIELDS.map((field) => (
@@ -109,6 +116,9 @@ export default function Settings() {
         </TabsContent>
         <TabsContent value="tags" className="grow">
           <TagSelector setTags={setTags} tags={tags} userId={userId} />
+        </TabsContent>
+        <TabsContent value="avatar" className="grow">
+          <AvatarPicker />
         </TabsContent>
       </Tabs>
     </main>

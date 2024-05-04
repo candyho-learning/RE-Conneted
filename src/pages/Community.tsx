@@ -142,17 +142,18 @@ export default function Community() {
           <Card className="w-80 h-96 mb-10 mx-5 relative bg-transparent border-brand-darkgrey rounded-3xl">
             <CardHeader>
               <div className="flex items-center mb-2">
-                <Avatar className="w-28 h-28 static border-4 border-blue-400">
+                <Avatar className="w-24 h-24 static bg-brand-mutedblue border-2 border-white flex justify-center items-center my-5">
                   <AvatarImage
-                    src="https://github.com/shadcn.png"
-                    alt="@shadcn"
+                    src={`/src/assets/avatars/avatar${user?.avatar}.png`}
+                    alt="user avatar"
+                    className="w-4/5 h-4/5 object-contain"
                   />
                   <AvatarFallback>
                     {user.firstName[0]}
                     {user.lastName[0]}
                   </AvatarFallback>
                 </Avatar>
-                <CardTitle className="ml-5 text-2xl">
+                <CardTitle className="ml-5 text-lg">
                   {user.firstName} {user.lastName}
                 </CardTitle>
               </div>

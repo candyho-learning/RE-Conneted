@@ -18,6 +18,8 @@ import { Input } from "@/components/ui/input";
 import BookSessionDialog from "@/components/BookSessionDialog";
 import { getMultipleSessionDetails } from "@/utils/utils";
 import { SessionDataType } from "@/interface/interfaces";
+import Avatar1 from "@/assets/avatars/avatar8.png";
+import UserAvatar from "@/components/UserAvatar";
 
 export default function Dashboard() {
   const { user, isLoggedIn, userId } = useContext(AuthContext);
@@ -49,12 +51,9 @@ export default function Dashboard() {
   if (!isLoggedIn) return <Login />;
   return (
     <div className="bg-gray h-full flex px-10">
-      <div className="w-1/4  p-10 bg-gray-400 rounded-lg text-white h-screen mt-8">
-        <div className="flex mb-5 items-center justify-center">
-          <Avatar className="w-32 h-32 static">
-            <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
+      <div className="w-1/4  px-10 bg-gray-400 rounded-lg text-white h-screen mt-8">
+        <div className="w-40 h-40 mx-auto mb-5">
+          <UserAvatar />
         </div>
         <h2 className="text-3xl font-semibold text-center mb-3">
           {user?.firstName} {user?.lastName}

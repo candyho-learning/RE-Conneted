@@ -13,6 +13,7 @@ export interface UserType {
   twitterLink?: string;
   websiteLink?: string;
   linkedinLink?: string;
+  avatar?: number;
 }
 export interface AuthContextType {
   isLoggedIn: boolean;
