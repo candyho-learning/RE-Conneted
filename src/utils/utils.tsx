@@ -20,6 +20,7 @@ import {
   UserActivityType,
   UserType,
 } from "../interface/interfaces";
+import { toast } from "@/components/ui/use-toast";
 
 //TODO check error handling for each function
 
@@ -30,7 +31,11 @@ export async function createNewSession(sessionData: SessionDataType) {
       ...sessionData,
       createdTimestamp: serverTimestamp(),
     });
-    alert("Session created successfully!");
+    toast({
+      title: "Session created successfully!",
+      description:
+        "Redirecting you to your dashboard. Copy the session code to share with friends!",
+    });
   } catch (err) {
     console.error(err);
   }

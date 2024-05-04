@@ -149,6 +149,14 @@ export default function Dashboard() {
                 {joiningSessions && (
                   <SessionList userSessions={joiningSessions} />
                 )}
+                {(!joiningSessions || joiningSessions.length === 0) && (
+                  <p className="text-gray-400 font-thin text-sm mt-3">
+                    You don't have upcoming join sessions.{" "}
+                    <a href="/community" className="underline">
+                      Find sessions to join from the community!
+                    </a>
+                  </p>
+                )}
               </CardContent>
             </Card>
           </TabsContent>
