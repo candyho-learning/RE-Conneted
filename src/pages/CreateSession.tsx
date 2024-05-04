@@ -74,6 +74,18 @@ export default function CreateSesssion() {
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (hasSessionName && isStartTimeValid && isTimerValid) {
+      const thirtyMinsBeforeStartTime = new Date(
+        formattedSessionStartTime.getTime() - 30 * 60 * 1000
+      );
+      const totalTimerDuration = timeBlocks.reduce(
+        (acc, cur) => acc + cur.duration,
+        0
+      );
+      const sessionEndTimtWithThirthyMinsBuffer = new Date(
+        formattedSessionStartTime.getTime() +
+          (totalTimerDuration + 30) * 60 * 1000
+      );
+
       const sessionData = {
         sessionId: nanoid(),
         sessionName,
@@ -82,6 +94,10 @@ export default function CreateSesssion() {
         host: userId,
         isTimerActive: false,
         backgroundImageUrl: backgroundImage,
+        linkValidPeriod: {
+          start: thirtyMinsBeforeStartTime,
+          end: sessionEndTimtWithThirthyMinsBuffer,
+        },
       };
 
       const userSessionData = {

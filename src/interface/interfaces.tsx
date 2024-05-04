@@ -49,6 +49,10 @@ export interface SessionDataType {
   host: string;
   isTimerActive: boolean;
   backgroundImageUrl: string;
+  linkValidPeriod: {
+    start: any;
+    end: any;
+  };
   participantsActivity?: Array<UserActivityType>;
 }
 
