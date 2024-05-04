@@ -142,7 +142,7 @@ export default function Community() {
           <Card className="w-80 h-96 mb-10 mx-5 relative bg-transparent border-brand-darkgrey rounded-3xl">
             <CardHeader>
               <div className="flex items-center mb-2">
-                <Avatar className="w-24 h-24 static bg-brand-mutedblue border-2 border-white flex justify-center items-center my-5">
+                <Avatar className="w-24 h-24 static bg-brand-mutedblue border-2 border-white flex justify-center items-center">
                   <AvatarImage
                     src={`/src/assets/avatars/avatar${user?.avatar}.png`}
                     alt="user avatar"
