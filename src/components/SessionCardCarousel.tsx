@@ -13,7 +13,7 @@ import {
   CardFooter,
   CardDescription,
 } from "@/components/ui/card";
-import { FutureSessionDataType, SessionDataType } from "@/interface/interfaces";
+import { UserSessionDataType, SessionDataType } from "@/interface/interfaces";
 import { Button } from "./ui/button";
 import { CalendarIcon, ClockIcon } from "@radix-ui/react-icons";
 import { useState } from "react";
@@ -22,7 +22,7 @@ import { getMultipleSessionDetails, hidePastSessions } from "@/utils/utils";
 
 import { hyphenatedToReadable } from "@/utils/utils";
 interface SessionCardCarouselProps {
-  sessions: Array<FutureSessionDataType>;
+  sessions: Array<UserSessionDataType>;
   isProfileOwner: boolean;
 }
 

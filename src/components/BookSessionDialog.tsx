@@ -17,7 +17,7 @@ import {
 } from "@/interface/interfaces";
 import { useContext, useState } from "react";
 import { AuthContext } from "@/context/authContext";
-import { addFutureSession, getSessionData, getUserData } from "@/utils/utils";
+import { addUserSession, getSessionData, getUserData } from "@/utils/utils";
 import { hyphenatedToReadable, getDaysFromNow } from "@/utils/utils";
 import { CalendarIcon, ClockIcon } from "@radix-ui/react-icons";
 import { dateOptions, timeOptions } from "@/utils/utils";
@@ -59,9 +59,7 @@ export default function BookSessionDialog({
   }
 
   async function confirmSessionBooking(userId: string, sessionId: string) {
-    if (
-      user?.futureSessions?.some((session) => session.sessionId === sessionId)
-    ) {
+    if (user?.sessions?.some((session) => session.sessionId === sessionId)) {
       toast({
         variant: "destructive",
         title: "Booking failed",
@@ -71,11 +69,11 @@ export default function BookSessionDialog({
       return;
     }
 
-    const futureSessionData = {
+    const userSessionData = {
       sessionId,
       role: "participant",
     };
-    const result = await addFutureSession(userId, futureSessionData);
+    const result = await addUserSession(userId, userSessionData);
     console.log("triggering toast");
     if (result)
       toast({

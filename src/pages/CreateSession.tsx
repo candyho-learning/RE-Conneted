@@ -3,7 +3,7 @@ import { nanoid } from "nanoid";
 import TimeBlockInput from "../components/TimeBlockInput";
 import { TimeBlock } from "../interface/interfaces";
 import { AuthContext } from "../context/authContext";
-import { addFutureSession, createNewSession } from "../utils/utils";
+import { addUserSession, createNewSession } from "../utils/utils";
 import Login from "./Login";
 import BackgroundPicker from "../components/BackgroundPicker";
 import { Input } from "@/components/ui/input";
@@ -84,14 +84,12 @@ export default function CreateSesssion() {
         backgroundImageUrl: backgroundImage,
       };
 
-      const futureSessionData = {
+      const userSessionData = {
         sessionId: sessionData.sessionId,
-        sessionName,
         role: "host",
-        startTime: formattedSessionStartTime,
       };
       await createNewSession(sessionData);
-      await addFutureSession(userId, futureSessionData);
+      await addUserSession(userId, userSessionData);
       resetForm();
       navigate("/dashboard");
     } else {

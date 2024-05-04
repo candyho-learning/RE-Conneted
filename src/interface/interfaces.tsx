@@ -4,7 +4,7 @@ export interface UserType {
   email: string;
   userId: string;
   accountCreatedTimestamp: any;
-  futureSessions?: Array<FutureSessionDataType>;
+  sessions?: Array<UserSessionDataType>;
   quote: string;
   location: string;
   tags?: Array<string>;
@@ -52,11 +52,9 @@ export interface SessionDataType {
   participantsActivity?: Array<UserActivityType>;
 }
 
-export interface FutureSessionDataType {
+export interface UserSessionDataType {
   sessionId: string;
   role: string;
-  startTime?: any;
-  sessionName?: string;
 }
 
 export interface VideoViewProps {

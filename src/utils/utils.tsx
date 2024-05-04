@@ -14,13 +14,12 @@ import {
 } from "firebase/firestore";
 
 import {
-  FutureSessionDataType,
+  UserSessionDataType,
   GoalsType,
   SessionDataType,
   UserActivityType,
   UserType,
 } from "../interface/interfaces";
-import { Session } from "inspector";
 
 //TODO check error handling for each function
 
@@ -37,16 +36,16 @@ export async function createNewSession(sessionData: SessionDataType) {
   }
 }
 
-export async function addFutureSession(
+export async function addUserSession(
   userId: string,
-  futureSessionData: FutureSessionDataType
+  userSessionData: UserSessionDataType
 ) {
   try {
     const userRef = doc(db, "users", userId);
     await updateDoc(userRef, {
-      futureSessions: arrayUnion(futureSessionData),
+      sessions: arrayUnion(userSessionData),
     });
-    console.log("added to future sessions");
+    console.log("added to user sessions");
     return true;
   } catch (err) {
     console.error(err);

@@ -27,12 +27,12 @@ export default function Dashboard() {
   const [joiningSessions, setJoiningSessions] =
     useState<Array<SessionDataType>>();
   useEffect(() => {
-    if (user?.futureSessions && user.futureSessions.length > 0) {
+    if (user?.sessions && user.sessions.length > 0) {
       (async () => {
-        if (!user.futureSessions) return;
+        if (!user.sessions) return;
         // Get session details
         const data = await getMultipleSessionDetails(
-          user.futureSessions.map((session) => session.sessionId)
+          user.sessions.map((session) => session.sessionId)
         );
         console.log(data);
         const hostingSessionData = data?.filter(
@@ -45,7 +45,7 @@ export default function Dashboard() {
         setJoiningSessions(joiningSessionData);
       })();
     }
-  }, [user?.futureSessions]);
+  }, [user?.sessions]);
   if (!isLoggedIn) return <Login />;
   return (
     <div className="bg-gray h-full flex px-10">

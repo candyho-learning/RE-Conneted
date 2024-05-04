@@ -132,13 +132,13 @@ export default function UserProfile() {
         <h2 className="scroll-m-20 border-b-[7px] text-3xl font-semibold tracking-tight first:mt-0 mb-10 border-b-brand-yellow w-fit">
           Hosting Sessions
         </h2>
-        {userData.futureSessions && (
+        {userData.sessions && (
           <SessionCardCarousel
-            sessions={userData.futureSessions}
+            sessions={userData.sessions}
             isProfileOwner={isProfileOwner}
           />
         )}
-        {!userData.futureSessions && (
+        {!userData.sessions && (
           <p>This user isn't hosting any sessions for now.</p>
         )}
       </div>
