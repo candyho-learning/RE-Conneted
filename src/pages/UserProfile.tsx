@@ -65,13 +65,24 @@ export default function UserProfile() {
       <div className="main-info w-4/5 mx-auto bg-white rounded-[60px] relative py-6">
         <div className="flex px-28 items-center">
           <div className="avatar-location flex- flex-col items-center">
-            <Avatar className="w-48 h-48 static border-4 border-gray-600 mt-[-40%]">
-              <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+            <Avatar className="w-44 h-44 static mt-[-80%] bg-brand-mutedblue border-4 border-white flex justify-center items-center">
+              <AvatarImage
+                src={`/src/assets/avatars/avatar${userData?.avatar}.png`}
+                alt="user avatar"
+                className="w-4/5 h-4/5 object-contain"
+              />
               <AvatarFallback>
                 {userData.firstName[0]}
                 {userData.lastName[0]}
               </AvatarFallback>
             </Avatar>
+            {/* <Avatar className="w-48 h-48 static border-4 border-gray-600 mt-[-40%]">
+              <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+              <AvatarFallback>
+                {userData.firstName[0]}
+                {userData.lastName[0]}
+              </AvatarFallback>
+            </Avatar> */}
             {userData.location && (
               <h1 className="text-xl my-5 text-center">
                 📍 {userData.location}
@@ -113,7 +124,7 @@ export default function UserProfile() {
         </div>
 
         {isProfileOwner && (
-          <div className="mx-auto px-10">
+          <div className="mx-auto px-24">
             <EditableQuote
               databaseContent={userData.quote}
               fieldName="quote"
