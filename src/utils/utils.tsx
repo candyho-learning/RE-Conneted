@@ -20,6 +20,7 @@ import {
   UserActivityType,
   UserType,
 } from "../interface/interfaces";
+import { Session } from "inspector";
 
 //TODO check error handling for each function
 
@@ -240,9 +241,7 @@ export function sortSessions(arr: Array<SessionDataType>) {
   });
 }
 
-export function hidePastSessions(
-  arr: Array<SessionDataType | FutureSessionDataType>
-) {
+export function hidePastSessions(arr: Array<SessionDataType>) {
   return arr.filter((session) => {
     const timestamp = session.startTime.toDate(); // Convert Firestore timestamp to JavaScript Date object
     return timestamp > new Date(); // Compare with current time

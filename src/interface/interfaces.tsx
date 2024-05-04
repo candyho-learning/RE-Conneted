@@ -118,7 +118,7 @@ export interface ProfileSocialLinksProps {
 }
 
 export interface SessionListProps {
-  userSessions: Array<FutureSessionDataType> | Array<SessionDataType>;
+  userSessions: Array<SessionDataType>;
 }
 
 export interface BookSessionDialogProps {
