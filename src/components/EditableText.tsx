@@ -3,6 +3,7 @@ import { EditableTextProps } from "../interface/interfaces";
 import { updateUserData } from "../utils/utils";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
+import { toast } from "./ui/use-toast";
 
 export default function EditableText({
   fieldName,
@@ -18,13 +19,20 @@ export default function EditableText({
     setIsEditing(false);
     if (textValue === databaseContent) return;
     if (fieldName.includes("Link") && !textValue.includes("https://")) {
-      alert("Please add a valid link!");
+      toast({
+        variant: "destructive",
+        title: "Are you sure this is the correct link?",
+        description: "Valid links should contain https:// ",
+      });
       setTextValue("");
       return;
     }
     const result = await updateUserData(userIdParam, fieldName, textValue);
     if (result.success) {
-      alert(`Updated your ${fieldName} successfully!`);
+      toast({
+        title: "Update successful!",
+        description: `Your ${fieldName} was saved!`,
+      });
     } else {
       console.error("Failed to update user data", result.error);
     }

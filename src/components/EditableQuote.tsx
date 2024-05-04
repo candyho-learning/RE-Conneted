@@ -3,6 +3,7 @@ import { EditableTextProps } from "../interface/interfaces";
 import { updateUserData } from "../utils/utils";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
+import { toast } from "./ui/use-toast";
 
 export default function EditableQuote({
   fieldName,
@@ -19,7 +20,10 @@ export default function EditableQuote({
     if (textValue === databaseContent) return;
     const result = await updateUserData(userIdParam, fieldName, textValue);
     if (result.success) {
-      alert(`Updated your ${fieldName} successfully!`);
+      toast({
+        title: "Quote updated!",
+        description: "We all love a good ol' status update!",
+      });
     } else {
       console.error("Failed to update user data", result.error);
     }

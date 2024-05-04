@@ -4,6 +4,7 @@ import { useState } from "react";
 import { updateUserData } from "../utils/utils";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "./ui/button";
+import { toast } from "./ui/use-toast";
 
 export default function TagSelector({
   setTags,
@@ -31,7 +32,11 @@ export default function TagSelector({
     console.log(userId);
     const result = await updateUserData(userId, "tags", tags);
     if (result.success) {
-      alert(`Updated your tags successfully!`);
+      toast({
+        title: "Updated your tags successfully!",
+        description:
+          "Now you can expect to meet like-minded people in the community for sure!",
+      });
     } else {
       console.error("Failed to update user data", result.error);
     }
