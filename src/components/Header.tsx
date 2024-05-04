@@ -56,7 +56,7 @@ export default function Header() {
                 >
                   <Avatar className="hidden h-9 w-9 sm:flex">
                     <AvatarImage src="/avatars/03.png" alt="Avatar" />
-                    <AvatarFallback>
+                    <AvatarFallback className="bg-brand-mutedblue">
                       {user?.firstName[0]}
                       {user?.lastName[0]}
                     </AvatarFallback>

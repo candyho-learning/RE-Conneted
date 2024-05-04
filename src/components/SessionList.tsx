@@ -47,7 +47,7 @@ export default function SessionList({
               <Badge
                 className={`font-normal mt-1 ${
                   getDaysFromNow(session.startTime) === "today"
-                    ? "bg-brand-lightblue font-medium"
+                    ? "bg-brand-lightblue font-medium pointer-events-none"
                     : ""
                 }`}
                 variant="secondary"
@@ -63,7 +63,9 @@ export default function SessionList({
                 {session.sessionName}{" "}
                 {isHosting &&
                 getDaysFromNow(session.createdTimestamp) === "today" ? (
-                  <Badge className="ml-2 text-xs font-normal py-0">New!</Badge>
+                  <Badge className="ml-2 text-xs font-normal py-0 pointer-events-none">
+                    New!
+                  </Badge>
                 ) : (
                   ""
                 )}
