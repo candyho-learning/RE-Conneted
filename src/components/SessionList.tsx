@@ -38,8 +38,12 @@ export default function SessionList({
       <TableBody>
         {userSessions.map((session) => (
           <TableRow>
-            <TableCell className="font-medium">
-              {session.startTime.toDate().toLocaleString("en-US", dateOptions)}
+            <TableCell className="font-medium whitespace-pre-wrap">
+              <p>
+                {session.startTime
+                  .toDate()
+                  .toLocaleString("en-US", dateOptions)}
+              </p>
               <Badge
                 className={`font-normal mt-1 ${
                   getDaysFromNow(session.startTime) === "today"
@@ -57,13 +61,14 @@ export default function SessionList({
             <TableCell className="whitespace-pre">
               <p>
                 {session.sessionName}{" "}
-                {getDaysFromNow(session.createdTimestamp) === "today" ? (
-                  <Badge className="ml-2 text-xs font-normal">New!</Badge>
+                {isHosting &&
+                getDaysFromNow(session.createdTimestamp) === "today" ? (
+                  <Badge className="ml-2 text-xs font-normal py-0">New!</Badge>
                 ) : (
                   ""
                 )}
               </p>
-              <p className="text-xs text-brand-darkgrey">
+              <p className="text-xs text-brand-darkgrey mt-1">
                 {session.timeBlocks.map((block, i) => {
                   if (i === session.timeBlocks.length - 1) {
                     return (

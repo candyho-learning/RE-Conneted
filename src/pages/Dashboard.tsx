@@ -49,17 +49,16 @@ export default function Dashboard() {
   if (!isLoggedIn) return <Login />;
   return (
     <div className="bg-gray h-full flex px-10">
-      <div className="w-1/3  p-10 bg-gray-400 rounded-lg text-white h-screen mt-8">
-        <div className="flex mb-10 items-center ">
-          <Avatar className="w-40 h-40 static">
+      <div className="w-1/4  p-10 bg-gray-400 rounded-lg text-white h-screen mt-8">
+        <div className="flex mb-5 items-center justify-center">
+          <Avatar className="w-32 h-32 static">
             <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
-          <h2 className="ml-5 text-5xl font-semibold">
-            {user?.firstName} {user?.lastName}
-          </h2>
         </div>
-
+        <h2 className="text-3xl font-semibold text-center mb-3">
+          {user?.firstName} {user?.lastName}
+        </h2>
         <nav>
           <Link to="/create-session">
             <Button className="w-full h-14 text-lg font-bold">
@@ -85,11 +84,11 @@ export default function Dashboard() {
             </li>
           </ul>
         </nav>
-        <div className="border mt-10 text-lg font-medium p-5 rounded-sm bg-background">
+        <div className="border mt-10 text-md font-medium p-5 rounded-sm bg-background">
           <h4 className="text-brand-dark font-semibold">
             Join a Session with Code
           </h4>
-          <div className="flex w-4/5 space-x-2 mt-3">
+          <div className="flex space-x-2 mt-3">
             <Input
               className="bg-white text-brand-dark"
               placeholder="Session Code"
@@ -107,7 +106,7 @@ export default function Dashboard() {
         </div>
       </div>
 
-      <div className="w-2/3 p-10">
+      <div className="w-3/4 p-10">
         <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight mb-10">
           Your Upcoming Sessions
         </h3>
