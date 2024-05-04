@@ -44,6 +44,7 @@ export interface TimeBlockProps {
 export interface SessionDataType {
   sessionId: string;
   sessionName: string;
+  createdTimestamp?: any;
   startTime: any;
   timeBlocks: Array<TimeBlock>;
   host: string;
@@ -121,6 +122,7 @@ export interface ProfileSocialLinksProps {
 
 export interface SessionListProps {
   userSessions: Array<SessionDataType>;
+  isHosting?: boolean;
 }
 
 export interface BookSessionDialogProps {

@@ -250,15 +250,26 @@ export function hidePastSessions(arr: Array<SessionDataType>) {
 export function getDaysFromNow(date: any) {
   const now = new Date();
   const start = date.toDate();
-  const diffTime = start.getTime() - now.getTime();
-  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-  if (diffDays === 0) {
+  // Compare year, month, and day of the two dates
+  const isSameDay =
+    now.getFullYear() === start.getFullYear() &&
+    now.getMonth() === start.getMonth() &&
+    now.getDate() === start.getDate();
+
+  if (isSameDay) {
     return "today";
-  } else if (diffDays > 0) {
-    return `${diffDays} days from now`;
   } else {
-    return "expired";
+    const diffTime = start.getTime() - now.getTime();
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+    if (diffDays === 1) {
+      return "tomorrow";
+    } else if (diffDays > 1) {
+      return `${diffDays} days from now`;
+    } else {
+      return "expired";
+    }
   }
 }
 

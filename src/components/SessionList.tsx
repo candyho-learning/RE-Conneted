@@ -6,21 +6,33 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Button, buttonVariants } from "./ui/button";
+import { Button } from "./ui/button";
 import { SessionListProps } from "@/interface/interfaces";
 import { Link } from "react-router-dom";
-import { dateOptions, timeOptions } from "@/utils/utils";
+import {
+  dateOptions,
+  getDaysFromNow,
+  sortSessions,
+  timeOptions,
+} from "@/utils/utils";
 import { hyphenatedToReadable } from "@/utils/utils";
+import { toast } from "./ui/use-toast";
+import { Badge } from "./ui/badge";
 
-export default function SessionList({ userSessions }: SessionListProps) {
+export default function SessionList({
+  userSessions,
+  isHosting = false,
+}: SessionListProps) {
+  userSessions = sortSessions(userSessions);
   return (
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead className="w-1/5">Date</TableHead>
+          <TableHead className="w-1/4">Date</TableHead>
           <TableHead>Time</TableHead>
           <TableHead>Session Name</TableHead>
           <TableHead className="text-right">Join Link</TableHead>
+          {isHosting && <TableHead className="text-right">Code</TableHead>}
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -28,13 +40,30 @@ export default function SessionList({ userSessions }: SessionListProps) {
           <TableRow>
             <TableCell className="font-medium">
               {session.startTime.toDate().toLocaleString("en-US", dateOptions)}
+              <Badge
+                className={`font-normal mt-1 ${
+                  getDaysFromNow(session.startTime) === "today"
+                    ? "bg-brand-lightblue font-medium"
+                    : ""
+                }`}
+                variant="secondary"
+              >
+                {getDaysFromNow(session.startTime)}
+              </Badge>
             </TableCell>
             <TableCell>
               {session.startTime.toDate().toLocaleString("en-US", timeOptions)}
             </TableCell>
-            <TableCell className="flex">
-              <p>{session.sessionName}</p>
+            <TableCell className="whitespace-pre">
               <p>
+                {session.sessionName}{" "}
+                {getDaysFromNow(session.createdTimestamp) === "today" ? (
+                  <Badge className="ml-2 text-xs font-normal">New!</Badge>
+                ) : (
+                  ""
+                )}
+              </p>
+              <p className="text-xs text-brand-darkgrey">
                 {session.timeBlocks.map((block, i) => {
                   if (i === session.timeBlocks.length - 1) {
                     return (
@@ -57,11 +86,27 @@ export default function SessionList({ userSessions }: SessionListProps) {
               <Link
                 to={`/coworking-session?type=default&id=${session.sessionId}`}
               >
-                <Button className={buttonVariants({ variant: "secondary" })}>
-                  Join
-                </Button>
+                <Button variant="secondary">Join</Button>
               </Link>
             </TableCell>
+            {isHosting && (
+              <TableCell className="text-right">
+                <Button
+                  variant="secondary"
+                  className="mx-auto"
+                  onClick={() => {
+                    navigator.clipboard.writeText(session.sessionId);
+                    toast({
+                      title: "Session Code Copied!",
+                      description:
+                        "Share this code with your friends to invite them to your session.",
+                    });
+                  }}
+                >
+                  <i className="fa-regular fa-copy"></i>
+                </Button>
+              </TableCell>
+            )}
           </TableRow>
         ))}
       </TableBody>

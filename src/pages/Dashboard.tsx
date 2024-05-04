@@ -124,7 +124,10 @@ export default function Dashboard() {
               </CardHeader>
               <CardContent>
                 {hostingSessions && hostingSessions.length > 0 && (
-                  <SessionList userSessions={hostingSessions} />
+                  <SessionList
+                    userSessions={hostingSessions}
+                    isHosting={true}
+                  />
                 )}
                 {(!hostingSessions || hostingSessions.length === 0) && (
                   <p className="text-gray-400 font-thin text-sm">
