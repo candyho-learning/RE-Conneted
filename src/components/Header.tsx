@@ -3,7 +3,6 @@ import { AuthContext } from "../context/authContext";
 import { Link } from "react-router-dom";
 import Logo from "@/assets/logo-dark.png";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 
 import {
@@ -64,12 +63,23 @@ export default function Header() {
                   <DropdownMenuLabel>Create a Session</DropdownMenuLabel>
                 </Link>
                 <DropdownMenuSeparator />
-                <Link to="/settings">
-                  <DropdownMenuItem>Profile Settings</DropdownMenuItem>
+                <Link to="/dashboard">
+                  <DropdownMenuItem className="hover:cursor-pointer">
+                    My Dashboard
+                  </DropdownMenuItem>
                 </Link>
-                <DropdownMenuItem>Manage My Sessions</DropdownMenuItem>
+                <Link to="/settings">
+                  <DropdownMenuItem className="hover:cursor-pointer">
+                    Profile Settings
+                  </DropdownMenuItem>
+                </Link>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={logout}>Logout</DropdownMenuItem>
+                <DropdownMenuItem
+                  onClick={logout}
+                  className="hover:cursor-pointer"
+                >
+                  Logout
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </>
