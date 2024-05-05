@@ -78,7 +78,7 @@ export default function Homepage() {
 
         <img src={Hero} className="h-full w-full object-cover"></img>
         <div className="w-1/3 absolute top-36 left-40 text-white">
-          <h1 className=" text-8xl font-extrabold leading-tight mb-5">
+          <h1 className="text-6xl font-extrabold leading-relaxed mb-5 xl:text-8xl xl:leading-snug 2xl:text-[6.8rem]">
             Work Remotely, Stay Connected.
           </h1>
           <p className="w-4/5 font-extralight tracking-widest text-lg">
@@ -86,7 +86,7 @@ export default function Homepage() {
           </p>
 
           <Link to="/signup">
-            <Button className="mt-10 h-16 w-1/2 text-2xl font-semibold">
+            <Button className="mt-10 h-16 w-1/2 text-lg font-semibold lg:text-xl xl:text-2xl">
               JOIN FOR FREE
             </Button>
           </Link>
