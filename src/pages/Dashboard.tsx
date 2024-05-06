@@ -3,7 +3,6 @@ import { AuthContext } from "../context/authContext";
 import Login from "./Login";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { PlusIcon } from "@radix-ui/react-icons";
 import {
   Card,
@@ -18,7 +17,6 @@ import { Input } from "@/components/ui/input";
 import BookSessionDialog from "@/components/BookSessionDialog";
 import { getMultipleSessionDetails } from "@/utils/utils";
 import { SessionDataType } from "@/interface/interfaces";
-import Avatar1 from "@/assets/avatars/avatar8.png";
 import UserAvatar from "@/components/UserAvatar";
 
 export default function Dashboard() {
@@ -27,6 +25,8 @@ export default function Dashboard() {
   const [hostingSessions, setHostingSessions] =
     useState<Array<SessionDataType>>();
   const [joiningSessions, setJoiningSessions] =
+    useState<Array<SessionDataType>>();
+  const [expiredSessions, setExpiredSessions] =
     useState<Array<SessionDataType>>();
   useEffect(() => {
     if (user?.sessions && user.sessions.length > 0) {
@@ -37,14 +37,24 @@ export default function Dashboard() {
           user.sessions.map((session) => session.sessionId)
         );
         console.log(data);
-        const hostingSessionData = data?.filter(
-          (session) => session.host === userId
-        );
+        const hostingSessionData = data?.filter((session) => {
+          const validstart = session.linkValidPeriod?.start.toDate();
+          const validend = session.linkValidPeriod?.end.toDate();
+          const now = new Date();
+          return session.host === userId;
+        });
         const joiningSessionData = data?.filter(
           (session) => session.host !== userId
         );
+
+        const expiredSessionData = data?.filter((session) => {
+          const validstart = session.linkValidPeriod.start.toDate();
+          const validend = session.linkValidPeriod.end.toDate();
+          return validstart < new Date() && validend > new Date(); // Compare with current time
+        });
         setHostingSessions(hostingSessionData);
         setJoiningSessions(joiningSessionData);
+        setExpiredSessions(expiredSessionData);
       })();
     }
   }, [user?.sessions]);
@@ -110,15 +120,16 @@ export default function Dashboard() {
           Your Upcoming Sessions
         </h3>
         <Tabs defaultValue="hosting" className="w-full">
-          <TabsList className="grid w-1/4 grid-cols-2 mb-5">
+          <TabsList className="grid w-1/4 grid-cols-3 mb-5">
             <TabsTrigger value="hosting">Hosting</TabsTrigger>
             <TabsTrigger value="joining">Joining</TabsTrigger>
+            <TabsTrigger value="expired">History</TabsTrigger>
           </TabsList>
           <TabsContent value="hosting">
             <Card className="mb-5">
               <CardHeader>
                 <CardTitle>Upcoming Sessions You Host</CardTitle>
-                <CardDescription>Card Description</CardDescription>
+                <CardDescription>Go host a killer session!</CardDescription>
               </CardHeader>
               <CardContent>
                 {hostingSessions && hostingSessions.length > 0 && (
@@ -142,7 +153,9 @@ export default function Dashboard() {
             <Card className="mb-5">
               <CardHeader>
                 <CardTitle>Upcoming Sessions You're Joining</CardTitle>
-                <CardDescription>Card Description</CardDescription>
+                <CardDescription>
+                  Are you excited to meet new friends and get some work done?
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 {joiningSessions && (
@@ -151,6 +164,27 @@ export default function Dashboard() {
                 {(!joiningSessions || joiningSessions.length === 0) && (
                   <p className="text-gray-400 font-thin text-sm mt-3">
                     You don't have upcoming join sessions.{" "}
+                    <a href="/community" className="underline">
+                      Find sessions to join from the community!
+                    </a>
+                  </p>
+                )}
+              </CardContent>
+            </Card>
+          </TabsContent>
+          <TabsContent value="expired">
+            <Card className="mb-5">
+              <CardHeader>
+                <CardTitle>Expired Sessions</CardTitle>
+                <CardDescription>Are asdasdasdasddone?</CardDescription>
+              </CardHeader>
+              <CardContent>
+                {expiredSessions && (
+                  <SessionList userSessions={expiredSessions} />
+                )}
+                {(!expiredSessions || expiredSessions.length === 0) && (
+                  <p className="text-gray-400 font-thin text-sm mt-3">
+                    You don't have any session history.
                     <a href="/community" className="underline">
                       Find sessions to join from the community!
                     </a>
