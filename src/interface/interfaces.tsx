@@ -125,6 +125,7 @@ export interface ProfileSocialLinksProps {
 export interface SessionListProps {
   userSessions: Array<SessionDataType>;
   isHosting?: boolean;
+  isExpiredSessions?: boolean;
 }
 
 export interface BookSessionDialogProps {

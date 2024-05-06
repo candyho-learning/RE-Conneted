@@ -37,21 +37,19 @@ export default function Dashboard() {
           user.sessions.map((session) => session.sessionId)
         );
         console.log(data);
-        const hostingSessionData = data?.filter((session) => {
-          const validstart = session.linkValidPeriod?.start.toDate();
-          const validend = session.linkValidPeriod?.end.toDate();
-          const now = new Date();
+        const nonExpiredSessions = data?.filter(
+          (session) => new Date() < session.linkValidPeriod?.end.toDate()
+        );
+        const hostingSessionData = nonExpiredSessions?.filter((session) => {
           return session.host === userId;
         });
-        const joiningSessionData = data?.filter(
+        const joiningSessionData = nonExpiredSessions?.filter(
           (session) => session.host !== userId
         );
 
-        const expiredSessionData = data?.filter((session) => {
-          const validstart = session.linkValidPeriod.start.toDate();
-          const validend = session.linkValidPeriod.end.toDate();
-          return validstart < new Date() && validend > new Date(); // Compare with current time
-        });
+        const expiredSessionData = data?.filter(
+          (session) => session.linkValidPeriod.end.toDate() < new Date()
+        );
         setHostingSessions(hostingSessionData);
         setJoiningSessions(joiningSessionData);
         setExpiredSessions(expiredSessionData);
@@ -129,7 +127,10 @@ export default function Dashboard() {
             <Card className="mb-5">
               <CardHeader>
                 <CardTitle>Upcoming Sessions You Host</CardTitle>
-                <CardDescription>Go host a killer session!</CardDescription>
+                <CardDescription>
+                  You will be able to join 30 minutes before the scheduled start
+                  time.
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 {hostingSessions && hostingSessions.length > 0 && (
@@ -176,18 +177,20 @@ export default function Dashboard() {
             <Card className="mb-5">
               <CardHeader>
                 <CardTitle>Expired Sessions</CardTitle>
-                <CardDescription>Are asdasdasdasddone?</CardDescription>
+                <CardDescription>
+                  You cannot reuse/join these expired sessions.
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 {expiredSessions && (
-                  <SessionList userSessions={expiredSessions} />
+                  <SessionList
+                    userSessions={expiredSessions}
+                    isExpiredSessions={true}
+                  />
                 )}
                 {(!expiredSessions || expiredSessions.length === 0) && (
                   <p className="text-gray-400 font-thin text-sm mt-3">
-                    You don't have any session history.
-                    <a href="/community" className="underline">
-                      Find sessions to join from the community!
-                    </a>
+                    You don't have any session history yet.
                   </p>
                 )}
               </CardContent>

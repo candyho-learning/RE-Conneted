@@ -22,6 +22,7 @@ import { Badge } from "./ui/badge";
 export default function SessionList({
   userSessions,
   isHosting = false,
+  isExpiredSessions = false,
 }: SessionListProps) {
   userSessions = sortSessions(userSessions);
   return (
@@ -31,8 +32,11 @@ export default function SessionList({
           <TableHead className="w-1/4">Date</TableHead>
           <TableHead>Time</TableHead>
           <TableHead>Session Name</TableHead>
-          <TableHead className="text-right">Join Link</TableHead>
+          {!isExpiredSessions && (
+            <TableHead className="text-right">Join Link</TableHead>
+          )}
           {isHosting && <TableHead className="text-right">Code</TableHead>}
+          {isExpiredSessions && <TableHead>Status</TableHead>}
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -44,16 +48,18 @@ export default function SessionList({
                   .toDate()
                   .toLocaleString("en-US", dateOptions)}
               </p>
-              <Badge
-                className={`font-normal mt-1 ${
-                  getDaysFromNow(session.startTime) === "today"
-                    ? "bg-brand-lightblue font-medium pointer-events-none"
-                    : ""
-                }`}
-                variant="secondary"
-              >
-                {getDaysFromNow(session.startTime)}
-              </Badge>
+              {!isExpiredSessions && (
+                <Badge
+                  className={`font-normal mt-1 ${
+                    getDaysFromNow(session.startTime) === "today"
+                      ? "bg-brand-lightblue font-medium pointer-events-none"
+                      : ""
+                  }`}
+                  variant="secondary"
+                >
+                  {getDaysFromNow(session.startTime)}
+                </Badge>
+              )}
             </TableCell>
             <TableCell>
               {session.startTime.toDate().toLocaleString("en-US", timeOptions)}
@@ -89,13 +95,28 @@ export default function SessionList({
                 })}
               </p>
             </TableCell>
-            <TableCell className="text-right">
-              <Link
-                to={`/coworking-session?type=default&id=${session.sessionId}`}
-              >
-                <Button variant="secondary">Join</Button>
-              </Link>
-            </TableCell>
+            {!isExpiredSessions && (
+              <TableCell className="text-right">
+                <Link
+                  to={
+                    session.linkValidPeriod.start.toDate() < new Date()
+                      ? `/coworking-session?type=default&id=${session.sessionId}`
+                      : ""
+                  }
+                >
+                  <Button
+                    variant="secondary"
+                    disabled={
+                      session.linkValidPeriod.start.toDate() < new Date()
+                        ? false
+                        : true
+                    }
+                  >
+                    Join
+                  </Button>
+                </Link>
+              </TableCell>
+            )}
             {isHosting && (
               <TableCell className="text-right">
                 <Button
@@ -113,6 +134,11 @@ export default function SessionList({
                   <i className="fa-regular fa-copy"></i>
                 </Button>
               </TableCell>
+            )}
+            {isExpiredSessions && (
+              <Badge className="font-normal mt-5" variant="destructive">
+                expired
+              </Badge>
             )}
           </TableRow>
         ))}
