@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { getUserData } from "../utils/utils";
 import { UserType } from "../interface/interfaces";
 import { AuthContext } from "../context/authContext";
 import ProfileSocialLinks from "../components/ProfileSocialLinks";
@@ -8,6 +7,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import EditableQuote from "@/components/EditableQuote";
+import { onSnapshot, doc } from "firebase/firestore";
+import { db } from "../firebase";
 
 import SessionCardCarousel from "@/components/SessionCardCarousel";
 import Loading from "@/components/Loading";
@@ -18,8 +19,8 @@ export default function UserProfile() {
   const { userId: userIdParam } = useParams<{ userId: string | undefined }>();
   const [userData, setUserData] = useState<UserType>();
   const [isLoading, setIsLoading] = useState(true);
-  const [isProfileOwner, setIsProfileOwnder] = useState(false);
-  // const isProfileOwner = userId === userIdParam;
+  // const [isProfileOwner, setIsProfileOwnder] = useState(false);
+  const isProfileOwner = userId === userIdParam;
   const hasSocialLink = Boolean(
     userData?.facebookLink ||
       userData?.instagramLink ||
@@ -31,22 +32,20 @@ export default function UserProfile() {
   console.log(userIdParam);
 
   useEffect(() => {
-    async function init(userIdParam: string) {
-      try {
-        const data = await getUserData(userIdParam);
-        setUserData(data as UserType);
-        setIsProfileOwnder(userId === userIdParam);
-      } catch (err) {
-        console.error(err);
-        console.log("this user does not exist.");
-      } finally {
+    if (!userIdParam) return;
+
+    const userDocRef = doc(db, "users", userIdParam);
+    const unsubscribe = onSnapshot(userDocRef, (doc) => {
+      if (doc.exists()) {
+        setUserData(doc.data() as UserType);
+        setIsLoading(false);
+      } else {
+        console.log("User not found");
         setIsLoading(false);
       }
-    }
+    });
 
-    if (userIdParam) {
-      init(userIdParam);
-    }
+    return () => unsubscribe();
   }, [userIdParam]);
 
   if (!userData || !userIdParam) {
@@ -76,13 +75,7 @@ export default function UserProfile() {
                 {userData.lastName[0]}
               </AvatarFallback>
             </Avatar>
-            {/* <Avatar className="w-48 h-48 static border-4 border-gray-600 mt-[-40%]">
-              <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-              <AvatarFallback>
-                {userData.firstName[0]}
-                {userData.lastName[0]}
-              </AvatarFallback>
-            </Avatar> */}
+
             {userData.location && (
               <h1 className="text-xl my-5 text-center">
                 📍 {userData.location}

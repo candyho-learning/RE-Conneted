@@ -86,7 +86,7 @@ export default function SessionCardCarousel({
                           className="w-full h-60 object-cover bg-gray-200"
                         ></img>
 
-                        <CardTitle className="text-2xl">
+                        <CardTitle className="text-xl 2xl:text-2xl truncate hover:text-clip">
                           {session.sessionName}
                         </CardTitle>
                         <CardDescription className="min-h-12">

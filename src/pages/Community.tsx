@@ -157,7 +157,7 @@ export default function Community() {
                 </CardTitle>
               </div>
 
-              <CardDescription className="italic">
+              <CardDescription className="italic truncate">
                 {user.quote ||
                   "Let's get some work done and have fun! RE:Connected with me."}
               </CardDescription>

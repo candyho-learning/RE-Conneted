@@ -7,7 +7,7 @@ export default function SessionThankYou() {
   const { state } = useLocation();
   const { tasksCompleted, participants, isHost } = state; // Read values passed on state
   return (
-    <div className="flex flex-col justify-center bg-brand-yellow py-40 px-20 h-screen">
+    <div className="flex flex-col justify-center bg-background py-40 px-20 h-screen">
       <Confetti recycle={false} gravity={0.2} />
       <div className="flex space-x-16 mt-20">
         <p className="w-1/4 font-thin">
@@ -44,9 +44,7 @@ export default function SessionThankYou() {
         ...for {isHost ? "hosting" : "joining"} this session.We hope to see you
         kick ass again in another session at RE:Connected!
         <Link to="/dashboard">
-          <Button variant="secondary" className="block mt-5">
-            Back to Dashboard
-          </Button>
+          <Button className="block mt-5">Back to Dashboard</Button>
         </Link>
       </p>
     </div>
