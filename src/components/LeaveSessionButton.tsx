@@ -13,19 +13,35 @@ import {
 } from "@/components/ui/alert-dialog";
 import { useNavigate } from "react-router-dom";
 import { CallControlBarProps } from "@/interface/interfaces";
+import { AuthContext } from "@/context/authContext";
+import { useContext } from "react";
 
 export const LeaveSessionButton = ({
   isHost,
   sessionData,
 }: CallControlBarProps) => {
+  const { userId } = useContext(AuthContext);
   const navigate = useNavigate();
   const call = useCall();
   const client = useStreamVideoClient();
   function leaveSession() {
-    isHost ? call?.endCall() : call?.leave();
+    if (isHost) {
+      call?.endCall();
+    } else {
+      call?.leave();
+    }
     client?.disconnectUser();
+
+    const userCompletedTaskCount =
+      sessionData?.participantsActivity
+        ?.find((item) => item.userId === userId)
+        ?.goals?.filter((task) => task.isDone).length || 0;
     navigate("/thankyou", {
-      state: { tasksCompleted: 3, participants: 4, isHost: isHost }, // Pass state correctly
+      state: {
+        tasksCompleted: userCompletedTaskCount,
+        participants: sessionData?.participantsActivity?.length,
+        isHost: isHost,
+      },
     });
   }
   return (

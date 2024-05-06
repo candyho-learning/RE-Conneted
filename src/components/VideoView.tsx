@@ -7,7 +7,7 @@ import { VideoViewProps } from "../interface/interfaces";
 
 import CallControlBar from "./CallControlBar";
 
-export default function VideoView({ isHost }: VideoViewProps) {
+export default function VideoView({ isHost, sessionData }: VideoViewProps) {
   const { useCallCallingState } = useCallStateHooks();
   const callingState = useCallCallingState();
   console.log(`calling state is ${callingState}`);
@@ -19,7 +19,7 @@ export default function VideoView({ isHost }: VideoViewProps) {
       <div style={{ width: "50%", height: "450px" }}>
         <PaginatedGridLayout groupSize={4} pageArrowsVisible={true} />
       </div>
-      <CallControlBar isHost={isHost} />
+      <CallControlBar isHost={isHost} sessionData={sessionData} />
     </div>
   );
 }

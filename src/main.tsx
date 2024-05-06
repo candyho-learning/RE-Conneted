@@ -31,10 +31,10 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             <Route path="/coworking-session" element={<Session2 />} />
             <Route path="/connect/:userId" element={<UserProfile />} />
             <Route path="/settings" element={<Settings />} />
-            <Route path="/thankyou" element={<SessionThankYou />} />
           </Route>
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/thankyou" element={<SessionThankYou />} />
         </Routes>
       </BrowserRouter>
     </AuthContextProvider>

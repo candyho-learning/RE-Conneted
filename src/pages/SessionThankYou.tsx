@@ -1,10 +1,15 @@
 import { useLocation } from "react-router-dom";
+import Confetti from "react-confetti";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
+
 export default function SessionThankYou() {
   const { state } = useLocation();
   const { tasksCompleted, participants, isHost } = state; // Read values passed on state
   return (
     <div className="flex flex-col justify-center bg-brand-yellow py-40 px-20 h-screen">
-      <div className="flex space-x-16">
+      <Confetti recycle={false} gravity={0.2} />
+      <div className="flex space-x-16 mt-20">
         <p className="w-1/4 font-thin">
           <p className="font-semibold">
             Did you have fun & get some work done?
@@ -26,16 +31,23 @@ export default function SessionThankYou() {
           next!
         </p>
       </div>
-      <h1 className="text-9xl font-extrabold mt-16 mr-10">Hey, You Did It!</h1>
+      <h1 className="text-9xl font-extrabold mt-16 mr-10 xl:text-[8rem] 2xl:text-[10rem] 2xl:mt-28">
+        Hey, You Did It!
+      </h1>
       <h4 className="text-3xl text-brand-darkgrey">
         You completed <h4 className="font-bold inline">{tasksCompleted} </h4>
         tasks and connected with{" "}
-        <h4 className="font-bold inline">{participants}</h4> friends
+        <h4 className="font-bold inline">{participants - 1}</h4> friends
       </h4>
-      <p className="w-1/4 font-thin self-end mt-16">
+      <p className="w-1/4 font-thin self-end mt-16 2xl:mt-44">
         <p className="font-semibold">Thank you so much ❤️ </p>
         ...for {isHost ? "hosting" : "joining"} this session.We hope to see you
         kick ass again in another session at RE:Connected!
+        <Link to="/dashboard">
+          <Button variant="secondary" className="block mt-5">
+            Back to Dashboard
+          </Button>
+        </Link>
       </p>
     </div>
   );
