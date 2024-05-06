@@ -65,6 +65,7 @@ export interface UserSessionDataType {
 
 export interface VideoViewProps {
   isHost: boolean | undefined;
+  sessionData: SessionDataType;
 }
 
 export interface UnsplashResponse {
@@ -129,4 +130,9 @@ export interface SessionListProps {
 export interface BookSessionDialogProps {
   sessionId: string;
   buttonText?: string;
+}
+
+export interface CallControlBarProps {
+  isHost: boolean | undefined;
+  sessionData: SessionDataType;
 }

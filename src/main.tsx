@@ -15,6 +15,7 @@ import Session2 from "./pages/Session2.tsx";
 import UserProfile from "./pages/UserProfile.tsx";
 import Settings from "./pages/Settings.tsx";
 import FindSessions from "./pages/FindSessions.tsx";
+import SessionThankYou from "./pages/SessionThankYou.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -30,6 +31,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             <Route path="/coworking-session" element={<Session2 />} />
             <Route path="/connect/:userId" element={<UserProfile />} />
             <Route path="/settings" element={<Settings />} />
+            <Route path="/thankyou" element={<SessionThankYou />} />
           </Route>
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />

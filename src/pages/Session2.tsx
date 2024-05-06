@@ -92,7 +92,9 @@ export default function Session2() {
   }, [callId]);
 
   useEffect(() => {
-    sessionData && setIsHost(sessionData.host === userId);
+    if (sessionData && userId) {
+      setIsHost(sessionData.host === userId);
+    }
   }, [sessionData]);
 
   useEffect(() => {
@@ -117,11 +119,11 @@ export default function Session2() {
       }}
       className="flex justify-between relative p-14"
     >
-      {client && call && (
+      {client && call && sessionData && (
         <StreamVideo client={client}>
           <StreamTheme>
             <StreamCall call={call}>
-              <VideoView isHost={isHost} />
+              <VideoView isHost={isHost} sessionData={sessionData} />
             </StreamCall>
           </StreamTheme>
         </StreamVideo>

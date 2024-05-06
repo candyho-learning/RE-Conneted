@@ -1,15 +1,13 @@
 import {
-  useCall,
   useCallStateHooks,
   CallingState,
   PaginatedGridLayout,
-  CallControls,
 } from "@stream-io/video-react-sdk";
 import { VideoViewProps } from "../interface/interfaces";
-import { Button } from "./ui/button";
+
+import CallControlBar from "./CallControlBar";
 
 export default function VideoView({ isHost }: VideoViewProps) {
-  const call = useCall();
   const { useCallCallingState } = useCallStateHooks();
   const callingState = useCallCallingState();
   console.log(`calling state is ${callingState}`);
@@ -21,30 +19,7 @@ export default function VideoView({ isHost }: VideoViewProps) {
       <div style={{ width: "50%", height: "450px" }}>
         <PaginatedGridLayout groupSize={4} pageArrowsVisible={true} />
       </div>
-      <CallControls />
-      {isHost && (
-        <Button
-          onClick={() => {
-            call?.endCall();
-          }}
-          variant="destructive"
-          className="absolute bottom-8 left-28"
-        >
-          End Call For Everyone
-        </Button>
-      )}
-      {!isHost && (
-        <Button
-          onClick={() => {
-            //TODO
-            console.log("leaving session");
-          }}
-          variant="destructive"
-          className="absolute bottom-8 left-16"
-        >
-          Leave Session
-        </Button>
-      )}
+      <CallControlBar isHost={isHost} />
     </div>
   );
 }
