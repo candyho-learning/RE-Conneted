@@ -5,7 +5,7 @@
 @layer base {
   :root {
     --heading-font: "Cinzel", serif;
-    --text-font: "Poppins Light", sans-serif;
+    --text-font: "Poppins", sans-serif;
 
     --background: 220 7.32% 91.96%;
     --foreground: 222.2 84% 4.9%;
@@ -79,7 +79,8 @@
 
   p,
   span,
-  a {
+  a,
+  li {
     font-family: var(--text-font);
   }
 

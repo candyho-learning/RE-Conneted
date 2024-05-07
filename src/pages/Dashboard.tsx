@@ -115,13 +115,14 @@ export default function Dashboard() {
 
       <div className="w-3/4 p-10">
         <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight mb-10">
-          Your Upcoming Sessions
+          Your RE:Connected Sessions
         </h3>
+
         <Tabs defaultValue="hosting" className="w-full">
           <TabsList className="grid w-1/4 grid-cols-3 mb-5">
             <TabsTrigger value="hosting">Hosting</TabsTrigger>
             <TabsTrigger value="joining">Joining</TabsTrigger>
-            <TabsTrigger value="expired">History</TabsTrigger>
+            <TabsTrigger value="expired">Expired</TabsTrigger>
           </TabsList>
           <TabsContent value="hosting">
             <Card className="mb-5">
@@ -178,7 +179,8 @@ export default function Dashboard() {
               <CardHeader>
                 <CardTitle>Expired Sessions</CardTitle>
                 <CardDescription>
-                  You cannot reuse/join these expired sessions.
+                  Session links are for one-time use only and will expire after
+                  the session ends or after the scheduled end time.
                 </CardDescription>
               </CardHeader>
               <CardContent>

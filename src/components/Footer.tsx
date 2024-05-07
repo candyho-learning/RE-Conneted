@@ -3,7 +3,7 @@ import Logo from "@/assets/logo-dark.png";
 
 export default function Footer() {
   return (
-    <footer className="w-full bottom-0 min-h-min border-t px-32 py-8 justify-between">
+    <footer className="w-full bottom-0 min-h-min border-t px-32 py-8 justify-between bg-brand-dark text-white">
       <div className="flex justify-between my-10">
         <div>
           <img
@@ -17,7 +17,7 @@ export default function Footer() {
           </h1>
           <p>RE:Connected, 2024.</p>
         </div>
-        <nav className="flex w-1/6 justify-between">
+        <nav className="flex w-1/4 justify-between">
           <div className="space-y-3">
             <h4 className="font-bold text-lg">Company</h4>
             <p>About Us</p>

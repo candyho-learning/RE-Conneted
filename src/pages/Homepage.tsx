@@ -14,6 +14,10 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import UserAvatar from "@/components/UserAvatar";
+import ConnectionsImg from "@/assets/connection.png";
+import ConcentrationImg from "@/assets/concentration.png";
+import features from "@/assets/features.png";
+import PersonaCard from "@/components/PersonaCard";
 
 export default function Homepage() {
   const { isLoggedIn, user, logout } = useContext(AuthContext);
@@ -77,7 +81,7 @@ export default function Homepage() {
         )}
 
         <img src={Hero} className="h-full w-full object-cover"></img>
-        <div className="w-1/3 absolute top-36 left-40 text-white">
+        <div className="w-1/3 absolute top-32 left-40 text-white">
           <h1 className="text-6xl font-extrabold leading-relaxed mb-5 xl:text-8xl xl:leading-snug 2xl:text-[6.8rem]">
             Work Remotely, Stay Connected.
           </h1>
@@ -92,6 +96,92 @@ export default function Homepage() {
           </Link>
         </div>
       </div>
+
+      <main className=" text-brand-dark">
+        <section className="flex flex-col items-center py-36">
+          <h2 className="text-6xl font-bold mb-16">RE:Connected is for...</h2>
+          <div className="flex space-x-10">
+            <PersonaCard />
+            <PersonaCard />
+            <PersonaCard />
+          </div>
+          <p className="mt-10">
+            and everyone who struggles to balance maintaining connections and
+            doing quality work in their free time.
+          </p>
+          <p></p>
+        </section>
+        <section className="bg-brand-yellow px-40 py-20">
+          <h2 className="text-4xl font-bold text-center tracking-wide italic">
+            Short, focused co-working sessions <br />
+            to help you work and create bonds.
+          </h2>
+        </section>
+        <section className="flex py-16 justify-between my-20 px-28 2xl:px-60">
+          <div className="shrink-0">
+            <img src={ConcentrationImg}></img>
+          </div>
+          <div className="w-3/5 flex flex-col justify-between ml-20">
+            <h2 className="text-6xl font-bold">Concentration</h2>
+            <p className="w-4/5 text-2xl text-brand-darkgrey">
+              <strong>Each RE:Connected session comes with</strong> built-in
+              productivity tools to help you focus and do deep work in a short
+              period of time.
+            </p>
+            <p className="w-4/5 font-thin">
+              At Re:Connected, we understand the value of deep focus and
+              concentration. Our platform is designed to help you achieve a
+              state of flow, where distractions fade away, and productivity
+              soars.
+            </p>
+          </div>
+        </section>
+
+        <section className="flex py-16 justify-between my-20 px-28 2xl:px-60 ">
+          <div className="w-3/5 flex flex-col justify-between mr-20">
+            <h2 className="text-6xl font-bold">+ Connection</h2>
+            <p className="w-4/5 text-2xl text-brand-darkgrey">
+              <strong>Join a vibrant community</strong> of like-minded
+              professionals who are all dedicated to improving their work-life
+              balance.
+            </p>
+            <p className="w-4/5 font-thin">
+              Whether you're looking to expand your professional network or
+              simply meet new friends, Re:Connected provides the perfect
+              platform to make meaningful connections in a digital age.
+            </p>
+          </div>
+          <div className="shrink-0">
+            <img src={ConnectionsImg}></img>
+          </div>
+        </section>
+        <section className="flex py-16 justify-between my-20 px-28 2xl:px-60">
+          <div className="shrink-0 bg-brand-mutedblue px-10 py-20 w-1/2">
+            <img src={features}></img>
+          </div>
+          <div className="w-1/2 flex flex-col items-center justify-center">
+            <h2 className="text-6xl font-bold">Key Features</h2>
+            <p className="tracking-widest text-md">
+              THAT HELP YOU FOCUS AND HAVE FUN
+            </p>
+            <ul className="mt-10">
+              <li className="border-b text-brand-dark border-brand-darkgrey py-8 px-20 text-center text-xl">
+                Video Calling
+              </li>
+              <li className="border-b text-brand-dark border-brand-darkgrey py-8 px-20 text-center text-xl">
+                Instant Messaging
+              </li>
+              <li className="border-b text-brand-dark border-brand-darkgrey py-8 px-20 text-center text-xl">
+                Focus Timers
+              </li>
+              <li className="border-b text-brand-dark border-brand-darkgrey py-8 px-20 text-center text-xl">
+                Session To-Do Lists
+              </li>
+              <li className="py-8 px-20 text-center text-xl">Community</li>
+            </ul>
+          </div>
+        </section>
+      </main>
       <div></div>
       <Footer />
     </div>

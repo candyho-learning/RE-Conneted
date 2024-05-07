@@ -97,12 +97,15 @@ export default function SessionList({
             </TableCell>
             {!isExpiredSessions && (
               <TableCell className="text-right">
-                <Link
+                {/* <Link
                   to={
                     session.linkValidPeriod.start.toDate() < new Date()
                       ? `/coworking-session?type=default&id=${session.sessionId}`
                       : ""
                   }
+                > */}
+                <Link
+                  to={`/coworking-session?type=default&id=${session.sessionId}`}
                 >
                   <Button
                     variant="secondary"
