@@ -64,7 +64,7 @@ export default function UserProfile() {
       <div className="main-info w-4/5 mx-auto bg-white rounded-[60px] relative py-6">
         <div className="flex px-28 items-center">
           <div className="avatar-location flex- flex-col items-center">
-            <Avatar className="w-44 h-44 static mt-[-80%] bg-brand-mutedblue border-4 border-white flex justify-center items-center">
+            <Avatar className="w-44 h-44 static mt-[-60%] bg-brand-mutedblue border-4 border-white flex justify-center items-center">
               <AvatarImage
                 src={`/src/assets/avatars/avatar${userData?.avatar}.png`}
                 alt="user avatar"
