@@ -1,4 +1,4 @@
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import {
   StreamVideoClient,
   User,
@@ -6,8 +6,6 @@ import {
   StreamCall,
   StreamVideo,
   StreamTheme,
-  useCallStateHooks,
-  CallingState,
 } from "@stream-io/video-react-sdk";
 import { getStreamUserToken } from "../utils/utils";
 import { useContext, useEffect, useState } from "react";
