@@ -18,6 +18,9 @@ import ConnectionsImg from "@/assets/connection.png";
 import ConcentrationImg from "@/assets/concentration.png";
 import features from "@/assets/features.png";
 import PersonaCard from "@/components/PersonaCard";
+import Persona1 from "@/assets/persona1.png";
+import Persona2 from "@/assets/persona2.png";
+import Persona3 from "@/assets/persona3.png";
 
 export default function Homepage() {
   const { isLoggedIn, user, logout } = useContext(AuthContext);
@@ -81,7 +84,7 @@ export default function Homepage() {
         )}
 
         <img src={Hero} className="h-full w-full object-cover"></img>
-        <div className="w-1/3 absolute top-32 left-40 text-white">
+        <div className="w-1/3 absolute top-32 left-40 text-white 2xl:top-44">
           <h1 className="text-6xl font-extrabold leading-relaxed mb-5 xl:text-8xl xl:leading-snug 2xl:text-[6.8rem]">
             Work Remotely, Stay Connected.
           </h1>
@@ -97,15 +100,27 @@ export default function Homepage() {
         </div>
       </div>
 
-      <main className=" text-brand-dark">
+      <main className=" text-brand-dark relative">
         <section className="flex flex-col items-center py-32">
           <h2 className="text-6xl font-bold mb-16">RE:Connected is for...</h2>
           <div className="flex space-x-10">
-            <PersonaCard />
-            <PersonaCard />
-            <PersonaCard />
+            <PersonaCard
+              img={Persona1}
+              title="Busy Friends"
+              description="who want to work together and catch up"
+            />
+            <PersonaCard
+              img={Persona2}
+              title="Remote Workers"
+              description="who seek productivity and mental well-being in a supportive community"
+            />
+            <PersonaCard
+              img={Persona3}
+              title="Professionals"
+              description="who value meaningful connections & professional growth in a digital age"
+            />
           </div>
-          <p className="mt-10">
+          <p className="mt-16">
             and everyone who struggles to balance maintaining connections and
             doing quality work in their free time.
           </p>
@@ -155,14 +170,14 @@ export default function Homepage() {
             <img src={ConnectionsImg}></img>
           </div>
         </section>
-        <section className="flex py-16 justify-between my-20 px-28 2xl:px-60">
+        <section className="flex py-16 justify-between mt-20 px-28 2xl:px-60">
           <div className="shrink-0 bg-brand-mutedblue px-10 py-20 w-1/2">
             <img src={features}></img>
           </div>
           <div className="w-1/2 flex flex-col items-center justify-center">
             <h2 className="text-6xl font-bold">Key Features</h2>
             <p className="tracking-widest text-md">
-              THAT HELP YOU FOCUS AND HAVE FUN
+              THAT HELP YOU FOCUS AND CONNECT
             </p>
             <ul className="mt-10">
               <li className="border-b text-brand-dark border-brand-darkgrey py-8 px-20 text-center text-xl">
@@ -181,6 +196,19 @@ export default function Homepage() {
             </ul>
           </div>
         </section>
+        <Button
+          className="absolute bottom-5 right-5"
+          onClick={() => {
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth",
+            });
+          }}
+          size="icon"
+          variant="outline"
+        >
+          <i className="fa-solid fa-angles-up"></i>
+        </Button>
       </main>
       <div></div>
       <Footer />

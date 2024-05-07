@@ -5,16 +5,24 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-import friends from "@/assets/friends.jpg";
+interface PersonaCardProps {
+  img: string;
+  title: string;
+  description: string;
+}
 
-export default function PersonaCard() {
+export default function PersonaCard({
+  img,
+  title,
+  description,
+}: PersonaCardProps) {
   return (
-    <Card className="w-80 h-96 rounded-none">
-      <img src={friends} className="h-2/3 w-full object-cover"></img>
+    <Card className="w-80 h-96 rounded-none pb-8 text-brand-dark">
+      <img src={img} className="h-2/3 w-full object-cover"></img>
       <CardHeader className="text-center">
-        <CardTitle className="text-3xl font-bold">Busy Friends</CardTitle>
-        <CardDescription>
-          ...who want to work together and catch up
+        <CardTitle className="text-3xl font-bold">{title}</CardTitle>
+        <CardDescription className="font-normal text-sm">
+          ...{description}
         </CardDescription>
       </CardHeader>
     </Card>

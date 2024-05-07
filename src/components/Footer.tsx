@@ -17,7 +17,7 @@ export default function Footer() {
           </h1>
           <p>RE:Connected, 2024.</p>
         </div>
-        <nav className="flex w-1/4 justify-between">
+        <nav className="flex w-1/4 justify-between 2xl:w-1/5">
           <div className="space-y-3">
             <h4 className="font-bold text-lg">Company</h4>
             <p>About Us</p>
