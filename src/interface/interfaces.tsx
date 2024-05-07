@@ -56,7 +56,7 @@ export interface SessionDataType {
     end: any;
   };
   participantsActivity?: Array<UserActivityType>;
-  end?: boolean;
+  ended?: boolean;
 }
 
 export interface UserSessionDataType {

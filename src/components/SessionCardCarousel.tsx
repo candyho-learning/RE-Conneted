@@ -72,8 +72,9 @@ export default function SessionCardCarousel({
             <p className="ml-10 font-semibold text-lg">{errorMessage}</p>
           )}
           {hostingSessionDetails &&
-            hidePastSessions(sortSessions(hostingSessionDetails)).map(
-              (session) => (
+            hidePastSessions(sortSessions(hostingSessionDetails))
+              .filter((session) => session?.ended !== true)
+              .map((session) => (
                 <CarouselItem
                   key={session.sessionId}
                   className="md:basis-1/2 lg:basis-1/3"
@@ -143,8 +144,7 @@ export default function SessionCardCarousel({
                     </Card>
                   </div>
                 </CarouselItem>
-              )
-            )}
+              ))}
         </CarouselContent>
         <CarouselPrevious />
         <CarouselNext />

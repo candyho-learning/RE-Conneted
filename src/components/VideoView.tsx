@@ -10,6 +10,7 @@ import CallControlBar from "./CallControlBar";
 import { AuthContext } from "@/context/authContext";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "./ui/use-toast";
 
 export default function VideoView({ isHost, sessionData }: VideoViewProps) {
   const navigate = useNavigate();
@@ -30,6 +31,10 @@ export default function VideoView({ isHost, sessionData }: VideoViewProps) {
         participants: sessionData?.participantsActivity?.length,
         isHost: isHost,
       },
+    });
+    toast({
+      title: "The host has ended the session for everyone.",
+      description: "Thank you for joining! Until next time.",
     });
   }
   return (

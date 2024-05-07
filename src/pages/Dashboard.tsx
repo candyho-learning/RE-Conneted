@@ -38,7 +38,9 @@ export default function Dashboard() {
         );
         console.log(data);
         const nonExpiredSessions = data?.filter(
-          (session) => new Date() < session.linkValidPeriod?.end.toDate()
+          (session) =>
+            new Date() < session.linkValidPeriod?.end.toDate() &&
+            session.ended !== true
         );
         const hostingSessionData = nonExpiredSessions?.filter((session) => {
           return session.host === userId;
@@ -48,7 +50,9 @@ export default function Dashboard() {
         );
 
         const expiredSessionData = data?.filter(
-          (session) => session.linkValidPeriod.end.toDate() < new Date()
+          (session) =>
+            session.linkValidPeriod.end.toDate() < new Date() ||
+            session.ended === true
         );
         setHostingSessions(hostingSessionData);
         setJoiningSessions(joiningSessionData);
