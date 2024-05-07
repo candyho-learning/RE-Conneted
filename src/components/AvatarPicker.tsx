@@ -1,5 +1,4 @@
 import { AuthContext } from "@/context/authContext";
-import { Avatar, AvatarImage, AvatarFallback } from "./ui/avatar";
 import { Button } from "./ui/button";
 import { useContext, useState } from "react";
 import { updateUserData } from "@/utils/utils";

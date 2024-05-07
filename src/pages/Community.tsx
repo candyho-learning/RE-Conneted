@@ -78,7 +78,7 @@ export default function Community() {
 
   return (
     <div className="flex py-10 px-10">
-      <div className="side-bar left w-[500px] p-10 grow-0 bg-brand-dark text-brand-lightgrey rounded-3xl">
+      <div className="side-bar left w-[500px] p-10 grow-0 bg-gray-400 text-brand-lightgrey rounded-3xl h-screen">
         <div className="flex items-center mb-5">
           <h2 className="px-4 text-md font-thin tracking-tight">
             Filter by Tags
@@ -113,7 +113,7 @@ export default function Community() {
           Visit A Random User
         </h2>
         <Button
-          className="w-full h-12 group"
+          className="w-full h-12 group border-none"
           variant="outline"
           onClick={() => {
             allUsers && visitRandomProfile(allUsers);
@@ -125,7 +125,7 @@ export default function Community() {
           </p>
         </Button>
       </div>
-      <div className="flex flex-wrap px-10 pt-0 flex-grow-1 w-min-[500px] basis-4/5 ">
+      <div className="flex flex-wrap px-10 pt-0 flex-grow-1 w-min-[500px] basis-4/5 justify-start">
         {filteredUsers?.length === 0 && (
           <Alert className="border w-1/3 h-fit border-primary mx-auto my-40 p-3 scale-150">
             <ChatBubbleIcon className="h-4 w-4 p-0" />
@@ -157,7 +157,7 @@ export default function Community() {
                 </CardTitle>
               </div>
 
-              <CardDescription className="italic truncate">
+              <CardDescription className="italic">
                 {user.quote ||
                   "Let's get some work done and have fun! RE:Connected with me."}
               </CardDescription>
