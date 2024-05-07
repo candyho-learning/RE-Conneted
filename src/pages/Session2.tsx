@@ -25,6 +25,7 @@ import {
   Window,
 } from "stream-chat-react";
 import { onSnapshot, doc } from "firebase/firestore";
+import Favicon from "@/assets/favicon.png";
 
 import { db } from "../firebase";
 import "stream-chat-react/dist/css/v2/index.css";
@@ -81,7 +82,7 @@ export default function Session2() {
         setCall(newCall);
         const chatChannel = chatClient.channel("messaging", callId, {
           // add as many custom fields as you'd like
-          image: "https://www.drupal.org/files/project-images/react.png",
+          image: Favicon,
           name: sessionData?.sessionName,
         });
         setChatChannel(chatChannel);

@@ -19,6 +19,15 @@ export default function VideoView({ isHost, sessionData }: VideoViewProps) {
   const callingState = useCallCallingState();
   const client = useStreamVideoClient();
   console.log(`calling state is ${callingState}`);
+  if (callingState === CallingState.JOINING) {
+    return (
+      <>
+        {/* @ts-ignore */}
+        <l-cardio size="50" stroke="4" speed="2"></l-cardio>
+        <p>Loading call preview</p>
+      </>
+    );
+  }
   if (callingState === CallingState.LEFT) {
     client?.disconnectUser();
     const userCompletedTaskCount =
