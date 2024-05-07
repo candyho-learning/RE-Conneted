@@ -1,4 +1,4 @@
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import {
   StreamVideoClient,
   User,
@@ -6,6 +6,8 @@ import {
   StreamCall,
   StreamVideo,
   StreamTheme,
+  useCallStateHooks,
+  CallingState,
 } from "@stream-io/video-react-sdk";
 import { getStreamUserToken } from "../utils/utils";
 import { useContext, useEffect, useState } from "react";
@@ -60,7 +62,8 @@ export default function Session2() {
   const callType = searchParams.get("type") || "default";
   const [call, setCall] = useState<Call>();
   const [sessionData, setSessionData] = useState<SessionDataType>();
-  const [isHost, setIsHost] = useState<boolean>();
+  // const [isHost, setIsHost] = useState<boolean>();
+  const isHost = sessionData?.host === userId;
   //@ts-ignore
   const [chatChannel, setChatChannel] = useState<Channel>();
 
@@ -91,11 +94,25 @@ export default function Session2() {
     return () => unsub();
   }, [callId]);
 
-  useEffect(() => {
-    if (sessionData && userId) {
-      setIsHost(sessionData.host === userId);
-    }
-  }, [sessionData]);
+  // useEffect(() => {
+  //   // if (sessionData && userId) {
+  //   //   setIsHost(sessionData.host === userId);
+  //   // }
+  //   if (sessionData?.end) {
+  //     client?.disconnectUser();
+  //     const userCompletedTaskCount =
+  //       sessionData?.participantsActivity
+  //         ?.find((item) => item.userId === userId)
+  //         ?.goals?.filter((task) => task.isDone).length || 0;
+  //     navigate("/thankyou", {
+  //       state: {
+  //         tasksCompleted: userCompletedTaskCount,
+  //         participants: sessionData?.participantsActivity?.length,
+  //         isHost: isHost,
+  //       },
+  //     });
+  //   }
+  // }, [sessionData]);
 
   useEffect(() => {
     if (client && call) {

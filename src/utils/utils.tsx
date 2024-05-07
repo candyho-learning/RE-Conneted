@@ -296,3 +296,19 @@ export async function getMultipleSessionDetails(sessionIdArr: Array<string>) {
     return null;
   }
 }
+
+export async function markSessionAsExpired(sessionId: string) {
+  const docRef = doc(db, "sessions", sessionId);
+  try {
+    await updateDoc(docRef, {
+      ended: true,
+    });
+    toast({
+      title: "The host has ended this session.",
+      description:
+        "Redirecting you to your dashboard. Copy the session code to share with friends!",
+    });
+  } catch (err) {
+    console.error("failed to mark session as ended");
+  }
+}

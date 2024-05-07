@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 import { CallControlBarProps } from "@/interface/interfaces";
 import { AuthContext } from "@/context/authContext";
 import { useContext } from "react";
+import { markSessionAsExpired } from "@/utils/utils";
 
 export const LeaveSessionButton = ({
   isHost,
@@ -24,9 +25,10 @@ export const LeaveSessionButton = ({
   const navigate = useNavigate();
   const call = useCall();
   const client = useStreamVideoClient();
-  function leaveSession() {
+  async function leaveSession() {
     if (isHost) {
       call?.endCall();
+      await markSessionAsExpired(sessionData.sessionId);
     } else {
       call?.leave();
     }
