@@ -153,7 +153,7 @@ export default function CreateSesssion() {
               />
               {!hasSessionName && (
                 <p className="text-destructive">
-                  Must contain as least 5 characters.
+                  Must contain at least 5 characters.
                 </p>
               )}
             </div>

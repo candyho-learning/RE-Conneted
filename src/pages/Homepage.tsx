@@ -98,7 +98,7 @@ export default function Homepage() {
       </div>
 
       <main className=" text-brand-dark">
-        <section className="flex flex-col items-center py-36">
+        <section className="flex flex-col items-center py-32">
           <h2 className="text-6xl font-bold mb-16">RE:Connected is for...</h2>
           <div className="flex space-x-10">
             <PersonaCard />
