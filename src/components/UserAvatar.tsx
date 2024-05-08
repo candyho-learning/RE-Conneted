@@ -7,7 +7,7 @@ export default function UserAvatar() {
   return (
     <Avatar className="w-full h-full static bg-brand-mutedblue border-2 border-white flex justify-center items-center my-5">
       <AvatarImage
-        src={`/src/assets/avatars/avatar${user?.avatar}.png`}
+        src={`/avatars/avatar${user?.avatar}.png`}
         alt="user avatar"
         className="w-4/5 h-4/5 object-contain"
       />
