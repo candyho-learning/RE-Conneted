@@ -66,7 +66,7 @@ export default function UserProfile() {
           <div className="avatar-location flex- flex-col items-center">
             <Avatar className="w-44 h-44 static mt-[-60%] bg-brand-mutedblue border-4 border-white flex justify-center items-center">
               <AvatarImage
-                src={`/src/assets/avatars/avatar${userData?.avatar}.png`}
+                src={`/avatars/avatar${userData?.avatar}.png`}
                 alt="user avatar"
                 className="w-4/5 h-4/5 object-contain"
               />

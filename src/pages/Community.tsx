@@ -143,7 +143,7 @@ export default function Community() {
               <div className="flex items-center mb-2">
                 <Avatar className="w-24 h-24 static bg-brand-mutedblue border-2 border-white flex justify-center items-center">
                   <AvatarImage
-                    src={`/src/assets/avatars/avatar${user?.avatar}.png`}
+                    src={`/avatars/avatar${user?.avatar}.png`}
                     alt="user avatar"
                     className="w-4/5 h-4/5 object-contain"
                   />
