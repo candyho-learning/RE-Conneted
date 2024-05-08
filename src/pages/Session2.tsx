@@ -65,6 +65,16 @@ export default function Session2() {
   const isHost = sessionData?.host === userId;
   //@ts-ignore
   const [chatChannel, setChatChannel] = useState<Channel>();
+  const reloadCount = Number(sessionStorage.getItem("reloadCount")) || 0;
+
+  useEffect(() => {
+    if (reloadCount < 1) {
+      sessionStorage.setItem("reloadCount", String(reloadCount + 1));
+      window.location.reload();
+    } else {
+      sessionStorage.removeItem("reloadCount");
+    }
+  }, []);
 
   useEffect(() => {
     if (!callId) return;
@@ -92,26 +102,6 @@ export default function Session2() {
     init();
     return () => unsub();
   }, [callId]);
-
-  // useEffect(() => {
-  //   // if (sessionData && userId) {
-  //   //   setIsHost(sessionData.host === userId);
-  //   // }
-  //   if (sessionData?.end) {
-  //     client?.disconnectUser();
-  //     const userCompletedTaskCount =
-  //       sessionData?.participantsActivity
-  //         ?.find((item) => item.userId === userId)
-  //         ?.goals?.filter((task) => task.isDone).length || 0;
-  //     navigate("/thankyou", {
-  //       state: {
-  //         tasksCompleted: userCompletedTaskCount,
-  //         participants: sessionData?.participantsActivity?.length,
-  //         isHost: isHost,
-  //       },
-  //     });
-  //   }
-  // }, [sessionData]);
 
   useEffect(() => {
     if (client && call) {

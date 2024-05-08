@@ -1,5 +1,5 @@
 import { Separator } from "@radix-ui/react-separator";
-import Logo from "@/assets/logo-dark.png";
+import Logo from "@/assets/logo-light.png";
 
 export default function Footer() {
   return (
