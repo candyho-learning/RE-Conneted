@@ -78,7 +78,7 @@ export default function Community() {
 
   return (
     <div className="flex py-10 px-10">
-      <div className="side-bar left w-[500px] p-10 grow-0 bg-gray-400 text-brand-lightgrey rounded-3xl h-screen">
+      <div className="side-bar left w-[400px] p-10 grow-0 bg-gray-400 text-brand-lightgrey rounded-3xl h-screen">
         <div className="flex items-center mb-5">
           <h2 className="px-4 text-md font-thin tracking-tight">
             Filter by Tags
