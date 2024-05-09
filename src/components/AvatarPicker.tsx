@@ -61,8 +61,8 @@ export default function AvatarPicker() {
                   }}
                 >
                   <img
-                    src={`/src/assets/avatars/avatar${i + 1}.png`}
-                    alt="@shadcn"
+                    src={`/avatars/avatar${user?.avatar}.png`}
+                    alt="reconnected avatar"
                     className="w-4/5 h-4/5 object-contain"
                   />
                 </div>
