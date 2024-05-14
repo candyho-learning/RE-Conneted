@@ -174,7 +174,7 @@ export default function Homepage() {
           <div className="shrink-0 bg-brand-mutedblue px-10 py-20 w-1/2">
             <img src={features}></img>
           </div>
-          <div className="w-1/2 flex flex-col items-center justify-center">
+          <div className="w-1/2 flex flex-col items-center justify-center ml-20">
             <h2 className="text-6xl font-bold">Key Features</h2>
             <p className="tracking-widest text-md">
               THAT HELP YOU FOCUS AND CONNECT
