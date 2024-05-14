@@ -48,6 +48,7 @@ export default function EditableText({
               setTextValue(e.target.value);
             }}
             className="mr-3 w-full text-lg h-full"
+            placeholder={`Add your ${fieldName}`}
           />
           <Button onClick={confirmTextUpdate} className="xl:h-full xl:text-md">
             save
@@ -57,7 +58,7 @@ export default function EditableText({
       {!isEditing && (
         <div className="flex xl:h-12">
           <div className="flex w-full items-center h-full rounded-md border border-input bg-transparent px-3 py-1 text-lg shadow-sm transition-colors  placeholder:text-muted-foreground mr-3">
-            {textValue ? textValue : `Add your ${fieldName}...`}
+            {textValue ? textValue : ""}
           </div>
           <Button
             onClick={() => {
