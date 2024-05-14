@@ -166,7 +166,7 @@ export default function Community() {
             <CardContent>
               <div className="flex flex-wrap my-5 h-10">
                 {user.tags?.map((tag) => (
-                  <Badge className="m-1 h-[15px] text-[11px] bg-white font-normal">
+                  <Badge className="m-1 h-[18px] text-[12px] bg-white font-normal">
                     {tag}
                   </Badge>
                 ))}
