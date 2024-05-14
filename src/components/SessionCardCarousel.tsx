@@ -59,6 +59,13 @@ export default function SessionCardCarousel({
     })();
   }, []);
 
+  if (
+    hidePastSessions(sortSessions(hostingSessionDetails)).filter(
+      (session) => session?.ended !== true
+    ).length === 0
+  )
+    return <p>This user isn't hosting any sessions for now.</p>;
+
   return (
     <div className="w-full relative px-0">
       <Carousel
@@ -90,7 +97,7 @@ export default function SessionCardCarousel({
                         <CardTitle className="text-xl 2xl:text-2xl truncate hover:text-clip">
                           {session.sessionName}
                         </CardTitle>
-                        <CardDescription className="min-h-12">
+                        <CardDescription className="min-h-12 line-clamp-2">
                           {session.timeBlocks.map((block, i) => {
                             if (i === session.timeBlocks.length - 1) {
                               return (
@@ -114,7 +121,7 @@ export default function SessionCardCarousel({
                       </CardHeader>
 
                       <CardContent>
-                        <div className="flex items-center">
+                        <div className="flex items-center truncate">
                           <CalendarIcon />
                           <p className="ml-3">
                             {session.startTime

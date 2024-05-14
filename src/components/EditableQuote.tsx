@@ -12,7 +12,7 @@ export default function EditableQuote({
 }: EditableTextProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [textValue, setTextValue] = useState(
-    databaseContent ? databaseContent : `Add a link...`
+    databaseContent ? databaseContent : ""
   );
 
   async function confirmTextUpdate() {
@@ -43,6 +43,7 @@ export default function EditableQuote({
               setTextValue(e.target.value);
             }}
             className="w-4/5 mr-3 text-lg h-full border-gray-400"
+            placeholder="Add your quote here"
           />
           <Button onClick={confirmTextUpdate} className="absolute right-3">
             save quote

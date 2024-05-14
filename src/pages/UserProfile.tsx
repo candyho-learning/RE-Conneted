@@ -60,30 +60,22 @@ export default function UserProfile() {
   }
 
   return (
-    <div className="user-profile-wrapper py-20 px-20 flex flex-col justify-center">
-      <div className="main-info w-4/5 mx-auto bg-white rounded-[60px] relative py-8">
-        <div className="flex px-14 items-center">
-          <div className="avatar-location flex flex-col items-center w-1/4">
-            <Avatar className="w-48 h-48 static mb-24 bg-brand-mutedblue border-4 border-white flex justify-center items-center">
-              <AvatarImage
-                src={`/avatars/avatar${userData?.avatar}.png`}
-                alt="user avatar"
-                className="w-4/5 h-4/5 object-contain"
-              />
-              <AvatarFallback>
-                {userData.firstName[0]}
-                {userData.lastName[0]}
-              </AvatarFallback>
-            </Avatar>
+    <div className="user-profile-wrapper py-10 px-20 flex flex-col justify-center">
+      <div className="main-info w-4/5 mx-auto bg-white rounded-[60px] relative py-8 px-10">
+        <div className="flex px-14 items-center mb-12">
+          <Avatar className="w-48 h-48 static bg-brand-mutedblue border-4 border-white flex justify-center items-center">
+            <AvatarImage
+              src={`/avatars/avatar${userData?.avatar}.png`}
+              alt="user avatar"
+              className="w-4/5 h-4/5 object-contain"
+            />
+            <AvatarFallback>
+              {userData.firstName[0]}
+              {userData.lastName[0]}
+            </AvatarFallback>
+          </Avatar>
 
-            {/* <div className="min-h-[3rem] overflow-hidden w-4/5">
-              {userData.location && (
-                <h1 className="text-xl text-center">📍{userData.location}</h1>
-              )}
-            </div> */}
-          </div>
-
-          <div className="wrapper ml-10 mb-20 overflow-hidden">
+          <div className="wrapper ml-10 overflow-hidden">
             <div className="flex items-center">
               <h1 className="text-4xl font-extrabold mr-5 line-clamp-1 ellipsis leading-tight">
                 {userData.firstName} {userData.lastName}
@@ -107,11 +99,11 @@ export default function UserProfile() {
               )}
             </div>
 
-            <div className="flex mt-5">
+            <div className="flex flex-wrap">
               {userData.tags &&
                 userData.tags.map((tag) => (
                   <Badge
-                    className="mr-2 h-[20px] text-[13px]"
+                    className="mr-2 h-[20px] text-[13px] mt-4"
                     variant="secondary"
                   >
                     {tag}
@@ -122,7 +114,7 @@ export default function UserProfile() {
         </div>
 
         {isProfileOwner && (
-          <div className="mx-auto px-24">
+          <div className="mx-auto">
             <EditableQuote
               databaseContent={userData.quote}
               fieldName="quote"
@@ -131,7 +123,7 @@ export default function UserProfile() {
           </div>
         )}
         {!isProfileOwner && (
-          <div className="w-4/5 mx-auto relative rounded-lg border-l-8 border-l-gray-500 bg-gray-200 py-0 pl-16 pr-5 font-sans text-lg italic leading-relaxed text-gray-600 before:absolute before:left-3 before:top-3 before:font-serif before:text-6xl before:text-gray-700 before:content-['“'] line-clamp-2">
+          <div className="w-4/5 mx-auto relative rounded-lg border-l-8 border-l-gray-500 bg-gray-300 py-0 pl-16 pr-5 font-sans text-lg italic leading-relaxed text-gray-600 before:absolute before:left-3 before:top-3 before:font-serif before:text-6xl before:text-gray-700 before:content-['“'] line-clamp-2">
             <p className="py-5">
               {userData.quote || "Hi, I'm new here. RE:Connect with me!"}
             </p>

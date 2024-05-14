@@ -53,7 +53,7 @@ export default function ParticipantInfoDrawer({
                     {item.userName}'s Session Goals
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="min-h-40">
+                <CardContent className="h-36 overflow-y-scroll mb-4">
                   <div>
                     {item.goals &&
                       item.goals?.length > 0 &&
