@@ -11,7 +11,7 @@ export default function UserAvatar() {
         alt="user avatar"
         className="w-4/5 h-4/5 object-contain"
       />
-      <AvatarFallback>
+      <AvatarFallback className="text-brand-dark">
         {user?.firstName[0]} {user?.lastName[0]}
       </AvatarFallback>
     </Avatar>
