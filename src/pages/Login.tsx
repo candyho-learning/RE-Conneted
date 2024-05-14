@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../context/authContext";
 
 import { useNavigate } from "react-router-dom";
@@ -10,11 +10,15 @@ import friendsMainImage from "@/assets/friends.jpg";
 import Loading from "@/components/Loading";
 
 export default function Login() {
-  const { login, isLoading } = useContext(AuthContext);
+  const { login, isLoading, isLoggedIn } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isLoggedIn) navigate("/dashboard");
+  }, [isLoggedIn]);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();

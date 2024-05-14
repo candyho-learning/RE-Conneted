@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../context/authContext";
 import Friends2 from "@/assets/friends2.jpg";
 import { Button } from "@/components/ui/button";
@@ -14,9 +14,13 @@ const defaultFormValues = {
 };
 
 export default function Signup() {
-  const { createAccount } = useContext(AuthContext);
+  const { createAccount, isLoggedIn } = useContext(AuthContext);
   const [signupForm, setSignupForm] = useState(defaultFormValues);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isLoggedIn) navigate("/dashboard");
+  }, [isLoggedIn]);
 
   function handleFieldChange(e: React.ChangeEvent<HTMLInputElement>) {
     setSignupForm({

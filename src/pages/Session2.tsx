@@ -67,14 +67,14 @@ export default function Session2() {
   const [chatChannel, setChatChannel] = useState<Channel>();
   const reloadCount = Number(sessionStorage.getItem("reloadCount")) || 0;
 
-  useEffect(() => {
-    if (reloadCount < 1) {
-      sessionStorage.setItem("reloadCount", String(reloadCount + 1));
-      window.location.reload();
-    } else {
-      sessionStorage.removeItem("reloadCount");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (reloadCount < 1) {
+  //     sessionStorage.setItem("reloadCount", String(reloadCount + 1));
+  //     window.location.reload();
+  //   } else {
+  //     sessionStorage.removeItem("reloadCount");
+  //   }
+  // }, []);
 
   useEffect(() => {
     if (!callId) return;
@@ -155,19 +155,21 @@ export default function Session2() {
           )}
         </div>
       </div>
+      {chatClient && chatChannel && (
+        <div className="chat-window">
+          <Chat client={chatClient} theme="str-chat__theme-light">
+            <Channel channel={chatChannel}>
+              <Window>
+                <ChannelHeader />
+                <MessageList />
+                <MessageInput />
+              </Window>
+              <Thread />
+            </Channel>
+          </Chat>
+        </div>
+      )}
 
-      <div className="chat-window">
-        <Chat client={chatClient} theme="str-chat__theme-light">
-          <Channel channel={chatChannel}>
-            <Window>
-              <ChannelHeader />
-              <MessageList />
-              <MessageInput />
-            </Window>
-            <Thread />
-          </Channel>
-        </Chat>
-      </div>
       {/* <CallControls /> */}
     </div>
   );
