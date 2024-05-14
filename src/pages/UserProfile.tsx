@@ -62,7 +62,7 @@ export default function UserProfile() {
   return (
     <div className="user-profile-wrapper py-20 px-20 flex flex-col justify-center">
       <div className="main-info w-4/5 mx-auto bg-white rounded-[60px] relative py-8">
-        <div className="flex px-28 items-center">
+        <div className="flex px-14 items-center">
           <div className="avatar-location flex flex-col items-center w-1/4">
             <Avatar className="w-44 h-44 static mt-[-60%] mb-10 bg-brand-mutedblue border-4 border-white flex justify-center items-center">
               <AvatarImage
@@ -83,7 +83,7 @@ export default function UserProfile() {
             </div>
           </div>
 
-          <div className="wrapper ml-10 mb-20">
+          <div className="wrapper ml-10 mb-20 overflow-hidden">
             <div className="flex items-center">
               <h1 className="text-4xl font-extrabold mr-5 line-clamp-1 ellipsis leading-tight">
                 {userData.firstName} {userData.lastName}
