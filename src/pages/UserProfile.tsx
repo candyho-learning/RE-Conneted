@@ -85,7 +85,7 @@ export default function UserProfile() {
 
           <div className="wrapper ml-10 mb-20">
             <div className="flex items-center">
-              <h1 className="text-5xl font-extrabold mr-5 line-clamp-1 ellipsis leading-tight">
+              <h1 className="text-4xl font-extrabold mr-5 line-clamp-1 ellipsis leading-tight">
                 {userData.firstName} {userData.lastName}
               </h1>
               {isProfileOwner && (

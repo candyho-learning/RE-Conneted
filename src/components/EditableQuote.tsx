@@ -18,6 +18,10 @@ export default function EditableQuote({
   async function confirmTextUpdate() {
     setIsEditing(false);
     if (textValue === databaseContent) return;
+    if (textValue.length >= 70) {
+      alert("Please keep it short and concise! Max 70 characters.");
+      return;
+    }
     const result = await updateUserData(userIdParam, fieldName, textValue);
     if (result.success) {
       toast({
