@@ -61,10 +61,10 @@ export default function UserProfile() {
 
   return (
     <div className="user-profile-wrapper py-20 px-20 flex flex-col justify-center">
-      <div className="main-info w-4/5 mx-auto bg-white rounded-[60px] relative py-6">
+      <div className="main-info w-4/5 mx-auto bg-white rounded-[60px] relative py-8">
         <div className="flex px-28 items-center">
-          <div className="avatar-location flex- flex-col items-center">
-            <Avatar className="w-44 h-44 static mt-[-60%] bg-brand-mutedblue border-4 border-white flex justify-center items-center">
+          <div className="avatar-location flex flex-col items-center w-1/4">
+            <Avatar className="w-44 h-44 static mt-[-60%] mb-10 bg-brand-mutedblue border-4 border-white flex justify-center items-center">
               <AvatarImage
                 src={`/avatars/avatar${userData?.avatar}.png`}
                 alt="user avatar"
@@ -76,16 +76,16 @@ export default function UserProfile() {
               </AvatarFallback>
             </Avatar>
 
-            {userData.location && (
-              <h1 className="text-xl my-5 text-center">
-                📍 {userData.location}
-              </h1>
-            )}
+            <div className="min-h-[3rem] overflow-hidden w-4/5">
+              {userData.location && (
+                <h1 className="text-xl text-center">📍{userData.location}</h1>
+              )}
+            </div>
           </div>
 
           <div className="wrapper ml-10 mb-20">
             <div className="flex items-center">
-              <h1 className="text-5xl font-extrabold mr-5">
+              <h1 className="text-5xl font-extrabold mr-5 line-clamp-1 ellipsis leading-tight">
                 {userData.firstName} {userData.lastName}
               </h1>
               {isProfileOwner && (
@@ -97,12 +97,12 @@ export default function UserProfile() {
               )}
             </div>
 
-            <div className="text-brand-dark italic text-sm">
+            <div className="text-brand-dark italic text-sm mt-5">
               Member since{" "}
               {userData.accountCreatedTimestamp.toDate().toDateString()}
             </div>
 
-            <div className="flex mt-5">
+            <div className="flex mt-12">
               {userData.tags &&
                 userData.tags.map((tag) => (
                   <Badge
@@ -126,8 +126,10 @@ export default function UserProfile() {
           </div>
         )}
         {!isProfileOwner && (
-          <div className="w-4/5 h-16 mx-auto my-10 relative rounded-lg border-l-8 border-l-gray-500 bg-gray-200 py-5 pl-16 pr-5 font-sans text-lg italic leading-relaxed text-gray-600 before:absolute before:left-3 before:top-3 before:font-serif before:text-6xl before:text-gray-700 before:content-['“']">
-            {userData.quote || "Hi, I'm new here. RE:Connect with me!"}
+          <div className="w-4/5 mx-auto relative rounded-lg border-l-8 border-l-gray-500 bg-gray-200 py-0 pl-16 pr-5 font-sans text-lg italic leading-relaxed text-gray-600 before:absolute before:left-3 before:top-3 before:font-serif before:text-6xl before:text-gray-700 before:content-['“'] line-clamp-2">
+            <p className="py-5">
+              {userData.quote || "Hi, I'm new here. RE:Connect with me!"}
+            </p>
           </div>
         )}
       </div>

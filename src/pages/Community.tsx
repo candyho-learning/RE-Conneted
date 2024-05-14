@@ -152,12 +152,12 @@ export default function Community() {
                     {user.lastName[0]}
                   </AvatarFallback>
                 </Avatar>
-                <CardTitle className="ml-5 text-lg">
+                <CardTitle className="ml-5 text-lg line-clamp-2">
                   {user.firstName} {user.lastName}
                 </CardTitle>
               </div>
 
-              <CardDescription className="italic">
+              <CardDescription className="italic line-clamp-2">
                 {user.quote ||
                   "Let's get some work done and have fun! RE:Connected with me."}
               </CardDescription>
