@@ -107,34 +107,27 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
   ) {
     console.log("create account function in auth context running");
 
-    try {
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
+    const userCredential = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
 
-      localStorage.setItem(
-        "userCredential",
-        JSON.stringify(userCredential.user)
-      );
-      const uid = userCredential.user.uid;
-      if (uid) {
-        //add user document
-        // Add a new document in collection "cities"
-        await setDoc(doc(db, "users", uid), {
-          firstName: firstName,
-          lastName: lastName,
-          email: email,
-          userId: uid,
-          accountCreatedTimestamp: serverTimestamp(),
-          quote: "",
-          location: "",
-          tags: [],
-        });
-      }
-    } catch (err) {
-      console.error(err);
+    localStorage.setItem("userCredential", JSON.stringify(userCredential.user));
+    const uid = userCredential.user.uid;
+    if (uid) {
+      //add user document
+      // Add a new document in collection "cities"
+      await setDoc(doc(db, "users", uid), {
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        userId: uid,
+        accountCreatedTimestamp: serverTimestamp(),
+        quote: "",
+        location: "",
+        tags: [],
+      });
     }
   }
 

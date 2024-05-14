@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useNavigate } from "react-router-dom";
+import { FirebaseError } from "firebase/app";
 
 const defaultFormValues = {
   firstName: "",
@@ -34,14 +35,24 @@ export default function Signup() {
     console.log("creating an account...");
     const { email, password, firstName, lastName } = signupForm;
     console.log(firstName, lastName);
-    await createAccount(email, password, firstName, lastName);
-    setSignupForm(defaultFormValues);
-    navigate("/dashboard");
+    try {
+      await createAccount(email, password, firstName, lastName);
+      navigate("/dashboard");
+    } catch (err: any) {
+      console.log(err.code);
+      if (err.code === "auth/email-already-in-use") {
+        alert("this email has been taken");
+      } else if (err.code === "auth/weak-password") {
+        alert("Password should be at least 6 characters long.");
+      } else {
+        alert("something went wrong. please try again");
+      }
+    }
   }
   return (
     <div className="w-full h-screen bg-brand-mutedblue lg:flex justify-between lg:min-h-[600px] xl:min-h-[800px]">
-      <div className="flex items-center justify-center py-12 px-60">
-        <div className="mx-auto grid w-[350px] gap-6">
+      <div className="flex items-center justify-center py-12 px-32">
+        <div className="mx-auto grid w-[400px] gap-6">
           <div className="grid gap-2 text-center">
             <h1 className="text-3xl font-bold">Join RE:Connected</h1>
             <p className="text-balance text-muted-foreground">
