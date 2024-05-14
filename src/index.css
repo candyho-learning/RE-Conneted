@@ -4,11 +4,8 @@
 
 html {
   font-size: 16px;
-  @screen lg {
-    font-size: 18px;
-  }
 
-  @screen xl {
+  @screen 2xl {
     font-size: 20px;
   }
 }
@@ -140,6 +137,7 @@ html {
   background-color: gray;
   color: white;
   width: 100%;
+  display: none;
 }
 
 .str-video__participant-view > .str-video__call-controls__button {
