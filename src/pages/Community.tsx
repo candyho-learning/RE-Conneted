@@ -125,7 +125,7 @@ export default function Community() {
           </p>
         </Button>
       </div>
-      <div className="flex flex-wrap px-10 pt-0 flex-grow-1 w-min-[500px] basis-4/5 justify-start">
+      <div className="grid px-10 pt-0  w-min-[500px] grid-cols-3">
         {filteredUsers?.length === 0 && (
           <Alert className="border w-1/3 h-fit border-primary mx-auto my-40 p-3 scale-150">
             <ChatBubbleIcon className="h-4 w-4 p-0" />
