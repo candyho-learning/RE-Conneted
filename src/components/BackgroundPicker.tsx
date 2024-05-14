@@ -66,7 +66,7 @@ export default function BackgroundPicker({
       <SheetTrigger asChild>
         <Button variant="secondary">Change Selection</Button>
       </SheetTrigger>
-      <SheetContent className="w-[460px] sm:max-w-none">
+      <SheetContent className="w-[460px] sm:max-w-none 2xl:w-[520px]">
         <SheetHeader>
           <SheetTitle>Search on Unsplash</SheetTitle>
           <SheetDescription>
