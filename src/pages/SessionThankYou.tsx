@@ -44,7 +44,9 @@ export default function SessionThankYou() {
         ...for {isHost ? "hosting" : "joining"} this session.We hope to see you
         kick ass again in another session at RE:Connected!
         <Link to="/dashboard">
-          <Button className="block mt-5">Back to Dashboard</Button>
+          <Button className="block mt-5 text-lg font-semibold" size="lg">
+            Back to Dashboard
+          </Button>
         </Link>
       </p>
     </div>

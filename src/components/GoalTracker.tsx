@@ -58,7 +58,7 @@ export default function GoalTracker({
   return (
     <div className="goal-tracker p-5 bg-gray-100 rounded-md w-96">
       <h3 className="text-xl font-semibold mb-2">What are your goals today?</h3>
-      <div className="h-4/5 min-h-5 max-h-36 overflow-y-scroll">
+      <div className="h-4/5 min-h-5 max-h-32 overflow-y-scroll">
         {allGoals.map((goal) => (
           <div
             className="flex items-center hover:cursor-pointer"

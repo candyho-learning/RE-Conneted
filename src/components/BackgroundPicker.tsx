@@ -66,7 +66,7 @@ export default function BackgroundPicker({
       <SheetTrigger asChild>
         <Button variant="secondary">Change Selection</Button>
       </SheetTrigger>
-      <SheetContent className="w-[420px] sm:max-w-none">
+      <SheetContent className="w-[460px] sm:max-w-none">
         <SheetHeader>
           <SheetTitle>Search on Unsplash</SheetTitle>
           <SheetDescription>
@@ -89,7 +89,7 @@ export default function BackgroundPicker({
               Search
             </Button>
           </form>
-          <ScrollArea className="search-results w-full h-80 xl:h-[580px] 2xl:h-[700px]">
+          <ScrollArea className="search-results w-full h-80 xl:h-[540px] 2xl:h-[700px]">
             <div className="flex flex-wrap justify-between gap-2">
               {searchResults &&
                 searchResults.map((item) => (
@@ -103,7 +103,7 @@ export default function BackgroundPicker({
                     <div
                       className={`w-44 h-28 rounded-md ${
                         backgroundImage === item.urls.full
-                          ? " border-2 border-primary"
+                          ? " border-4 border-primary"
                           : "none"
                       }`}
                     >
@@ -127,7 +127,7 @@ export default function BackgroundPicker({
             Load More
           </Button>
         </div>
-        <SheetFooter className="fixed bottom-5 w-96">
+        <SheetFooter className="relative bottom-0 w-full">
           <SheetClose asChild>
             <Button className="w-full">Confirm Selection</Button>
           </SheetClose>
