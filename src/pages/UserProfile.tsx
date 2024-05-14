@@ -64,7 +64,7 @@ export default function UserProfile() {
       <div className="main-info w-4/5 mx-auto bg-white rounded-[60px] relative py-8">
         <div className="flex px-14 items-center">
           <div className="avatar-location flex flex-col items-center w-1/4">
-            <Avatar className="w-44 h-44 static mt-[-60%] mb-10 bg-brand-mutedblue border-4 border-white flex justify-center items-center">
+            <Avatar className="w-48 h-48 static mb-24 bg-brand-mutedblue border-4 border-white flex justify-center items-center">
               <AvatarImage
                 src={`/avatars/avatar${userData?.avatar}.png`}
                 alt="user avatar"
@@ -76,11 +76,11 @@ export default function UserProfile() {
               </AvatarFallback>
             </Avatar>
 
-            <div className="min-h-[3rem] overflow-hidden w-4/5">
+            {/* <div className="min-h-[3rem] overflow-hidden w-4/5">
               {userData.location && (
                 <h1 className="text-xl text-center">📍{userData.location}</h1>
               )}
-            </div>
+            </div> */}
           </div>
 
           <div className="wrapper ml-10 mb-20 overflow-hidden">
@@ -97,12 +97,17 @@ export default function UserProfile() {
               )}
             </div>
 
-            <div className="text-brand-dark italic text-sm mt-5">
+            <div className="text-brand-dark italic text-sm">
               Member since{" "}
               {userData.accountCreatedTimestamp.toDate().toDateString()}
             </div>
+            <div className="overflow-hidden mt-5">
+              {userData.location && (
+                <h1 className="text-lg">📍{userData.location}</h1>
+              )}
+            </div>
 
-            <div className="flex mt-12">
+            <div className="flex mt-5">
               {userData.tags &&
                 userData.tags.map((tag) => (
                   <Badge
