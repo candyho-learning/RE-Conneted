@@ -117,7 +117,7 @@ export default function Session2() {
     <div
       style={{
         backgroundImage: call
-          ? `url(${sessionData?.backgroundImageUrl})`
+          ? `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${sessionData?.backgroundImageUrl})`
           : "none",
         width: "100vw",
         height: "calc(100vh - 80px)",
