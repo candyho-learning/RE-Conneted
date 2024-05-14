@@ -256,25 +256,24 @@ export function getDaysFromNow(date: any) {
   const now = new Date();
   const start = date.toDate();
 
-  // Compare year, month, and day of the two dates
-  const isSameDay =
-    now.getFullYear() === start.getFullYear() &&
-    now.getMonth() === start.getMonth() &&
-    now.getDate() === start.getDate();
+  const startOfToday = new Date(now);
+  startOfToday.setHours(0, 0, 0, 0);
+  const startOfTargetDate = new Date(start);
+  startOfTargetDate.setHours(0, 0, 0, 0);
 
-  if (isSameDay) {
+  const diffTime = startOfTargetDate.getTime() - startOfToday.getTime();
+
+  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+  if (diffDays === 0) {
     return "today";
+  } else if (diffDays === 1) {
+    return "tomorrow";
+  } else if (diffDays > 1) {
+    return `${diffDays} days from now`;
   } else {
-    const diffTime = start.getTime() - now.getTime();
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-    if (diffDays === 1) {
-      return "tomorrow";
-    } else if (diffDays > 1) {
-      return `${diffDays} days from now`;
-    } else {
-      return "expired";
-    }
+    // diffDays is negative
+    return "expired";
   }
 }
 
