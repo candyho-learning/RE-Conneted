@@ -27,6 +27,7 @@ export default function CreateSesssion() {
   const [sessionName, setSessionName] = useState<string>("");
   const [sessionStartTime, setSessionStartTime] = useState("");
   const [backgroundImage, setBackgroundImage] = useState(defaultBackground);
+  const [isShowWarning, setIsShowWarning] = useState(false);
   let nextId = useRef(1);
   const [timeBlocks, setTimeBlocks] = useState<Array<TimeBlock>>([
     {
@@ -51,6 +52,7 @@ export default function CreateSesssion() {
     setSessionName("");
     setSessionStartTime("");
     setBackgroundImage(defaultBackground);
+    setIsShowWarning(false);
     setTimeBlocks([
       {
         type: "deep-work",
@@ -73,6 +75,7 @@ export default function CreateSesssion() {
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setIsShowWarning(true);
     if (hasSessionName && isStartTimeValid && isTimerValid) {
       const thirtyMinsBeforeStartTime = new Date(
         formattedSessionStartTime.getTime() - 30 * 60 * 1000
@@ -151,7 +154,7 @@ export default function CreateSesssion() {
                   setSessionName(e.target.value);
                 }}
               />
-              {!hasSessionName && (
+              {!hasSessionName && isShowWarning && (
                 <p className="text-destructive">
                   Must contain at least 5 characters.
                 </p>
@@ -171,7 +174,7 @@ export default function CreateSesssion() {
                   setSessionStartTime(e.target.value);
                 }}
               />
-              {!isStartTimeValid && (
+              {!isStartTimeValid && isShowWarning && (
                 <p className="text-destructive">
                   Start time must be in the future.
                 </p>
@@ -212,7 +215,7 @@ export default function CreateSesssion() {
             >
               Add Another Time Block
             </Button>
-            {!isTimerValid && (
+            {!isTimerValid && isShowWarning && (
               <p className="text-destructive">
                 To enjoy the best RE:Conneted experience, sessions should be
                 between 30~180 mins.
