@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../context/authContext";
 
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -15,6 +15,9 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/dashboard"; // Default to dashboard or any other appropriate route
 
   useEffect(() => {
     if (isLoggedIn) navigate("/dashboard");
@@ -26,7 +29,7 @@ export default function Login() {
     if (loginResult) {
       setEmail("");
       setPassword("");
-      navigate("/dashboard");
+      navigate(from, { replace: true });
     } else {
       setErrorMessage("Incorrect email or password. Please try again.");
     }

@@ -60,7 +60,7 @@ export default function Dashboard() {
       })();
     }
   }, [user?.sessions]);
-  if (!isLoggedIn) return <Login />;
+  // if (!isLoggedIn) return <Login />;
   return (
     <div className="bg-gray h-full flex px-10">
       <div className="w-1/4  px-10 bg-gray-400 rounded-lg text-white h-screen mt-8">

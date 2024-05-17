@@ -16,6 +16,7 @@ import UserProfile from "./pages/UserProfile.tsx";
 import Settings from "./pages/Settings.tsx";
 import FindSessions from "./pages/FindSessions.tsx";
 import SessionThankYou from "./pages/SessionThankYou.tsx";
+import ProtectedRoutes from "./pages/ProtectedRoutes.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -23,7 +24,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Homepage />} />
-          <Route path="/" element={<App />}>
+          <Route element={<ProtectedRoutes />}>
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/create-session" element={<CreateSesssion />} />
             <Route path="/find-sessions" element={<FindSessions />} />

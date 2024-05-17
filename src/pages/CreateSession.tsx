@@ -116,7 +116,7 @@ export default function CreateSesssion() {
       return;
     }
   }
-  if (!isLoggedIn) return <Login />;
+  // if (!isLoggedIn) return <Login />;
 
   return (
     //TODO split form in half, limit height

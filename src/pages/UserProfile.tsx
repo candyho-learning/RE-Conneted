@@ -55,9 +55,9 @@ export default function UserProfile() {
     return <h1>This user does not exist!</h1>;
   }
 
-  if (!isLoggedIn) {
-    return <Login />;
-  }
+  // if (!isLoggedIn) {
+  //   return <Login />;
+  // }
 
   return (
     <div className="user-profile-wrapper py-10 px-20 flex flex-col justify-center">

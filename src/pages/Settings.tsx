@@ -37,9 +37,9 @@ export default function Settings() {
     return <Loading />;
   }
 
-  if (!isLoggedIn) {
-    return <Login />;
-  }
+  // if (!isLoggedIn) {
+  //   return <Login />;
+  // }
 
   if (userData)
     return (

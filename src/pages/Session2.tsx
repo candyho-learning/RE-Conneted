@@ -108,9 +108,8 @@ export default function Session2() {
       call.join({ create: true });
     }
   }, [call]);
-  if (!isLoggedIn) {
-    if (isLoading) return <Loading hint="Setting up the call..." />;
-    return <Login />;
+  if (isLoading) {
+    return <Loading hint="Setting up the call..." />;
   }
 
   return (

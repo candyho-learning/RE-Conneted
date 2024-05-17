@@ -34,12 +34,6 @@ export default function Header() {
         <Link to="/community" className=" transition-colors hover:font-bold">
           <h4>Community</h4>
         </Link>
-        {/* <Link
-          to="/find-sessions"
-          className=" transition-colors hover:font-bold"
-        >
-          <h4>Sessions</h4>
-        </Link> */}
       </nav>
       <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4 justify-end">
         {isLoggedIn && user && (

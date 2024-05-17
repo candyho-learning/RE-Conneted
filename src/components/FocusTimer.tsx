@@ -7,22 +7,12 @@ import { Button } from "./ui/button";
 
 export default function FocusTimer(sessionData: SessionDataType) {
   const { userId } = useContext(AuthContext);
-  //this will need to be passed as a prop
-  //for testing, I'm using floats
-  //   const timeBlocks: Array<TimeBlock> = [
-  //     { type: "ice-breaking", duration: 0.1 },
-  //     { type: "deep-work", duration: 0.2 },
-  //     { type: "rest", duration: 0.1 },
-  //   ];
 
   const timeBlocks = sessionData.timeBlocks;
   const timerTotalTime = timeBlocks.reduce((acc, cur) => {
     return acc + cur.duration;
   }, 0);
   const [currentTimeBlockIndex, setCurrentTimeBlockIndex] = useState(0);
-  //   const [blockMin, setBlockMin] = useState<number>(
-  //     timeBlocks[currentTimeBlockIndex].duration
-  //   );
   const [secondsLeft, setSecondsLeft] = useState(
     timeBlocks[currentTimeBlockIndex].duration * 60
   );
