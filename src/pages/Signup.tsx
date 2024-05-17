@@ -4,7 +4,8 @@ import Friends2 from "@/assets/friends2.jpg";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import Logo from "@/assets/logo-dark.png";
 
 const defaultFormValues = {
   firstName: "",
@@ -50,6 +51,13 @@ export default function Signup() {
   }
   return (
     <div className="w-full h-screen bg-brand-mutedblue lg:flex justify-between lg:min-h-[600px] xl:min-h-[800px]">
+      <Link to="/" className="absolute top-10 left-10">
+        <img
+          src={Logo}
+          alt="Logo"
+          className="w-44 mt-2 mr-40 hover:cursor-pointer"
+        />
+      </Link>
       <div className="flex items-center justify-center py-12 px-32">
         <div className="mx-auto grid w-[400px] gap-6">
           <div className="grid gap-2 text-center">

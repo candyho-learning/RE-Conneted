@@ -1,7 +1,8 @@
 import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../context/authContext";
 
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
+import Logo from "@/assets/logo-dark.png";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -39,6 +40,13 @@ export default function Login() {
 
   return (
     <div className="w-full h-screen lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
+      <Link to="/" className="absolute top-10 left-10">
+        <img
+          src={Logo}
+          alt="Logo"
+          className="w-44 mt-2 mr-40 hover:cursor-pointer"
+        />
+      </Link>
       <div className="flex items-center justify-center py-12">
         <div className="mx-auto grid w-[350px] gap-6">
           <div className="grid gap-2 text-center">
