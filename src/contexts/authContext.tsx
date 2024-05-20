@@ -25,7 +25,7 @@ async function getUserProfile(userId: string) {
   try {
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
-      console.log("Document data:", docSnap.data());
+      // console.log("Document data:", docSnap.data());
       return docSnap.data();
     } else {
       throw new Error(
@@ -64,19 +64,19 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
   const [user, setUser] = useState<UserType | null>(null);
 
   useEffect(() => {
-    console.log("auth useEffect triggered");
+    // console.log("auth useEffect triggered");
     const unsub = onAuthStateChanged(auth, (user) => {
       if (user) {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/auth.user
         const uid = user.uid;
-        console.log(`user ${uid} is signed in`);
+        // console.log(`user ${uid} is signed in`);
         setUserId(uid);
         setIsLoggedIn(true);
         setIsLoading(false);
         // ...
       } else {
-        console.log("not logged in");
+        // console.log("not logged in");
         setIsLoading(false);
         setUserId("");
         setIsLoggedIn(false);
@@ -89,11 +89,8 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
   useEffect(() => {
     if (!userId) return;
     getUserProfile(userId);
-    console.log("get user profile ran");
     const unsub = onSnapshot(doc(db, "users", userId), (doc) => {
-      console.log("change in user data!");
-      console.log("Current data: ", doc.data());
-      console.log(typeof doc.data());
+      // console.log("change in user data!");
       setUser(doc.data() as UserType);
     });
     return () => unsub();
@@ -105,8 +102,6 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
     firstName: string,
     lastName: string
   ) {
-    console.log("create account function in auth context running");
-
     const userCredential = await createUserWithEmailAndPassword(
       auth,
       email,
@@ -132,7 +127,6 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
   }
 
   async function login(email: string, password: string): Promise<boolean> {
-    console.log("auth log in");
     try {
       setIsLoading(true);
       const userCredential = await signInWithEmailAndPassword(
@@ -159,7 +153,7 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
   }
 
   async function logout() {
-    console.log("signing out...");
+    // console.log("signing out...");
     try {
       await signOut(auth);
       setIsLoggedIn(false);

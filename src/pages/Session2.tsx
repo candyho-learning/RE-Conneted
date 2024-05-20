@@ -38,19 +38,16 @@ export default function Session4() {
   const [chatChannel, setChatChannel] = useState<any>();
   const isHost = sessionData?.host === userId;
 
-  console.log("video client", videoClient);
-  console.log("chat Client", chatClient);
-
   useEffect(() => {
     if (!callId) return;
     videoClient &&
       chatClient &&
       (async () => {
-        console.log("getting sesession with getdoc");
+        // console.log("getting sesession with getdoc");
         const data = await getSessionData(callId);
         if (!data) return;
         setSessionData(data as SessionDataType);
-        console.log("setting up stream call and channel");
+        // console.log("setting up stream call and channel");
         const call = videoClient?.call(callType, callId);
         setVideoCall(call);
         const channel = chatClient?.channel("messaging", callId, {
@@ -63,7 +60,7 @@ export default function Session4() {
   useEffect(() => {
     if (!callId) return;
     const unsub = onSnapshot(doc(db, "sessions", callId), (doc) => {
-      console.log("change in session data!");
+      // console.log("change in session data!");
       setSessionData(doc.data() as SessionDataType);
     });
 
@@ -72,7 +69,6 @@ export default function Session4() {
 
   useEffect(() => {
     if (videoCall) {
-      console.log(videoCall);
       videoCall.join({ create: true });
     }
 

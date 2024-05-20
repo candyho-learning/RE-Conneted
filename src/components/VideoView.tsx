@@ -18,7 +18,7 @@ export default function VideoView({ isHost, sessionData }: VideoViewProps) {
   const { useCallCallingState } = useCallStateHooks();
   const callingState = useCallCallingState();
   const client = useStreamVideoClient();
-  console.log(`calling state is ${callingState}`);
+  // console.log(`calling state is ${callingState}`);
   if (callingState === CallingState.JOINING) {
     return (
       <>

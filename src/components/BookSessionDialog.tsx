@@ -74,7 +74,6 @@ export default function BookSessionDialog({
       role: "participant",
     };
     const result = await addUserSession(userId, userSessionData);
-    console.log("triggering toast");
     if (result)
       toast({
         title: "Session Successfully Booked!",

@@ -4,7 +4,6 @@ import TimeBlockInput from "../components/TimeBlockInput";
 import { TimeBlock } from "../interface/interfaces";
 import { AuthContext } from "../contexts/authContext";
 import { addUserSession, createNewSession } from "../utils/utils";
-import Login from "./Login";
 import BackgroundPicker from "../components/BackgroundPicker";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -23,7 +22,7 @@ const defaultBackground =
 
 export default function CreateSesssion() {
   const navigate = useNavigate();
-  const { userId, isLoggedIn } = useContext(AuthContext);
+  const { userId } = useContext(AuthContext);
   const [sessionName, setSessionName] = useState<string>("");
   const [sessionStartTime, setSessionStartTime] = useState("");
   const [backgroundImage, setBackgroundImage] = useState(defaultBackground);
@@ -112,7 +111,6 @@ export default function CreateSesssion() {
       resetForm();
       navigate("/dashboard");
     } else {
-      console.log("nope");
       return;
     }
   }

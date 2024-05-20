@@ -1,8 +1,6 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { UserType } from "../interface/interfaces";
 import { getCollection } from "../utils/utils";
-import { AuthContext } from "../contexts/authContext";
-import Login from "./Login";
 import { Link } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -23,7 +21,6 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 export default function Community() {
   const navigate = useNavigate();
-  const { isLoggedIn } = useContext(AuthContext);
   const [allUsers, setAllUsers] = useState<undefined | Array<UserType>>();
   const [filterTags, setFilterTags] = useState<Array<string>>([]);
   const [filteredUsers, setFilteredUsers] = useState<
@@ -32,7 +29,6 @@ export default function Community() {
   useEffect(() => {
     async function loadUsers() {
       const data = await getCollection("users");
-      console.log(allUsers);
       setAllUsers(data);
       setFilteredUsers(data);
     }
@@ -55,7 +51,6 @@ export default function Community() {
   }, [filterTags]);
 
   function toggleSelectedTags(tagName: string) {
-    console.log(tagName);
     if (filterTags.includes(tagName)) {
       //tag already selected -> remove from list
       setFilterTags(filterTags.filter((tag) => tag !== tagName));
@@ -69,7 +64,6 @@ export default function Community() {
 
   function visitRandomProfile(userArr: Array<UserType>) {
     const randomIndex = Math.floor(Math.random() * userArr.length);
-    console.log(randomIndex);
     const randomUser = userArr[randomIndex].userId;
     navigate(`/connect/${randomUser}`);
   }

@@ -38,10 +38,10 @@ export default function FocusTimer(sessionData: SessionDataType) {
 
   //1 - if timer is not paused, take 1 sec off seconds left every second
   useEffect(() => {
-    console.log("restarting timer", currentTimeBlockIndex);
+    // console.log("restarting timer", currentTimeBlockIndex);
 
     const timer = setInterval(() => {
-      console.log("1s passed", isTimerActive);
+      // console.log("1s passed", isTimerActive);
       isTimerActive &&
         setSecondsLeft((prevSecondsLeft) => Math.max(0, prevSecondsLeft - 1));
     }, 1000);
@@ -49,25 +49,25 @@ export default function FocusTimer(sessionData: SessionDataType) {
     setTimerId(timer);
 
     return () => {
-      console.log("timer interval clean up!");
+      // console.log("timer interval clean up!");
       clearInterval(timer);
     };
   }, [isTimerActive, currentTimeBlockIndex]);
 
   useEffect(() => {
-    console.log("changing block min", currentTimeBlockIndex);
+    // console.log("changing block min", currentTimeBlockIndex);
     setSecondsLeft(timeBlocks[currentTimeBlockIndex].duration * 60);
   }, [currentTimeBlockIndex]);
 
   useEffect(() => {
     if (secondsLeft === 0) {
       if (currentTimeBlockIndex < timeBlocks.length - 1) {
-        console.log(currentTimeBlockIndex);
-        console.log("adding 1 to time block index");
+        // console.log(currentTimeBlockIndex);
+        // console.log("adding 1 to time block index");
         setCurrentTimeBlockIndex((prevIndex) => prevIndex + 1);
       } else {
-        console.log("timer ended, removing timer");
-        console.log("timer end time", Date.now());
+        // console.log("timer ended, removing timer");
+        // console.log("timer end time", Date.now());
         setTimerStartState("ended");
         clearInterval(timerId);
       }
@@ -90,7 +90,7 @@ export default function FocusTimer(sessionData: SessionDataType) {
     if (timerStartState === "ended") {
       return;
     }
-    console.log("resetting timer state");
+    // console.log("resetting timer state");
     setTimerStartState("started");
     setIsTimerActive((s) => !s);
   }

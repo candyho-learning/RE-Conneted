@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../contexts/authContext";
-import Login from "./Login";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { PlusIcon } from "@radix-ui/react-icons";
@@ -20,7 +19,7 @@ import { SessionDataType } from "@/interface/interfaces";
 import UserAvatar from "@/components/UserAvatar";
 
 export default function Dashboard() {
-  const { user, isLoggedIn, userId } = useContext(AuthContext);
+  const { user, userId } = useContext(AuthContext);
   const [sessionCode, setSessionCode] = useState("");
   const [hostingSessions, setHostingSessions] =
     useState<Array<SessionDataType>>();
@@ -36,7 +35,6 @@ export default function Dashboard() {
         const data = await getMultipleSessionDetails(
           user.sessions.map((session) => session.sessionId)
         );
-        console.log(data);
         const nonExpiredSessions = data?.filter(
           (session) =>
             new Date() < session.linkValidPeriod?.end.toDate() &&

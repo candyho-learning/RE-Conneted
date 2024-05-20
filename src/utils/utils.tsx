@@ -50,7 +50,6 @@ export async function addUserSession(
     await updateDoc(userRef, {
       sessions: arrayUnion(userSessionData),
     });
-    console.log("added to user sessions");
     return true;
   } catch (err) {
     console.error(err);
@@ -93,7 +92,6 @@ export async function getSessionData(sessionId: string) {
   try {
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
-      console.log("Document data:", docSnap.data());
       return docSnap.data();
     } else {
       return null;
@@ -106,8 +104,6 @@ export async function getSessionData(sessionId: string) {
 export async function searchUnsplash(searchTerm: string, page: number = 1) {
   const UNSPLASH_API_KEY = import.meta.env.VITE_UNSPLASH_API_KEY;
   const URL = `https://api.unsplash.com/search/photos?query=${searchTerm}&client_id=${UNSPLASH_API_KEY}&orientation=landscape&per_page=10&page=${page}`;
-  console.log("searching on unsplash page", page);
-  console.log(URL);
   try {
     const response = await fetch(URL);
     if (!response.ok) {
@@ -130,7 +126,6 @@ export async function updateUserSessionGoal(
   try {
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
-      console.log("Document data:", docSnap.data());
       //find field: participantsActivity
       const participantsActivityCopy =
         docSnap.data()?.participantsActivity || [];
@@ -173,8 +168,6 @@ export async function updateUserSessionGoal(
       await updateDoc(docRef, {
         participantsActivity: newParticipantsActivityCopy,
       });
-
-      console.log("user goals updated on firebase!!");
     } else {
       throw new Error("Session data for this sessionId doesn't exist.");
     }
@@ -188,7 +181,6 @@ export async function getUserData(userId: string) {
   try {
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
-      console.log("Document data:", docSnap.data());
       return docSnap.data();
     } else {
       throw new Error("Cannot get user data because document does not exist.");
@@ -287,7 +279,6 @@ export async function getMultipleSessionDetails(sessionIdArr: Array<string>) {
     let data: Array<SessionDataType> = [];
     sessionsDocsSnap.forEach((doc) => {
       data.push(doc.data() as SessionDataType);
-      console.log(doc.data());
     });
     return data;
   } catch (err) {

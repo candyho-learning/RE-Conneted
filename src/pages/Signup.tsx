@@ -32,14 +32,11 @@ export default function Signup() {
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    console.log("creating an account...");
     const { email, password, firstName, lastName } = signupForm;
-    console.log(firstName, lastName);
     try {
       await createAccount(email, password, firstName, lastName);
       navigate("/dashboard");
     } catch (err: any) {
-      console.log(err.code);
       if (err.code === "auth/email-already-in-use") {
         alert("this email has been taken");
       } else if (err.code === "auth/weak-password") {

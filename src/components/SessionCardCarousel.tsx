@@ -39,10 +39,8 @@ export default function SessionCardCarousel({
     SessionDataType[]
   >([]);
   const [errorMessage, setErrorMessage] = useState("");
-  console.log("in carousel, is profile owner?", isProfileOwner);
   useEffect(() => {
     (async () => {
-      console.log("getting individual session data");
       const hostingSessionIds = sessions
         .filter((session) => session.role === "host")
         .map((session) => session.sessionId);

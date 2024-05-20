@@ -11,11 +11,9 @@ export default function TagSelector({
   tags,
   userId,
 }: TagSelectorProps) {
-  console.log(userId);
   const [isEditing, setIsEditing] = useState(false);
 
   function toggleSelectedTags(tagName: string) {
-    console.log(tagName);
     if (tags.includes(tagName)) {
       //tag already selected -> remove from list
       setTags(tags.filter((tag) => tag !== tagName));
@@ -29,7 +27,6 @@ export default function TagSelector({
 
   async function confirmTagSelection() {
     setIsEditing(false);
-    console.log(userId);
     const result = await updateUserData(userId, "tags", tags);
     if (result.success) {
       toast({

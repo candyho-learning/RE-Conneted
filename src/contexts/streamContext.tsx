@@ -42,7 +42,7 @@ export const StreamContextProvider = ({
   //Connect with video and chat client once when the app loads
 
   useEffect(() => {
-    console.log("stream useEffect triggered");
+    // console.log("stream useEffect triggered");
     if (!userId || !user) return;
     const streamUser = {
       id: userId,
@@ -52,7 +52,7 @@ export const StreamContextProvider = ({
     let videoClient: StreamVideoClient | undefined = undefined;
     let chatClient: StreamChat | undefined = undefined;
     async function setupClients() {
-      console.log("setting up video and chat client");
+      // console.log("setting up video and chat client");
       const userToken = await getStreamUserToken(userId);
 
       await new Promise((resolve) => setTimeout(resolve, 2000)); // Wait for 2 seconds
@@ -74,7 +74,7 @@ export const StreamContextProvider = ({
     return () => {
       setVideoClient(undefined);
       setChatClient(undefined);
-      console.log("disconnecting client in stream context");
+      // console.log("disconnecting client in stream context");
       (async () => {
         await videoClient?.disconnectUser();
         await chatClient?.disconnectUser();

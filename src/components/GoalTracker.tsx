@@ -40,7 +40,6 @@ export default function GoalTracker({
   }, [allGoals]);
 
   function changeGoalStatus(goalId: number) {
-    console.log("changing goal status");
     setAllGoals(
       allGoals.map((goal) => {
         if (goal.id === goalId) {

@@ -15,7 +15,6 @@ export default function TimeBlockInput({
   timeBlocks,
 }: TimeBlockProps) {
   function handleSelectChange(e: React.ChangeEvent<HTMLSelectElement>) {
-    console.log("selection changed");
     const newType = e.target.value;
     setTimeBlocks(
       timeBlocks.map((block) => {
@@ -28,7 +27,6 @@ export default function TimeBlockInput({
     );
   }
   function handleDurationChange(e: React.ChangeEvent<HTMLInputElement>) {
-    console.log("minuted edited");
     const newDuration =
       e.target.value === "" ? e.target.value : Number(e.target.value);
     setTimeBlocks(
@@ -43,7 +41,6 @@ export default function TimeBlockInput({
   }
 
   function handleDeleteTimeBlock() {
-    console.log("deleting this time block");
     setTimeBlocks(timeBlocks.filter((block) => block.id !== id));
   }
 

@@ -12,10 +12,9 @@ import { db } from "../firebase";
 
 import SessionCardCarousel from "@/components/SessionCardCarousel";
 import Loading from "@/components/Loading";
-import Login from "./Login";
 
 export default function UserProfile() {
-  const { userId, isLoggedIn } = useContext(AuthContext);
+  const { userId } = useContext(AuthContext);
   const { userId: userIdParam } = useParams<{ userId: string | undefined }>();
   const [userData, setUserData] = useState<UserType>();
   const [isLoading, setIsLoading] = useState(true);
@@ -29,8 +28,6 @@ export default function UserProfile() {
       userData?.linkedinLink
   );
 
-  console.log(userIdParam);
-
   useEffect(() => {
     if (!userIdParam) return;
 
@@ -40,7 +37,7 @@ export default function UserProfile() {
         setUserData(doc.data() as UserType);
         setIsLoading(false);
       } else {
-        console.log("User not found");
+        // console.log("User not found");
         setIsLoading(false);
       }
     });

@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../contexts/authContext";
-import Login from "./Login";
 import { UserType } from "../interface/interfaces";
 import EditableText from "../components/EditableText";
 import TagSelector from "../components/TagSelector";
@@ -18,14 +17,13 @@ import Loading from "@/components/Loading";
 
 export default function Settings() {
   //TODO get userId from authcontext
-  const { isLoggedIn, userId, isLoading } = useContext(AuthContext);
+  const { userId, isLoading } = useContext(AuthContext);
   const [userData, setUserData] = useState<UserType>();
   const [tags, setTags] = useState(userData?.tags || []);
   //TODO read data from database
   useEffect(() => {
     if (!userId) return;
     const unsub = onSnapshot(doc(db, "users", userId), (doc) => {
-      console.log("change in user settings!");
       setUserData(doc.data() as UserType);
       setTags(doc.data()?.tags || []);
     });
