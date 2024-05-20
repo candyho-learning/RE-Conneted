@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../context/authContext";
+import { AuthContext } from "../contexts/authContext";
 import Login from "./Login";
 import { UserType } from "../interface/interfaces";
 import EditableText from "../components/EditableText";

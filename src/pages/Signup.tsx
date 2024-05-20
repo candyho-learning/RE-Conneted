@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from "react";
-import { AuthContext } from "../context/authContext";
+import { AuthContext } from "../contexts/authContext";
 import Friends2 from "@/assets/friends2.jpg";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";

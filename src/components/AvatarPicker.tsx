@@ -1,4 +1,4 @@
-import { AuthContext } from "@/context/authContext";
+import { AuthContext } from "@/contexts/authContext";
 import { Button } from "./ui/button";
 import { useContext, useState } from "react";
 import { updateUserData } from "@/utils/utils";

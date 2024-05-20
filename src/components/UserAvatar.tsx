@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Avatar, AvatarImage, AvatarFallback } from "./ui/avatar";
-import { AuthContext } from "@/context/authContext";
+import { AuthContext } from "@/contexts/authContext";
 
 export default function UserAvatar() {
   const { user } = useContext(AuthContext);

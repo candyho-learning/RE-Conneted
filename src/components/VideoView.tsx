@@ -7,7 +7,7 @@ import {
 import { VideoViewProps } from "../interface/interfaces";
 
 import CallControlBar from "./CallControlBar";
-import { AuthContext } from "@/context/authContext";
+import { AuthContext } from "@/contexts/authContext";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "./ui/use-toast";

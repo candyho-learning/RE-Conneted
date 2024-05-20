@@ -10,7 +10,7 @@ import {
 import { getStreamUserToken } from "../utils/utils";
 import { useContext, useEffect, useState } from "react";
 import VideoView from "../components/VideoView";
-import { AuthContext } from "../context/authContext";
+import { AuthContext } from "../contexts/authContext";
 import Login from "./Login";
 import { StreamChat } from "stream-chat";
 import {

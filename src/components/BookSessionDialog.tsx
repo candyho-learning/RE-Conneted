@@ -16,7 +16,7 @@ import {
   UserType,
 } from "@/interface/interfaces";
 import { useContext, useState } from "react";
-import { AuthContext } from "@/context/authContext";
+import { AuthContext } from "@/contexts/authContext";
 import { addUserSession, getSessionData, getUserData } from "@/utils/utils";
 import { hyphenatedToReadable, getDaysFromNow } from "@/utils/utils";
 import { CalendarIcon, ClockIcon } from "@radix-ui/react-icons";

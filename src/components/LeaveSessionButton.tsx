@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { useNavigate } from "react-router-dom";
 import { CallControlBarProps } from "@/interface/interfaces";
-import { AuthContext } from "@/context/authContext";
+import { AuthContext } from "@/contexts/authContext";
 import { useContext } from "react";
 import { markSessionAsExpired } from "@/utils/utils";
 

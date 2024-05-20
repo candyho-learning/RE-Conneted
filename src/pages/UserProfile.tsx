@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { UserType } from "../interface/interfaces";
-import { AuthContext } from "../context/authContext";
+import { AuthContext } from "../contexts/authContext";
 import ProfileSocialLinks from "../components/ProfileSocialLinks";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";

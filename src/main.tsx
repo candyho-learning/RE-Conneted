@@ -7,7 +7,7 @@ import Homepage from "./pages/Homepage.tsx";
 import Signup from "./pages/Signup.tsx";
 import Login from "./pages/Login.tsx";
 import "./firebase.ts";
-import { AuthContextProvider } from "./context/authContext.tsx";
+import { AuthContextProvider } from "./contexts/authContext.tsx";
 import Dashboard from "./pages/Dashboard.tsx";
 import CreateSesssion from "./pages/CreateSession.tsx";
 import Community from "./pages/Community.tsx";

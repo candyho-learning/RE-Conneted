@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { UserType } from "../interface/interfaces";
 import { getCollection } from "../utils/utils";
-import { AuthContext } from "../context/authContext";
+import { AuthContext } from "../contexts/authContext";
 import Login from "./Login";
 import { Link } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";

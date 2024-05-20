@@ -2,7 +2,7 @@ import React, { useContext, useRef, useState } from "react";
 import { nanoid } from "nanoid";
 import TimeBlockInput from "../components/TimeBlockInput";
 import { TimeBlock } from "../interface/interfaces";
-import { AuthContext } from "../context/authContext";
+import { AuthContext } from "../contexts/authContext";
 import { addUserSession, createNewSession } from "../utils/utils";
 import Login from "./Login";
 import BackgroundPicker from "../components/BackgroundPicker";

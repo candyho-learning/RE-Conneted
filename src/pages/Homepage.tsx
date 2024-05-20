@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import Logo from "@/assets/logo-light.png";
 import { useContext } from "react";
-import { AuthContext } from "@/context/authContext";
+import { AuthContext } from "@/contexts/authContext";
 import {
   DropdownMenu,
   DropdownMenuContent,

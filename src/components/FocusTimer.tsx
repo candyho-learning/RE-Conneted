@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { SessionDataType } from "../interface/interfaces";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
-import { AuthContext } from "../context/authContext";
+import { AuthContext } from "../contexts/authContext";
 import { Button } from "./ui/button";
 
 export default function FocusTimer(sessionData: SessionDataType) {
