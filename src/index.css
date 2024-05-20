@@ -114,8 +114,9 @@ html {
   width: 300px;
 }
 
-.str-video__participant-view {
+div.str-video__participant-view {
   width: 180px;
+  background-color: aqua;
   margin-bottom: 20px;
 }
 
@@ -154,4 +155,8 @@ html {
 
 .str-video__notification {
   display: none;
+}
+
+.str-video__generic-menu {
+  color: white;
 }

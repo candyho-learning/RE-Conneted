@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import App from "./App.tsx";
 import "./index.css";
 import Homepage from "./pages/Homepage.tsx";
 import Signup from "./pages/Signup.tsx";
@@ -17,27 +16,30 @@ import Settings from "./pages/Settings.tsx";
 import FindSessions from "./pages/FindSessions.tsx";
 import SessionThankYou from "./pages/SessionThankYou.tsx";
 import ProtectedRoutes from "./pages/ProtectedRoutes.tsx";
+import { StreamContextProvider } from "./contexts/streamContext.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <AuthContextProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Homepage />} />
-          <Route element={<ProtectedRoutes />}>
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/create-session" element={<CreateSesssion />} />
-            <Route path="/find-sessions" element={<FindSessions />} />
-            <Route path="/community" element={<Community />} />
-            <Route path="/coworking-session" element={<Session2 />} />
-            <Route path="/connect/:userId" element={<UserProfile />} />
-            <Route path="/settings" element={<Settings />} />
-          </Route>
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/thankyou" element={<SessionThankYou />} />
-        </Routes>
-      </BrowserRouter>
+      <StreamContextProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Homepage />} />
+            <Route element={<ProtectedRoutes />}>
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/create-session" element={<CreateSesssion />} />
+              <Route path="/find-sessions" element={<FindSessions />} />
+              <Route path="/community" element={<Community />} />
+              <Route path="/coworking-session" element={<Session2 />} />
+              <Route path="/connect/:userId" element={<UserProfile />} />
+              <Route path="/settings" element={<Settings />} />
+            </Route>
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/thankyou" element={<SessionThankYou />} />
+          </Routes>
+        </BrowserRouter>
+      </StreamContextProvider>
     </AuthContextProvider>
   </React.StrictMode>
 );

@@ -48,9 +48,7 @@ export default function VideoView({ isHost, sessionData }: VideoViewProps) {
   }
   return (
     <div>
-      <div style={{ width: "50%", height: "450px" }}>
-        <PaginatedGridLayout groupSize={4} pageArrowsVisible={true} />
-      </div>
+      <PaginatedGridLayout groupSize={4} pageArrowsVisible={true} />
       <CallControlBar isHost={isHost} sessionData={sessionData} />
     </div>
   );

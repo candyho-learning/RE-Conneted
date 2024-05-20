@@ -1,160 +1,137 @@
+import { useState, useEffect, useContext } from "react";
+import { AuthContext } from "@/contexts/authContext";
 import { useSearchParams } from "react-router-dom";
+import { SessionDataType } from "@/interface/interfaces";
 import {
-  StreamVideoClient,
-  User,
+  StreamVideo,
   Call,
   StreamCall,
-  StreamVideo,
   StreamTheme,
 } from "@stream-io/video-react-sdk";
-import { getStreamUserToken } from "../utils/utils";
-import { useContext, useEffect, useState } from "react";
-import VideoView from "../components/VideoView";
-import { AuthContext } from "../contexts/authContext";
-import Login from "./Login";
-import { StreamChat } from "stream-chat";
+import { onSnapshot, doc } from "firebase/firestore";
+import { db } from "@/firebase";
+import { getSessionData } from "@/utils/utils";
+import { StreamContext } from "@/contexts/streamContext";
 import {
-  Chat,
   Channel,
   ChannelHeader,
   MessageInput,
   MessageList,
   Thread,
   Window,
+  Chat,
 } from "stream-chat-react";
-import { onSnapshot, doc } from "firebase/firestore";
-import Favicon from "@/assets/favicon.png";
-
-import { db } from "../firebase";
-import "stream-chat-react/dist/css/v2/index.css";
-import FocusTimer from "../components/FocusTimer";
-import { getSessionData } from "../utils/utils";
-import { SessionDataType } from "../interface/interfaces";
-import GoalTracker from "../components/GoalTracker";
-import Loading from "@/components/Loading";
+import VideoView from "@/components/VideoView";
+import FocusTimer from "@/components/FocusTimer";
+import GoalTracker from "@/components/GoalTracker";
 import ParticipantInfoDrawer from "@/components/ParticipantInfoDrawer";
+import "stream-chat-react/dist/css/v2/index.css";
 
-//@ts-ignore
-const userCredential = JSON.parse(localStorage.getItem("userCredential"));
-
-const API_KEY: string = import.meta.env.VITE_STREAM_API_KEY;
-const userId: string = userCredential?.uid;
-
-const user: User = {
-  id: userId,
-};
-
-const client = new StreamVideoClient({
-  apiKey: API_KEY,
-  tokenProvider: () => getStreamUserToken(userId),
-  user,
-});
-
-const chatClient = new StreamChat(API_KEY);
-//@ts-ignore
-chatClient.connectUser(user, () => getStreamUserToken(userId));
-
-export default function Session2() {
-  const { isLoggedIn, user, isLoading } = useContext(AuthContext);
+export default function Session4() {
+  const { userId, user } = useContext(AuthContext);
+  const { videoClient, chatClient } = useContext(StreamContext);
   const [searchParams] = useSearchParams();
   const callId = searchParams.get("id");
   const callType = searchParams.get("type") || "default";
-  const [call, setCall] = useState<Call>();
   const [sessionData, setSessionData] = useState<SessionDataType>();
-  // const [isHost, setIsHost] = useState<boolean>();
+  const [videoCall, setVideoCall] = useState<Call>();
+  const [chatChannel, setChatChannel] = useState<any>();
   const isHost = sessionData?.host === userId;
-  //@ts-ignore
-  const [chatChannel, setChatChannel] = useState<Channel>();
-  const reloadCount = Number(sessionStorage.getItem("reloadCount")) || 0;
+
+  console.log("video client", videoClient);
+  console.log("chat Client", chatClient);
 
   useEffect(() => {
-    if (reloadCount < 1) {
-      sessionStorage.setItem("reloadCount", String(reloadCount + 1));
-      window.location.reload();
-    } else {
-      sessionStorage.removeItem("reloadCount");
-    }
-  }, []);
+    if (!callId) return;
+    videoClient &&
+      chatClient &&
+      (async () => {
+        console.log("getting sesession with getdoc");
+        const data = await getSessionData(callId);
+        if (!data) return;
+        setSessionData(data as SessionDataType);
+        console.log("setting up stream call and channel");
+        const call = videoClient?.call(callType, callId);
+        setVideoCall(call);
+        const channel = chatClient?.channel("messaging", callId, {
+          name: data.sessionName,
+        });
+        setChatChannel(channel);
+      })();
+  }, [callId, videoClient, chatClient]);
 
   useEffect(() => {
     if (!callId) return;
     const unsub = onSnapshot(doc(db, "sessions", callId), (doc) => {
       console.log("change in session data!");
-      console.log("Current data: ", doc.data());
-      console.log(typeof doc.data());
       setSessionData(doc.data() as SessionDataType);
     });
-    async function init() {
-      if (callId) {
-        const newCall = client.call(callType, callId);
-        setCall(newCall);
-        const chatChannel = chatClient.channel("messaging", callId, {
-          // add as many custom fields as you'd like
-          image: Favicon,
-          name: sessionData?.sessionName,
-        });
-        setChatChannel(chatChannel);
-        const sesh = await getSessionData(callId);
-        console.log(sesh);
-        setSessionData(sesh as SessionDataType);
-      }
-    }
-    init();
+
     return () => unsub();
   }, [callId]);
 
   useEffect(() => {
-    if (client && call) {
-      call.join({ create: true });
+    if (videoCall) {
+      console.log(videoCall);
+      videoCall.join({ create: true });
     }
-  }, [call]);
-  if (isLoading) {
-    return <Loading hint="Setting up the call..." />;
-  }
 
-  return (
-    <div
-      style={{
-        backgroundImage: call
-          ? `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${sessionData?.backgroundImageUrl})`
-          : "none",
-        width: "100vw",
-        height: "calc(100vh - 80px)",
-        backgroundSize: "cover",
-      }}
-      className="flex justify-between relative p-14"
-    >
-      {client && call && sessionData && (
-        <StreamVideo client={client}>
+    return () => {
+      (async () => {
+        await new Promise((resolve) => setTimeout(resolve, 2000)); // Wait for 2 seconds
+        videoCall?.leave();
+      })();
+    };
+  }, [videoCall]);
+
+  //if sessionId is valid and data is retrived, create/join a call and channel
+  if (!sessionData) return <h1>This session doesn't exist</h1>;
+  // if (isLoading) {
+  //   return <Loading hint="Setting up the call..." />;
+  // }
+  if (chatClient && videoClient && chatChannel && videoCall)
+    return (
+      <div
+        style={{
+          backgroundImage: videoCall
+            ? `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${sessionData?.backgroundImageUrl})`
+            : "none",
+          width: "100vw",
+          height: "calc(100vh - 80px)",
+          backgroundSize: "cover",
+        }}
+        className="flex justify-between relative p-14"
+      >
+        <StreamVideo client={videoClient}>
           <StreamTheme>
-            <StreamCall call={call}>
+            <StreamCall call={videoCall}>
               <VideoView isHost={isHost} sessionData={sessionData} />
             </StreamCall>
           </StreamTheme>
         </StreamVideo>
-      )}
-      <div className="wrapper flex justify-between flex-1">
-        <div className="flex flex-col items-center flex-1">
-          {sessionData && <FocusTimer {...sessionData} />}
 
-          {sessionData && user && (
-            <div>
-              <GoalTracker
-                sessionId={sessionData.sessionId}
-                userId={userId}
-                userName={user?.firstName}
-                userLocation={user?.location}
-              />
-            </div>
-          )}
+        <div className="wrapper flex justify-between flex-1">
+          <div className="flex flex-col items-center flex-1">
+            {sessionData && <FocusTimer {...sessionData} />}
+
+            {sessionData && user && (
+              <div>
+                <GoalTracker
+                  sessionId={sessionData.sessionId}
+                  userId={userId}
+                  userName={user?.firstName}
+                  userLocation={user?.location}
+                />
+              </div>
+            )}
+          </div>
+          <div className="p-10 pt-0">
+            {sessionData && user && (
+              <ParticipantInfoDrawer sessionData={sessionData} />
+            )}
+          </div>
         </div>
-        <div className="p-10 pt-0">
-          {sessionData && user && (
-            <ParticipantInfoDrawer sessionData={sessionData} />
-          )}
-        </div>
-      </div>
-      {chatClient && chatChannel && (
+
         <div className="chat-window">
           <Chat client={chatClient} theme="str-chat__theme-light">
             <Channel channel={chatChannel}>
@@ -167,9 +144,6 @@ export default function Session2() {
             </Channel>
           </Chat>
         </div>
-      )}
-
-      {/* <CallControls /> */}
-    </div>
-  );
+      </div>
+    );
 }
