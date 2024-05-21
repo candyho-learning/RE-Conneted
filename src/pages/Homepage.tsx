@@ -84,10 +84,12 @@ export default function Homepage() {
         )}
 
         <img src={Hero} className="h-full w-full object-cover"></img>
-        <div className="w-1/3 absolute top-32 left-40 text-white xl:top-40 2xl:top-44">
-          <h1 className="text-6xl font-extrabold leading-relaxed mb-5 xl:leading-tight 2xl:leading-snug 2xl:text-[5rem]">
-            Work Remotely, Stay Connected.
-          </h1>
+        <div className="flex flex-col justify-between w-1/3 absolute h-2/3 top-32 left-40 text-white text-6xl font-extrabold leading-relaxed mb-5 lg:text-[4.3rem] xl:top-40 xl:text-[4.6rem] xl:leading-tight 2xl:leading-snug 2xl:text-[4.2rem]">
+          <h1>Work</h1>
+          <h1>Remotely,</h1>
+          <h1>Stay</h1>
+          <h1>Connected.</h1>
+
           <p className="w-4/5 font-extralight tracking-widest text-lg">
             A community for busy professionals to work, have fun, and connect.
           </p>
