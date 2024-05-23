@@ -59,6 +59,7 @@ export interface SessionDataType {
   ended?: boolean;
   currentTimeBlockIndex?: number;
   currentSecondsLeft?: number;
+  timerStartState?: string;
 }
 
 export interface UserSessionDataType {

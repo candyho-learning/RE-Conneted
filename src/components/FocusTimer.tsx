@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { SessionDataType } from "../interface/interfaces";
-import { doc, updateDoc } from "firebase/firestore";
+import { doc, updateDoc, onSnapshot, collection } from "firebase/firestore";
 import { db } from "../firebase";
 import { AuthContext } from "../contexts/authContext";
 import { Button } from "./ui/button";
@@ -25,10 +25,14 @@ export default function FocusTimer(sessionData: SessionDataType) {
   );
   const [isTimerActive, setIsTimerActive] = useState<boolean>(false);
   const [timerId, setTimerId] = useState<NodeJS.Timeout>();
-  const [timerStartState, setTimerStartState] = useState("not started");
+  const [timerStartState, setTimerStartState] = useState(
+    sessionData?.timerStartState || "not started"
+  );
   const [progress, setProgress] = useState<Array<number>>(
     Array(timeBlocks.length).fill(0)
   );
+
+  const [shouldSyncTimer, setShouldSyncTimer] = useState(false);
 
   function toTimerDisplay(secs: number) {
     const minute = Math.floor(secs / 60);
@@ -36,8 +40,9 @@ export default function FocusTimer(sessionData: SessionDataType) {
     return [minute, second];
   }
 
-  function printTimer() {
+  function syncTimer() {
     console.log("button pressed");
+    console.log(timerStartState);
     if (userId === sessionData.host && timerStartState === "started") {
       console.log(
         "Current timer: block",
@@ -62,9 +67,25 @@ export default function FocusTimer(sessionData: SessionDataType) {
     }
   }
 
+  //detects when new users join the call
+  useEffect(() => {
+    const subcollectionRef = collection(
+      db,
+      "sessions",
+      sessionData.sessionId,
+      "participantActivities"
+    );
+    const unsubscribe = onSnapshot(subcollectionRef, (_snapshot) => {
+      console.log("someone joined the call");
+      setShouldSyncTimer(true);
+    });
+
+    return unsubscribe;
+  }, []);
+
   useEffect(() => {
     setIsTimerActive(sessionData.isTimerActive);
-  }, [sessionData]);
+  }, [sessionData.isTimerActive]);
 
   useEffect(() => {
     if (sessionData.currentTimeBlockIndex) {
@@ -109,7 +130,9 @@ export default function FocusTimer(sessionData: SessionDataType) {
       } else {
         // console.log("timer ended, removing timer");
         // console.log("timer end time", Date.now());
+        syncTimer();
         setTimerStartState("ended");
+        setIsTimerActive(false);
         clearInterval(timerId);
       }
     }
@@ -138,14 +161,35 @@ export default function FocusTimer(sessionData: SessionDataType) {
 
   useEffect(() => {
     const sessionRef = doc(db, "sessions", sessionData.sessionId);
-    async function updateSession() {
+    async function updateIsTimerActive() {
       await updateDoc(sessionRef, {
         isTimerActive,
       });
     }
 
-    updateSession();
+    updateIsTimerActive();
   }, [isTimerActive]);
+
+  useEffect(() => {
+    const sessionRef = doc(db, "sessions", sessionData.sessionId);
+    async function updateTimerStartState() {
+      await updateDoc(sessionRef, {
+        timerStartState,
+      });
+    }
+
+    if (userId === sessionData.host) {
+      updateTimerStartState();
+      console.log("timer start state updated");
+    }
+  }, [timerStartState]);
+
+  useEffect(() => {
+    if (shouldSyncTimer) {
+      syncTimer();
+      setShouldSyncTimer(false);
+    }
+  }, [shouldSyncTimer]);
 
   return (
     <div className="timer text-black mb-10 w-96 bg-gray-100 rounded-md">
@@ -204,7 +248,8 @@ export default function FocusTimer(sessionData: SessionDataType) {
           {currentTimeBlockIndex < timeBlocks.length - 1 && (
             <h4>Next: {timeBlocks[currentTimeBlockIndex + 1].type}</h4>
           )}
-          <button onClick={printTimer}>Print current timer</button>
+          <button onClick={syncTimer}>Sync</button>
+          <p>{timerStartState}</p>
         </div>
       </div>
     </div>

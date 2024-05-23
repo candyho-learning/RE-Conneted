@@ -320,3 +320,20 @@ export async function syncFocusTimer(
     return false;
   }
 }
+
+export async function recordJoinTime(sessionId: string, userId: string) {
+  console.log("recording join time");
+  const subcollectionRef = doc(
+    db,
+    "sessions",
+    sessionId,
+    "participantActivities",
+    userId
+  );
+  const subcollectionData = { joinTimestamp: serverTimestamp(), userId };
+  try {
+    await setDoc(subcollectionRef, subcollectionData);
+  } catch (err) {
+    console.error(err);
+  }
+}

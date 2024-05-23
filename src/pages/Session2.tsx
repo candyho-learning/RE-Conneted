@@ -10,7 +10,7 @@ import {
 } from "@stream-io/video-react-sdk";
 import { onSnapshot, doc } from "firebase/firestore";
 import { db } from "@/firebase";
-import { getSessionData } from "@/utils/utils";
+import { getSessionData, recordJoinTime } from "@/utils/utils";
 import { StreamContext } from "@/contexts/streamContext";
 import {
   Channel,
@@ -59,6 +59,9 @@ export default function Session4() {
 
   useEffect(() => {
     if (!callId) return;
+    (async () => {
+      await recordJoinTime(callId, userId);
+    })();
     const unsub = onSnapshot(doc(db, "sessions", callId), (doc) => {
       // console.log("change in session data!");
       setSessionData(doc.data() as SessionDataType);
@@ -68,7 +71,7 @@ export default function Session4() {
   }, [callId]);
 
   useEffect(() => {
-    if (videoCall) {
+    if (callId && videoCall) {
       videoCall.join({ create: true });
     }
 
