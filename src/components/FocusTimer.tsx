@@ -4,6 +4,7 @@ import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { AuthContext } from "../contexts/authContext";
 import { Button } from "./ui/button";
+import { syncFocusTimer } from "@/utils/utils";
 
 export default function FocusTimer(sessionData: SessionDataType) {
   const { userId } = useContext(AuthContext);
@@ -12,9 +13,12 @@ export default function FocusTimer(sessionData: SessionDataType) {
   const timerTotalTime = timeBlocks.reduce((acc, cur) => {
     return acc + cur.duration;
   }, 0);
-  const [currentTimeBlockIndex, setCurrentTimeBlockIndex] = useState(0);
+  const [currentTimeBlockIndex, setCurrentTimeBlockIndex] = useState(
+    sessionData?.currentTimeBlockIndex || 0
+  );
   const [secondsLeft, setSecondsLeft] = useState(
-    timeBlocks[currentTimeBlockIndex].duration * 60
+    sessionData?.currentSecondsLeft ||
+      timeBlocks[currentTimeBlockIndex].duration * 60
   );
   const [displayTime, setDisplayTime] = useState(() =>
     toTimerDisplay(secondsLeft)
@@ -32,9 +36,46 @@ export default function FocusTimer(sessionData: SessionDataType) {
     return [minute, second];
   }
 
+  function printTimer() {
+    console.log("button pressed");
+    if (userId === sessionData.host && timerStartState === "started") {
+      console.log(
+        "Current timer: block",
+        { currentTimeBlockIndex },
+        { secondsLeft },
+        "seconds left."
+      );
+
+      //upload to firebase
+      (async () => {
+        const result = await syncFocusTimer(
+          sessionData.sessionId,
+          currentTimeBlockIndex,
+          secondsLeft
+        );
+        if (result) {
+          console.log("uploaded timer successfully");
+        } else {
+          console.log("timer sync failed");
+        }
+      })();
+    }
+  }
+
   useEffect(() => {
     setIsTimerActive(sessionData.isTimerActive);
   }, [sessionData]);
+
+  useEffect(() => {
+    if (sessionData.currentTimeBlockIndex) {
+      setCurrentTimeBlockIndex(sessionData.currentTimeBlockIndex);
+      console.log("timer index updated");
+    }
+    if (sessionData.currentSecondsLeft) {
+      setSecondsLeft(sessionData.currentSecondsLeft);
+      console.log("timer seconds updated");
+    }
+  }, [sessionData.currentSecondsLeft, sessionData.currentTimeBlockIndex]);
 
   //1 - if timer is not paused, take 1 sec off seconds left every second
   useEffect(() => {
@@ -115,7 +156,7 @@ export default function FocusTimer(sessionData: SessionDataType) {
             style={{
               width: `${(block.duration / timerTotalTime) * 100}%`,
             }}
-            className="bg-white border border-gray-400 relative"
+            className="bg-white border border-gray-400 relative overflow-hidden"
           >
             {/* Progress bar */}
             <div
@@ -129,7 +170,8 @@ export default function FocusTimer(sessionData: SessionDataType) {
                   : "bg-timeblock-freeChat"
               } text-sm text-gray-400 transition-width duration-300 ease-in-out absolute inset-0`}
               style={{
-                width: `${progress[i] * 100}%`,
+                width:
+                  i < currentTimeBlockIndex ? "100%" : `${progress[i] * 100}%`,
               }}
             ></div>
             {/* Overlay text */}
@@ -162,6 +204,7 @@ export default function FocusTimer(sessionData: SessionDataType) {
           {currentTimeBlockIndex < timeBlocks.length - 1 && (
             <h4>Next: {timeBlocks[currentTimeBlockIndex + 1].type}</h4>
           )}
+          <button onClick={printTimer}>Print current timer</button>
         </div>
       </div>
     </div>

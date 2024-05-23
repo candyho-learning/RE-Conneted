@@ -295,10 +295,28 @@ export async function markSessionAsExpired(sessionId: string) {
     });
     toast({
       title: "The host has ended this session.",
-      description:
-        "Redirecting you to your dashboard. Copy the session code to share with friends!",
+      description: "Redirecting you to your dashboard.",
     });
   } catch (err) {
     console.error("failed to mark session as ended");
+  }
+}
+
+export async function syncFocusTimer(
+  sessionId: string,
+  currentTimeBlockIndex: number,
+  currentSecondsLeft: number
+) {
+  //upload to sessionData
+  const docRef = doc(db, "sessions", sessionId);
+  try {
+    await updateDoc(docRef, {
+      currentTimeBlockIndex,
+      currentSecondsLeft,
+    });
+    return true;
+  } catch (err) {
+    console.error(err);
+    return false;
   }
 }

@@ -57,6 +57,8 @@ export interface SessionDataType {
   };
   participantsActivity?: Array<UserActivityType>;
   ended?: boolean;
+  currentTimeBlockIndex?: number;
+  currentSecondsLeft?: number;
 }
 
 export interface UserSessionDataType {
