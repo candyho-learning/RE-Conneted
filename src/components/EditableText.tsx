@@ -12,7 +12,7 @@ export default function EditableText({
 }: EditableTextProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [textValue, setTextValue] = useState(
-    databaseContent ? databaseContent : `Add a link...`
+    databaseContent ? databaseContent : ""
   );
 
   async function confirmTextUpdate() {

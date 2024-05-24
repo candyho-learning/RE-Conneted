@@ -12,8 +12,8 @@ import Loading from "@/components/Loading";
 
 export default function Login() {
   const { login, isLoading, isLoggedIn } = useContext(AuthContext);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("demo@gmail.com");
+  const [password, setPassword] = useState("demo123456");
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
