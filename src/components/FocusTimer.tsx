@@ -79,7 +79,7 @@ export default function FocusTimer(sessionData: SessionDataType) {
     );
     const unsubscribe = onSnapshot(subcollectionRef, (_snapshot) => {
       console.log("someone joined the call");
-      setShouldSyncTimer(true);
+      setShouldSyncTimer(true); //TODO only host
     });
 
     return unsubscribe;
@@ -91,12 +91,13 @@ export default function FocusTimer(sessionData: SessionDataType) {
 
   useEffect(() => {
     if (sessionData.currentTimeBlockIndex) {
+      console.log(sessionData.currentTimeBlockIndex);
       setCurrentTimeBlockIndex(sessionData.currentTimeBlockIndex);
-      console.log("timer index updated");
+      console.log("3 timer index updated");
     }
     if (sessionData.currentSecondsLeft !== undefined) {
       setSecondsLeft(sessionData.currentSecondsLeft);
-      console.log("timer seconds updated");
+      console.log("3 timer seconds updated");
       console.log(sessionData.currentSecondsLeft);
     }
   }, [sessionData.currentSecondsLeft, sessionData.currentTimeBlockIndex]);
@@ -117,14 +118,14 @@ export default function FocusTimer(sessionData: SessionDataType) {
       // console.log("timer interval clean up!");
       clearInterval(timer);
     };
-  }, [isTimerActive, currentTimeBlockIndex]);
+  }, [isTimerActive]);
 
-  useEffect(() => {
-    // console.log("changing block min", currentTimeBlockIndex);
-    isTimerActive &&
-      setSecondsLeft(timeBlocks[currentTimeBlockIndex].duration * 60);
-    console.log("setting seconds left according to block index");
-  }, [currentTimeBlockIndex]);
+  // useEffect(() => {
+  //   // console.log("changing block min", currentTimeBlockIndex);
+  //   isTimerActive &&
+  //     setSecondsLeft(timeBlocks[currentTimeBlockIndex].duration * 60);
+  //   console.log("2 setting seconds left according to block index");
+  // }, [currentTimeBlockIndex]);
 
   useEffect(() => {
     if (secondsLeft === 0) {
@@ -132,6 +133,7 @@ export default function FocusTimer(sessionData: SessionDataType) {
         // console.log(currentTimeBlockIndex);
         // console.log("adding 1 to time block index");
         setCurrentTimeBlockIndex((prevIndex) => prevIndex + 1);
+        setSecondsLeft(timeBlocks[currentTimeBlockIndex + 1].duration * 60);
       } else {
         // console.log("timer ended, removing timer");
         // console.log("timer end time", Date.now());
@@ -194,6 +196,7 @@ export default function FocusTimer(sessionData: SessionDataType) {
     if (shouldSyncTimer) {
       syncTimer();
       setShouldSyncTimer(false);
+      console.log("1 timer synced");
     }
   }, [shouldSyncTimer]);
 
@@ -210,15 +213,7 @@ export default function FocusTimer(sessionData: SessionDataType) {
           >
             {/* Progress bar */}
             <div
-              className={`h-6 ${
-                block.type === "deep-work"
-                  ? "bg-timeblock-deepWork"
-                  : block.type === "rest"
-                  ? "bg-timeblock-rest"
-                  : block.type === "ice-breaking"
-                  ? "bg-timeblock-iceBreaking"
-                  : "bg-timeblock-freeChat"
-              } text-sm text-gray-400 transition-width duration-300 ease-in-out absolute inset-0`}
+              className={`h-6 bg-brand-lightblue text-sm text-gray-400 transition-width duration-300 ease-in-out absolute inset-0`}
               style={{
                 width:
                   i < currentTimeBlockIndex ? "100%" : `${progress[i] * 100}%`,
@@ -254,8 +249,6 @@ export default function FocusTimer(sessionData: SessionDataType) {
           {currentTimeBlockIndex < timeBlocks.length - 1 && (
             <h4>Next: {timeBlocks[currentTimeBlockIndex + 1].type}</h4>
           )}
-          <button onClick={syncTimer}>Sync</button>
-          <p>{timerStartState}</p>
         </div>
       </div>
     </div>

@@ -26,12 +26,6 @@ module.exports = {
           darkgrey: "#5c646b",
           dark: "#333652",
         },
-        timeblock: {
-          rest: "#ff595e",
-          deepWork: "#8ac926",
-          iceBreaking: "#1982c4",
-          freeChat: "#ffca3a",
-        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
