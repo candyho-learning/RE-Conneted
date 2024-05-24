@@ -23,7 +23,9 @@ export default function FocusTimer(sessionData: SessionDataType) {
   const [displayTime, setDisplayTime] = useState(() =>
     toTimerDisplay(secondsLeft)
   );
-  const [isTimerActive, setIsTimerActive] = useState<boolean>(false);
+  const [isTimerActive, setIsTimerActive] = useState<boolean>(
+    sessionData.isTimerActive
+  );
   const [timerId, setTimerId] = useState<NodeJS.Timeout>();
   const [timerStartState, setTimerStartState] = useState(
     sessionData?.timerStartState || "not started"
@@ -67,7 +69,7 @@ export default function FocusTimer(sessionData: SessionDataType) {
     }
   }
 
-  //detects when new users join the call
+  //onsnapshot listener to detect when new users join the call
   useEffect(() => {
     const subcollectionRef = collection(
       db,
@@ -92,9 +94,10 @@ export default function FocusTimer(sessionData: SessionDataType) {
       setCurrentTimeBlockIndex(sessionData.currentTimeBlockIndex);
       console.log("timer index updated");
     }
-    if (sessionData.currentSecondsLeft) {
+    if (sessionData.currentSecondsLeft !== undefined) {
       setSecondsLeft(sessionData.currentSecondsLeft);
       console.log("timer seconds updated");
+      console.log(sessionData.currentSecondsLeft);
     }
   }, [sessionData.currentSecondsLeft, sessionData.currentTimeBlockIndex]);
 
@@ -118,7 +121,9 @@ export default function FocusTimer(sessionData: SessionDataType) {
 
   useEffect(() => {
     // console.log("changing block min", currentTimeBlockIndex);
-    setSecondsLeft(timeBlocks[currentTimeBlockIndex].duration * 60);
+    isTimerActive &&
+      setSecondsLeft(timeBlocks[currentTimeBlockIndex].duration * 60);
+    console.log("setting seconds left according to block index");
   }, [currentTimeBlockIndex]);
 
   useEffect(() => {
@@ -157,6 +162,7 @@ export default function FocusTimer(sessionData: SessionDataType) {
     // console.log("resetting timer state");
     setTimerStartState("started");
     setIsTimerActive((s) => !s);
+    syncTimer();
   }
 
   useEffect(() => {
