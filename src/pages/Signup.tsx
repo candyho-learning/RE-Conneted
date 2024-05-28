@@ -123,6 +123,11 @@ export default function Signup() {
             <a href="/login" className="underline">
               Log In
             </a>
+            <p>
+              <a href="/login" className="underline">
+                👉🏻 Demo account available
+              </a>
+            </p>
           </div>
         </div>
       </div>
