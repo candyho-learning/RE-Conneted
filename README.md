@@ -1,6 +1,6 @@
-# RE:Connected - Work Remotely, Stay Connected.
-
 ![alt text](/src/assets/logo-dark.png)
+
+# RE:Connected - Work Remotely, Stay Connected.
 
 Re:Connected is a platform built for busy professionals who want to strengthen bonds with existing friends and expand their network by meeting like-minded individuals. Our mission is to facilitate a virtual co-working space where friends can collaborate and catch up, and where individuals can connect with new peers. 
 
@@ -33,8 +33,6 @@ Integrated Unsplash API for high quality stock image search
 - Create and invite friends to join your co-working sessions
 - Connect with like-minded users
 - Book co-working sessions and work with new friends
-
-![features](/src/assets/features.png)
 
 
 ## Roadmap
