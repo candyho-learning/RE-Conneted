@@ -1,30 +1,9 @@
-# React + TypeScript + Vite
+# RE:Connected - Work Remotely, Stay Connected.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Re:Connected is a platform built for busy professionals who want to strengthen bonds with existing friends and expand their network by meeting like-minded individuals. Our mission is to facilitate a virtual co-working space where friends can collaborate and catch up, and where individuals can connect with new peers. 
 
-Currently, two official plugins are available:
+We value meaningful connections, professional growth, and the expansion of social circles in a digital age. At Re:Connected, we believe that working remotely should be a doorway to building lasting relationships and enriching your professional life, offering a space where every session is an opportunity to grow and connect.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+![alt text](/src/assets/logo-light.png)
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
