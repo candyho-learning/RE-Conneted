@@ -17,7 +17,8 @@ We value meaningful connections, professional growth, and the expansion of socia
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-06B6D4.svg?style=for-the-badge&logo=Tailwind-CSS&logoColor=white)
 ![npm](https://img.shields.io/badge/npm-CB3837.svg?style=for-the-badge&logo=npm&logoColor=white)
 
-Stream API (https://github.com/GetStream)
+Integreated Stream API for video calling and instant messaging (https://github.com/GetStream)
+Integrated Unsplash API for high quality stock image search
 
 ## Features
 
@@ -32,3 +33,16 @@ Community
 - Connect with like-minded users
 - Book co-working session and work with new friends
 
+## Roadmap
+
+- Add the option to make co-working sessions public/private
+
+- Add categories for sessions
+
+- Add a "Discover Sessions" page for users to explore all public sessions
+
+- Allow hosts to delete sessions after creation (before expiration)
+
+- Allow useres to cancel the booking of a sessions
+
+- Add call lobby and show video call preview before joining a session
