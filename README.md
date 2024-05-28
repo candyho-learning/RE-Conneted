@@ -31,7 +31,7 @@ Co-working Sessions
 Community
 - Create and invite friends to join your co-working sessions
 - Connect with like-minded users
-- Book co-working session and work with new friends
+- Book co-working sessions and work with new friends
 
 ## Roadmap
 
