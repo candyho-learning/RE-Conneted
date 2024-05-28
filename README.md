@@ -4,6 +4,6 @@ Re:Connected is a platform built for busy professionals who want to strengthen b
 
 We value meaningful connections, professional growth, and the expansion of social circles in a digital age. At Re:Connected, we believe that working remotely should be a doorway to building lasting relationships and enriching your professional life, offering a space where every session is an opportunity to grow and connect.
 
-![alt text](/src/assets/logo-light.png)
+![alt text](/src/assets/logo-dark.png)
 
 
