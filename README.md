@@ -22,16 +22,20 @@ Integrated Unsplash API for high quality stock image search
 
 ## Features
 
-Co-working Sessions
+**Co-working Sessions**
+
 - Group Video Calling
 - Instant Messaging (supports text, images, gif, emoji reactions)
 - Focus Timer (works like a pomodoro timer, but more versatile)
 - In-session to-do lists for task management
 
-Community
+**Community**
 - Create and invite friends to join your co-working sessions
 - Connect with like-minded users
 - Book co-working sessions and work with new friends
+
+![features](/src/assets/features.png)
+
 
 ## Roadmap
 
