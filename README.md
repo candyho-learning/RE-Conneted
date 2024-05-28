@@ -17,6 +17,8 @@ We value meaningful connections, professional growth, and the expansion of socia
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-06B6D4.svg?style=for-the-badge&logo=Tailwind-CSS&logoColor=white)
 ![npm](https://img.shields.io/badge/npm-CB3837.svg?style=for-the-badge&logo=npm&logoColor=white)
 
+Stream API (https://github.com/GetStream)
+
 ## Features
 
 Co-working Sessions
