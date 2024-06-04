@@ -17,6 +17,9 @@ module.exports = {
       },
     },
     extend: {
+      screens: {
+        "3xl": "1800px",
+      },
       colors: {
         brand: {
           yellow: "#FAD02C",
